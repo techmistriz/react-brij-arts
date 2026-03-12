@@ -18,7 +18,12 @@ const Footer = () => {
             <Link to="/mentors" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Mentors</Link>
             <Link to="/publications" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Publications</Link>
             <Link to="/faq" className="text-sm text-muted-foreground hover:text-foreground transition-colors">FAQ</Link>
-            <a href="mailto:tbf@serendipityarts.org" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Contact</a>
+<Link
+  to="/faq#contact"
+  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+>
+  Contact
+</Link>
           </div>
 
           <div className="flex flex-col gap-3">
