@@ -18,7 +18,7 @@ import { useLocation } from "react-router-dom";
 const contactSchema = z.object({
   name: z.string().min(1, "Name is required").max(100),
   email: z.string().email("Enter a valid email"),
-  phone: z.string().min(5, "Enter a valid phone number"),
+  contact: z.string().min(10, "Enter a valid phone number"),
 });
 
 const categories = [
@@ -212,20 +212,19 @@ const Faq = () => {
     }
   };
 
-const location = useLocation();
+  const location = useLocation();
 
-useEffect(() => {
-  if (location.hash === "#contact") {
-    const el = document.getElementById("contact");
-    if (el) {
-      const yOffset = -120; // space from top (adjust if needed)
-      const y =
-        el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+  useEffect(() => {
+    if (location.hash === "#contact") {
+      const el = document.getElementById("contact");
+      if (el) {
+        const yOffset = -180; // space from top (adjust if needed)
+        const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
-      window.scrollTo({ top: y, behavior: "smooth" });
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
     }
-  }
-}, [location]);
+  }, [location]);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -340,17 +339,19 @@ useEffect(() => {
                   )}
                 </div>
 
-                {/* Phone */}
+                {/* contact */}
                 <div className="w-full">
                   <input
                     type="tel"
-                    {...register("phone")}
+                    inputMode="numeric"
+                    maxLength={10}
+                    {...register("contact")}
                     className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#f5a442]"
                     placeholder="Enter contact number..."
                   />
-                  {errors.phone && (
+                  {errors.contact && (
                     <p className="text-red-500 text-xs mt-1 text-left">
-                      {errors.phone.message}
+                      {errors.contact.message}
                     </p>
                   )}
                 </div>
