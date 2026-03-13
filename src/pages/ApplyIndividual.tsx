@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
+import { submitApplication } from "@/lib/api/applyIndividual";
 import {
   Select,
   SelectContent,
@@ -19,40 +20,48 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+import { useDropdowns } from "@/hooks/useDropdowns";
+
 const schema = z.object({
-  firstName: z.string().min(1, "Required").max(100),
-  lastName: z.string().min(1, "Required").max(100),
+  user_type: z.string(),
+
+  first_name: z.string().min(1, "Required").max(100),
+  last_name: z.string().min(1, "Required").max(100),
   email: z.string().email("Please enter a valid email").max(255),
-  phone: z.string().min(5, "Required").max(20),
-  country: z.string().min(1, "Required"),
-  linkedin: z.string().max(255).optional().or(z.literal("")),
-  website: z.string().max(255).optional().or(z.literal("")),
-  jobTitle: z.string().min(1, "Required").max(200),
-  jobLevel: z.string().min(1, "Required"),
+  password: z.string().min(8, "Password must be at least 8 characters"),
+  contact: z.string().min(5, "Required").max(20),
+  country_id: z.string().min(1, "Required"),
+  linkedIn_url: z.string().max(255).optional().or(z.literal("")),
+  website_url: z.string().max(255).optional().or(z.literal("")),
+  job_title: z.string().min(1, "Required").max(200),
+  job_level_id: z.string().min(1, "Required"),
   organisation: z.string().max(200).optional().or(z.literal("")),
-  industry: z.string().min(1, "Required"),
+  industry_id: z.string().min(1, "Required"),
   // Long-form fields
-  biography: z.string().min(1, "Required").max(5000),
-  collaborationStyle: z.string().min(1, "Required").max(5000),
-  culturalLeadership: z.string().min(1, "Required").max(5000),
+  professional_biography: z.string().min(1, "Required").max(5000),
+  working_style: z.string().min(1, "Required").max(5000),
+  cultural_leadership: z.string().min(1, "Required").max(5000),
   // Programme info
-  cohort: z.string().min(1, "Required"),
-  heardFrom: z.string().min(1, "Required"),
-  referralCode: z.string().max(50).optional().or(z.literal("")),
-  bursaryRequest: z.boolean().optional(),
-  ageConfirm: z.boolean().refine((v) => v, "You must confirm you are over 21"),
-  availabilityConfirm: z.boolean().refine((v) => v, "You must confirm availability"),
+  cohort_id: z.string().min(1, "Required"),
+  fellowship_source_id: z.string().min(1, "Required"),
+  referral_code: z.string().max(50).optional().or(z.literal("")),
+  is_apply_bursary: z.boolean().optional(),
+  is_confirm_age: z
+    .boolean()
+    .refine((v) => v, "You must confirm you are over 21"),
+  is_goa_available: z
+    .boolean()
+    .refine((v) => v, "You must confirm availability"),
 });
 
 type FormData = z.infer<typeof schema>;
 
-const countries = [
-  "India", "Pakistan", "Bangladesh", "Sri Lanka", "Nepal", "Bhutan", "Maldives",
-];
-
 const ApplyIndividual = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const { countries, joblevels, industries, cohorts, fellowship } =
+    useDropdowns();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -66,25 +75,58 @@ const ApplyIndividual = () => {
   } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
-      firstName: "", lastName: "", email: "", phone: "", country: "",
-      linkedin: "", website: "", jobTitle: "", jobLevel: "", organisation: "",
-      industry: "", biography: "", collaborationStyle: "", culturalLeadership: "",
-      cohort: "", heardFrom: "", referralCode: "",
-      bursaryRequest: false, ageConfirm: false, availabilityConfirm: false,
+      user_type: "individual",
+      first_name: "",
+      last_name: "",
+      email: "",
+      password: "",
+      contact: "",
+      job_title: "",
+      country_id: "",
+      cohort_id: "",
+      linkedIn_url: "",
+      website_url: "",
+      job_level_id: "",
+      organisation: "",
+      industry_id: "",
+      professional_biography: "",
+      working_style: "", //
+      cultural_leadership: "",
+      fellowship_source_id: "", //
+      referral_code: "",
+      is_apply_bursary: false, //
+      is_goa_available: false, //
+      is_confirm_age: false,
     },
   });
 
-  const onSubmit = (data: FormData) => {
-    setIsSubmitting(true);
-    console.log("Track 1 application:", data);
-    setTimeout(() => navigate("/submission-confirmation"), 1000);
+  const onSubmit = async (data: FormData) => {
+    try {
+      setIsSubmitting(true);
+      const res = await submitApplication(data);
+
+      //save auth data
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+
+      console.log("Track 1 application:", data);
+      navigate("/submission-confirmation");
+    } catch (error: any) {
+      console.error(error);
+      alert(error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const fieldError = (name: keyof FormData) =>
     errors[name] ? (
-      <p className="text-destructive text-xs mt-1">{errors[name]?.message as string}</p>
+      <p className="text-destructive text-xs mt-1">
+        {errors[name]?.message as string}
+      </p>
     ) : null;
 
+  // console.log({ ...register("website") });
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -107,10 +149,12 @@ const ApplyIndividual = () => {
 
               <div>
                 <p className="label-text mb-3 text-primary">Track 1</p>
-                <h1 className="editorial-subheading mb-4">Individual Applicant</h1>
+                <h1 className="editorial-subheading mb-4">
+                  Individual Applicant
+                </h1>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Before you begin, please confirm that you are available for both
-                  compulsory in-person moments:
+                  Before you begin, please confirm that you are available for
+                  both compulsory in-person moments:
                 </p>
                 <ul className="mt-3 space-y-1.5 text-sm text-muted-foreground">
                   <li>• In-person residential, Goa — 20–25 June 2026</li>
@@ -119,16 +163,20 @@ const ApplyIndividual = () => {
               </div>
 
               <div>
-                <h3 className="font-bold text-sm uppercase tracking-wide mb-3">Stages</h3>
+                <h3 className="font-bold text-sm uppercase tracking-wide mb-3">
+                  Stages
+                </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  The application is completed in two stages. Stage 1 takes approximately
-                  10–15 minutes. You can save your progress and return later before
-                  completing Stage 2.
+                  The application is completed in two stages. Stage 1 takes
+                  approximately 10–15 minutes. You can save your progress and
+                  return later before completing Stage 2.
                 </p>
               </div>
 
               <div className="border border-border p-5">
-                <h3 className="font-bold text-sm uppercase tracking-wide mb-3">Bursaries</h3>
+                <h3 className="font-bold text-sm uppercase tracking-wide mb-3">
+                  Bursaries
+                </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-2">
                   Ten bursaries available, from 25% to full fee coverage. Full
                   bursary recipients also receive a travel supplement.
@@ -141,8 +189,9 @@ const ApplyIndividual = () => {
 
               <div className="border-t border-border pt-6">
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  <strong>Note:</strong> Selection is at the discretion of the review
-                  committee. Submitting an application does not guarantee a place.
+                  <strong>Note:</strong> Selection is at the discretion of the
+                  review committee. Submitting an application does not guarantee
+                  a place.
                 </p>
               </div>
             </motion.div>
@@ -160,49 +209,81 @@ const ApplyIndividual = () => {
                     1. Applicant Details
                   </h2>
                   <div className="space-y-5">
+                    <input
+                      type="hidden"
+                      {...register("user_type")}
+                      value="individual"
+                    />
                     <div className="grid sm:grid-cols-2 gap-5">
                       <div>
                         <Label>First Name *</Label>
-                        <Input {...register("firstName")} className="mt-1.5" />
-                        {fieldError("firstName")}
+                        <Input {...register("first_name")} className="mt-1.5" />
+                        {fieldError("first_name")}
                       </div>
                       <div>
                         <Label>Last Name *</Label>
-                        <Input {...register("lastName")} className="mt-1.5" />
-                        {fieldError("lastName")}
+                        <Input {...register("last_name")} className="mt-1.5" />
+                        {fieldError("last_name")}
                       </div>
                     </div>
                     <div>
                       <Label>Email Address *</Label>
-                      <Input type="email" {...register("email")} className="mt-1.5" />
+                      <Input
+                        type="email"
+                        {...register("email")}
+                        className="mt-1.5"
+                      />
                       {fieldError("email")}
                     </div>
                     <div>
+                      <Label>Password</Label>
+                      <Input
+                        type="password"
+                        {...register("password")}
+                        className="mt-1.5"
+                      />
+                      {fieldError("password")}
+                    </div>
+                    <div>
                       <Label>Phone / WhatsApp *</Label>
-                      <Input type="tel" {...register("phone")} className="mt-1.5" />
-                      {fieldError("phone")}
+                      <Input
+                        type="tel"
+                        {...register("contact")}
+                        className="mt-1.5"
+                      />
+                      {fieldError("contact")}
                     </div>
                     <div>
                       <Label>Country / Region *</Label>
-                      <Select onValueChange={(v) => setValue("country", v)}>
+                      <Select onValueChange={(v) => setValue("country_id", v)}>
                         <SelectTrigger className="mt-1.5">
                           <SelectValue placeholder="Select country" />
                         </SelectTrigger>
                         <SelectContent>
                           {countries.map((c) => (
-                            <SelectItem key={c} value={c}>{c}</SelectItem>
+                            <SelectItem key={c.id} value={String(c.id)}>
+                              {c.name}
+                            </SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
-                      {fieldError("country")}
+                      {fieldError("country_id")}
                     </div>
                     <div>
                       <Label>LinkedIn Profile (optional)</Label>
-                      <Input {...register("linkedin")} placeholder="https://linkedin.com/in/..." className="mt-1.5" />
+                      <Input
+                        {...register("linkedIn_url")}
+                        placeholder="https://linkedin.com/in/..."
+                        className="mt-1.5"
+                      />
                     </div>
                     <div>
                       <Label>Website / Portfolio (optional)</Label>
-                      <Input {...register("website")} placeholder="https://..." className="mt-1.5" />
+                      <Input
+                        {...register("website_url")}
+                        placeholder="https://..."
+                        className="mt-1.5"
+                      />
                     </div>
                   </div>
                 </div>
@@ -215,20 +296,26 @@ const ApplyIndividual = () => {
                   <div className="space-y-5">
                     <div>
                       <Label>Job Title *</Label>
-                      <Input {...register("jobTitle")} className="mt-1.5" />
-                      {fieldError("jobTitle")}
+                      <Input {...register("job_title")} className="mt-1.5" />
+                      {fieldError("job_title")}
                     </div>
                     <div>
                       <Label>Job Level *</Label>
-                      <Select onValueChange={(v) => setValue("jobLevel", v)}>
-                        <SelectTrigger className="mt-1.5"><SelectValue placeholder="Select level" /></SelectTrigger>
+                      <Select
+                        onValueChange={(v) => setValue("job_level_id", v)}
+                      >
+                        <SelectTrigger className="mt-1.5">
+                          <SelectValue placeholder="Select level" />
+                        </SelectTrigger>
                         <SelectContent>
-                          {["Independent Practitioner", "Artist", "Curator", "Programme Manager", "Researcher", "Writer", "Institutional Staff", "Founder / Director", "Other"].map((l) => (
-                            <SelectItem key={l} value={l}>{l}</SelectItem>
+                          {joblevels.map((level) => (
+                            <SelectItem key={level.id} value={String(level.id)}>
+                              {level.name}
+                            </SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
-                      {fieldError("jobLevel")}
+                      {fieldError("job_level_id")}
                     </div>
                     <div>
                       <Label>Organisation (optional)</Label>
@@ -236,15 +323,19 @@ const ApplyIndividual = () => {
                     </div>
                     <div>
                       <Label>Industry / Sector *</Label>
-                      <Select onValueChange={(v) => setValue("industry", v)}>
-                        <SelectTrigger className="mt-1.5"><SelectValue placeholder="Select industry" /></SelectTrigger>
+                      <Select onValueChange={(v) => setValue("industry_id", v)}>
+                        <SelectTrigger className="mt-1.5">
+                          <SelectValue placeholder="Select Industry" />
+                        </SelectTrigger>
                         <SelectContent>
-                          {["Arts and Culture", "Museums / Galleries", "Performing Arts", "Publishing", "Creative Industries", "Education", "Independent Practice", "Other"].map((s) => (
-                            <SelectItem key={s} value={s}>{s}</SelectItem>
+                          {industries.map((s) => (
+                            <SelectItem key={s.id} value={String(s.id)}>
+                              {s.name}
+                            </SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
-                      {fieldError("industry")}
+                      {fieldError("industry_id")}
                     </div>
                   </div>
                 </div>
@@ -258,48 +349,50 @@ const ApplyIndividual = () => {
                     <div>
                       <Label>Professional Biography *</Label>
                       <p className="text-xs text-muted-foreground mt-1 mb-2 leading-relaxed">
-                        Written in the third person, summarise your background, professional or
-                        educational experience, areas of expertise, and key accomplishments. This
-                        biography may be used in programme publications or external announcements
-                        if you are selected as a Fellow.
+                        Written in the third person, summarise your background,
+                        professional or educational experience, areas of
+                        expertise, and key accomplishments. This biography may
+                        be used in programme publications or external
+                        announcements if you are selected as a Fellow.
                       </p>
                       <Textarea
-                        {...register("biography")}
+                        {...register("professional_biography")}
                         rows={6}
                         className="mt-1"
                         placeholder="Write your biography here..."
                       />
-                      {fieldError("biography")}
+                      {fieldError("professional_biography")}
                     </div>
                     <div>
                       <Label>Collaboration and Working Style *</Label>
                       <p className="text-xs text-muted-foreground mt-1 mb-2 leading-relaxed">
-                        Describe your collaboration style. How do you typically work within a team,
-                        and how do you approach disagreement or conflict when it arises in professional
-                        contexts?
+                        Describe your collaboration style. How do you typically
+                        work within a team, and how do you approach disagreement
+                        or conflict when it arises in professional contexts?
                       </p>
                       <Textarea
-                        {...register("collaborationStyle")}
+                        {...register("working_style")}
                         rows={6}
                         className="mt-1"
                         placeholder="Describe your collaboration style..."
                       />
-                      {fieldError("collaborationStyle")}
+                      {fieldError("working_style")}
                     </div>
                     <div>
                       <Label>Cultural Leadership Perspective *</Label>
                       <p className="text-xs text-muted-foreground mt-1 mb-2 leading-relaxed">
-                        Share your views on cultural leadership more broadly. How do you see yourself
-                        contributing to the field, and why does this work matter to you at this moment
-                        in your practice?
+                        Share your views on cultural leadership more broadly.
+                        How do you see yourself contributing to the field, and
+                        why does this work matter to you at this moment in your
+                        practice?
                       </p>
                       <Textarea
-                        {...register("culturalLeadership")}
+                        {...register("cultural_leadership")}
                         rows={6}
                         className="mt-1"
                         placeholder="Share your perspective..."
                       />
-                      {fieldError("culturalLeadership")}
+                      {fieldError("cultural_leadership")}
                     </div>
                   </div>
                 </div>
@@ -312,29 +405,46 @@ const ApplyIndividual = () => {
                   <div className="space-y-5">
                     <div>
                       <Label>Preferred Cohort *</Label>
-                      <Select onValueChange={(v) => setValue("cohort", v)}>
-                        <SelectTrigger className="mt-1.5"><SelectValue placeholder="Select cohort" /></SelectTrigger>
+                      <Select onValueChange={(v) => setValue("cohort_id", v)}>
+                        <SelectTrigger className="mt-1.5">
+                          <SelectValue placeholder="Select cohort" />
+                        </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="2026 Brij Cultural Leaders Fellowship">2026 Brij Cultural Leaders Fellowship</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      {fieldError("cohort")}
-                    </div>
-                    <div>
-                      <Label>How did you hear about the fellowship? *</Label>
-                      <Select onValueChange={(v) => setValue("heardFrom", v)}>
-                        <SelectTrigger className="mt-1.5"><SelectValue placeholder="Select option" /></SelectTrigger>
-                        <SelectContent>
-                          {["Serendipity Arts", "Brij", "Institut Français India", "Goethe-Institut", "British Council", "Social Media", "Friend / Colleague", "Other"].map((o) => (
-                            <SelectItem key={o} value={o}>{o}</SelectItem>
+                          {cohorts.map((c) => (
+                            <SelectItem key={c.id} value={String(c.id)}>
+                              {c.name}
+                            </SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
-                      {fieldError("heardFrom")}
+                      {fieldError("cohort_id")}
+                    </div>
+                    <div>
+                      <Label>How did you hear about the fellowship? *</Label>
+                      <Select
+                        onValueChange={(v) =>
+                          setValue("fellowship_source_id", v)
+                        }
+                      >
+                        <SelectTrigger className="mt-1.5">
+                          <SelectValue placeholder="Select option" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {fellowship.map((o) => (
+                            <SelectItem key={o.id} value={String(o.id)}>
+                              {o.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      {fieldError("fellowship_source_id")}
                     </div>
                     <div>
                       <Label>Referral Code (optional)</Label>
-                      <Input {...register("referralCode")} className="mt-1.5" />
+                      <Input
+                        {...register("referral_code")}
+                        className="mt-1.5"
+                      />
                     </div>
                   </div>
                 </div>
@@ -346,20 +456,26 @@ const ApplyIndividual = () => {
                   </h2>
                   <div className="flex items-start gap-3">
                     <Checkbox
-                      id="bursaryRequest"
-                      onCheckedChange={(checked) => setValue("bursaryRequest", checked === true)}
+                      id="is_apply_bursary"
+                      onCheckedChange={(checked) =>
+                        setValue("is_apply_bursary", checked === true)
+                      }
                       className="mt-0.5"
                     />
                     <div>
-                      <label htmlFor="bursaryRequest" className="text-sm cursor-pointer">
+                      <label
+                        htmlFor="is_apply_bursary"
+                        className="text-sm cursor-pointer"
+                      >
                         I would like to apply for a bursary.
                       </label>
                       <p className="text-xs text-muted-foreground mt-1">
                         This has no impact on how your application is assessed.
-                        The request for a bursary will be considered separately by the programme
-                        team on the basis of the information provided in the supporting attachment.
-                        Bursary decisions are made only after the jury has completed its evaluation
-                        of applications.
+                        The request for a bursary will be considered separately
+                        by the programme team on the basis of the information
+                        provided in the supporting attachment. Bursary decisions
+                        are made only after the jury has completed its
+                        evaluation of applications.
                       </p>
                     </div>
                   </div>
@@ -373,28 +489,39 @@ const ApplyIndividual = () => {
                   <div className="space-y-4">
                     <div className="flex items-start gap-3">
                       <Checkbox
-                        id="availabilityConfirm"
-                        onCheckedChange={(checked) => setValue("availabilityConfirm", checked === true)}
+                        id="is_goa_available"
+                        onCheckedChange={(checked) =>
+                          setValue("is_goa_available", checked === true)
+                        }
                         className="mt-0.5"
                       />
                       <div>
-                        <label htmlFor="availabilityConfirm" className="text-sm cursor-pointer">
-                          I confirm that I am available for both in-person moments in Goa (June & December 2026).
+                        <label
+                          htmlFor="is_goa_available"
+                          className="text-sm cursor-pointer"
+                        >
+                          I confirm that I am available for both in-person
+                          moments in Goa (June & December 2026).
                         </label>
-                        {fieldError("availabilityConfirm")}
+                        {fieldError("is_goa_available")}
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
                       <Checkbox
-                        id="ageConfirm"
-                        onCheckedChange={(checked) => setValue("ageConfirm", checked === true)}
+                        id="is_confirm_age"
+                        onCheckedChange={(checked) =>
+                          setValue("is_confirm_age", checked === true)
+                        }
                         className="mt-0.5"
                       />
                       <div>
-                        <label htmlFor="ageConfirm" className="text-sm cursor-pointer">
+                        <label
+                          htmlFor="is_confirm_age"
+                          className="text-sm cursor-pointer"
+                        >
                           I confirm that I am over 21 years of age.
                         </label>
-                        {fieldError("ageConfirm")}
+                        {fieldError("is_confirm_age")}
                       </div>
                     </div>
                   </div>
@@ -403,9 +530,9 @@ const ApplyIndividual = () => {
                 {/* Submit */}
                 <div className="border-t border-border pt-8">
                   <p className="text-xs text-muted-foreground mb-6">
-                    By submitting, you agree that your information will be reviewed by
-                    Serendipity Arts. Selection is at the discretion of the
-                    review committee.
+                    By submitting, you agree that your information will be
+                    reviewed by Serendipity Arts. Selection is at the discretion
+                    of the review committee.
                   </p>
                   <button
                     type="submit"
