@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -6,6 +6,15 @@ import fellowshipLogo from "@/assets/fellowship-logo.png";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  
+ const isLoggedIn = !!localStorage.getItem("token");
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    window.location.href = "/";
+  }
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
@@ -21,9 +30,21 @@ const Navbar = () => {
           <Link to="/mentors" className="label-text hover:text-foreground transition-colors">Mentors</Link>
           <Link to="/publications" className="label-text hover:text-foreground transition-colors">Publications</Link>
           <Link to="/faq" className="label-text hover:text-foreground transition-colors">FAQ</Link>
-          <Link to="/apply" className="bg-foreground text-background px-6 py-2.5 text-sm font-semibold tracking-wide hover:bg-primary transition-colors">
-            Apply Now
-          </Link>
+         {isLoggedIn ? (
+  <button
+    onClick={handleLogout}
+    className="bg-foreground text-background px-6 py-2.5 text-sm font-semibold tracking-wide"
+  >
+    Logout
+  </button>
+) : (
+  <Link
+    to="/apply"
+    className="bg-foreground text-background px-6 py-2.5 text-sm font-semibold tracking-wide hover:bg-primary transition-colors"
+  >
+    Apply Now
+  </Link>
+)}
         </div>
 
         {/* Mobile toggle */}
@@ -87,13 +108,21 @@ const Navbar = () => {
                 transition={{ delay: 0.2, duration: 0.25 }}
                 className="pt-2"
               >
-                <Link
-                  to="/apply"
-                  onClick={() => setMenuOpen(false)}
-                  className="block bg-foreground text-background px-6 py-3.5 text-sm font-semibold tracking-wide text-center"
-                >
-                  Apply Now
-                </Link>
+                {isLoggedIn ? (
+  <button
+    onClick={handleLogout}
+    className="bg-foreground text-background px-6 py-2.5 text-sm font-semibold tracking-wide"
+  >
+    Logout
+  </button>
+) : (
+  <Link
+    to="/apply"
+    className="bg-foreground text-background px-6 py-2.5 text-sm font-semibold tracking-wide hover:bg-primary transition-colors"
+  >
+    Apply Now
+  </Link>
+)}
               </motion.div>
             </div>
           </motion.div>
