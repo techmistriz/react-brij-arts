@@ -109,6 +109,11 @@ const ApplyInstitution = () => {
 
     try {
       const result = await submitInstitutionalNomination(data);
+
+      //save auth data
+      localStorage.setItem("token", result.data.token);
+      localStorage.setItem("user", result.data.user);
+      
       console.log("Track 2 API response:", result);
       alert("Nomination submitted successfully!");
      navigate("/submission-confirmation");
