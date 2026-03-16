@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import {
@@ -8,6 +8,17 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useEffect } from "react";
+import z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ContactFormData, submitContactForm } from "@/lib/api/contact";
+import { useForm } from "react-hook-form";
+
+const contactSchema = z.object({
+  name: z.string().min(1, "Name is required").max(100),
+  email: z.string().email("Enter a valid email"),
+  contact: z.string().min(10, "Enter a valid phone number"),
+});
 
 const individualFaq = [
   {
@@ -229,6 +240,40 @@ const FaqSection = ({
 );
 
 const Faq = () => {
+ const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactSchema),
+  });
+
+    const onSubmit = async (data: ContactFormData) => {
+    console.log("Form data", data);
+    try {
+      await submitContactForm(data);
+      alert("Form submitted successfully!");
+      reset();
+    } catch (error: any) {
+      alert(error.message || "Failed to submit");
+    }
+  };
+
+    const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash === "#contact") {
+      const el = document.getElementById("contact");
+      if (el) {
+        const yOffset = -180; // space from top (adjust if needed)
+        const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+      window.scrollTo({ top: y, behavior: "smooth" });
+      }
+    }
+}, [location]);
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -276,24 +321,81 @@ const Faq = () => {
             </motion.div>
             <FaqSection categories={institutionFaq} startDelay={0} />
           </div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="mt-16 pt-8 border-t border-border text-center"
-          >
-            <p className="text-sm text-muted-foreground mb-4">
-              Still have questions?
-            </p>
-            <a
-              href="mailto:tbf@serendipityarts.org"
-              className="inline-block bg-foreground text-background px-8 py-3 text-sm font-semibold tracking-wide hover:opacity-90 transition-opacity"
-            >
-              Contact Us
-            </a>
-          </motion.div>
         </div>
+
+
+              <motion.div
+          id="contact"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="w-full bg-[#f5f5f5] py-12 md:py-16 border-t border-border"
+        >
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-12 text-center">
+            <h2 className="text-lg md:text-xl font-bold mb-6">Get in Touch</h2>
+
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+              {/* Inputs */}
+              <div className="flex flex-col md:flex-row gap-4 md:gap-6">
+                {/* Name */}
+                <div className="w-full">
+                  <input
+                    type="text"
+                    {...register("name")}
+                    className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#f5a442]"
+                    placeholder="Enter name..."
+                  />
+                  {errors.name && (
+                    <p className="text-red-500 text-xs mt-1 text-left">
+                      {errors.name.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* Email */}
+                <div className="w-full">
+                  <input
+                    type="email"
+                    {...register("email")}
+                    className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#f5a442]"
+                    placeholder="Enter email..."
+                  />
+                  {errors.email && (
+                    <p className="text-red-500 text-xs mt-1 text-left">
+                      {errors.email.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* contact */}
+                <div className="w-full">
+                  <input
+                    type="tel"
+                    inputMode="numeric"
+                    maxLength={10}
+                    {...register("contact")}
+                    className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#f5a442]"
+                    placeholder="Enter contact number..."
+                  />
+                  {errors.contact && (
+                    <p className="text-red-500 text-xs mt-1 text-left">
+                      {errors.contact.message}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              {/* Button */}
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full md:w-auto mt-4 bg-foreground text-background px-8 py-3 text-sm font-semibold tracking-wide hover:opacity-90 transition-opacity disabled:opacity-50"
+              >
+                {isSubmitting ? "Submitting..." : "Contact Us"}
+              </button>
+            </form>
+          </div>
+        </motion.div>
       </main>
       <Footer />
     </div>
