@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import fellowshipLogo from "@/assets/fellowship-logo.png";
+import serendipityLogo from "@/assets/serendipity-arts-logo-full.png";
+import brijLogo from "@/assets/brij-logo.png";
 
 const Footer = () => {
   return (
@@ -7,23 +8,20 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-3 gap-12">
           <div>
-            <img src={fellowshipLogo} alt="The Brij Cultural Leaders Fellowship" className="h-10 mb-4" />
-            <p className="text-sm text-muted-foreground">Delivered by Serendipity Arts</p>
+            <div className="flex items-center gap-3 mb-4">
+              <img src={brijLogo} alt="The Brij" className="h-6" />
+              <span className="text-muted-foreground/40 text-lg font-light select-none">|</span>
+              <img src={serendipityLogo} alt="Serendipity Arts" className="h-8" />
+            </div>
           </div>
 
           <div className="flex flex-col gap-3">
             <p className="label-text mb-2">Links</p>
             <Link to="/about" className="text-sm text-muted-foreground hover:text-foreground transition-colors">About</Link>
             <Link to="/apply" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Apply</Link>
-            <Link to="/mentors" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Mentors</Link>
             <Link to="/publications" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Publications</Link>
             <Link to="/faq" className="text-sm text-muted-foreground hover:text-foreground transition-colors">FAQ</Link>
-<Link
-  to="/faq#contact"
-  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
->
-  Contact
-</Link>
+            <a href="mailto:tbf@serendipityarts.org" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Contact</a>
           </div>
 
           <div className="flex flex-col gap-3">

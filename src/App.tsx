@@ -8,9 +8,10 @@ import About from "./pages/About";
 import Apply from "./pages/Apply";
 import ApplyIndividual from "./pages/ApplyIndividual";
 import ApplyInstitution from "./pages/ApplyInstitution";
+import ApplyNominee from "./pages/ApplyNominee";
+import ApplyTrack3 from "./pages/ApplyTrack3";
 import Dashboard from "./pages/Dashboard";
 import SubmissionConfirmation from "./pages/SubmissionConfirmation";
-import Mentors from "./pages/Mentors";
 import Publications from "./pages/Publications";
 import Faq from "./pages/Faq";
 import NotFound from "./pages/NotFound";
@@ -29,9 +30,10 @@ const App = () => (
           <Route path="/apply" element={<Apply />} />
           <Route path="/apply/individual" element={<ApplyIndividual />} />
           <Route path="/apply/institution" element={<ApplyInstitution />} />
+          <Route path="/apply/nominee" element={<ApplyNominee />} />
+          <Route path="/apply/track3" element={<ApplyTrack3 />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/submission-confirmation" element={<SubmissionConfirmation />} />
-          <Route path="/mentors" element={<Mentors />} />
           <Route path="/publications" element={<Publications />} />
           <Route path="/faq" element={<Faq />} />
           <Route path="*" element={<NotFound />} />

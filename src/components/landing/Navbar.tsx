@@ -1,50 +1,31 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import fellowshipLogo from "@/assets/fellowship-logo.png";
+import serendipityLogo from "@/assets/serendipity-arts-logo-full.png";
+import brijLogo from "@/assets/brij-logo.png";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  
- const isLoggedIn = !!localStorage.getItem("token");
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-
-    window.location.href = "/";
-  }
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="flex items-center justify-between px-5 md:px-12 lg:px-24 py-3 md:py-4">
-        <Link to="/" className="flex items-center">
-          <img src={fellowshipLogo} alt="The Brij Cultural Leaders Fellowship" className="h-8 md:h-12" />
+        <Link to="/" className="flex items-center gap-3 md:gap-4">
+          <img src={brijLogo} alt="The Brij" className="h-5 md:h-7" />
+          <span className="text-muted-foreground/40 text-lg font-light select-none">|</span>
+          <img src={serendipityLogo} alt="Serendipity Arts" className="h-7 md:h-10" />
         </Link>
 
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-8">
           <Link to="/about" className="label-text hover:text-foreground transition-colors">About</Link>
           <a href="/#structure" className="label-text hover:text-foreground transition-colors">Structure</a>
-          <Link to="/mentors" className="label-text hover:text-foreground transition-colors">Mentors</Link>
           <Link to="/publications" className="label-text hover:text-foreground transition-colors">Publications</Link>
           <Link to="/faq" className="label-text hover:text-foreground transition-colors">FAQ</Link>
-         {isLoggedIn ? (
-  <button
-    onClick={handleLogout}
-    className="bg-foreground text-background px-6 py-2.5 text-sm font-semibold tracking-wide"
-  >
-    Logout
-  </button>
-) : (
-  <Link
-    to="/apply"
-    className="bg-foreground text-background px-6 py-2.5 text-sm font-semibold tracking-wide hover:bg-primary transition-colors"
-  >
-    Apply Now
-  </Link>
-)}
+          <Link to="/apply" className="bg-foreground text-background px-6 py-2.5 text-sm font-semibold tracking-wide hover:bg-primary transition-colors">
+            Apply Now
+          </Link>
         </div>
 
         {/* Mobile toggle */}
@@ -81,7 +62,6 @@ const Navbar = () => {
               {[
                 { to: "/about", label: "About" },
                 { to: "/#structure", label: "Structure", isHash: true },
-                { to: "/mentors", label: "Mentors" },
                 { to: "/publications", label: "Publications" },
                 { to: "/faq", label: "FAQ" },
               ].map((item, i) => (
@@ -108,21 +88,13 @@ const Navbar = () => {
                 transition={{ delay: 0.2, duration: 0.25 }}
                 className="pt-2"
               >
-                {isLoggedIn ? (
-  <button
-    onClick={handleLogout}
-    className="bg-foreground text-background px-6 py-2.5 text-sm font-semibold tracking-wide"
-  >
-    Logout
-  </button>
-) : (
-  <Link
-    to="/apply"
-    className="bg-foreground text-background px-6 py-2.5 text-sm font-semibold tracking-wide hover:bg-primary transition-colors"
-  >
-    Apply Now
-  </Link>
-)}
+                <Link
+                  to="/apply"
+                  onClick={() => setMenuOpen(false)}
+                  className="block bg-foreground text-background px-6 py-3.5 text-sm font-semibold tracking-wide text-center"
+                >
+                  Apply Now
+                </Link>
               </motion.div>
             </div>
           </motion.div>

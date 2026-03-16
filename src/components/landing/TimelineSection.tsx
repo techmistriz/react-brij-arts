@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 
 const timeline = [
-  { phase: "Applications Open", date: "March 2026", description: "Submit your application through the online portal." },
-  { phase: "Selection Process", date: "April — May 2026", description: "Review, shortlisting, and interviews with the selection committee." },
-  { phase: "Fellowship Begins", date: "July 2026", description: "Orientation and onboarding with your cohort." },
-  { phase: "Programme Duration", date: "July — December 2026", description: "Six months of intensive learning, mentorship, and engagement." },
+  { phase: "Applications Open", date: "Early 2026", description: "Submit your application through the online portal." },
+  { phase: "Selection Process", date: "Spring 2026", description: "Review, shortlisting, and conversations with the selection panel." },
+  { phase: "Opening Residential", date: "20–25 June 2026", description: "Six-day in-person residential in Goa. Fellowship begins." },
+  { phase: "Serendipity Arts Festival", date: "December 2026", description: "Public presentation of Research Inquiries at the Festival in Goa." },
 ];
 
 const TimelineSection = () => {

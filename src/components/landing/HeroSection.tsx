@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import heroImage from "@/assets/hero-fellowship.jpg";
-import fellowshipLogo from "@/assets/fellowship-logo-full.png";
+import tbclfLogo from "@/assets/tbclf-white.png";
 
 const HeroSection = () => {
   return (
@@ -18,9 +18,9 @@ const HeroSection = () => {
           transition={{ duration: 0.9, ease: "easeOut" }}
         >
           <img
-            src={fellowshipLogo}
-            alt="The Brij Cultural Leaders Fellowship — Delivered by Serendipity Arts"
-            className="h-24 md:h-32 lg:h-40 mb-8 brightness-0 invert"
+            src={tbclfLogo}
+            alt="The Brij Cultural Leaders Fellowship"
+            className="h-28 md:h-36 lg:h-44 mb-8"
           />
           <p className="body-large text-background/80 max-w-xl mb-12">
             A leadership programme for emerging cultural practitioners

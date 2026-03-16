@@ -5,6 +5,33 @@ import { ArrowRight } from "lucide-react";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 
+const tracks = [
+  {
+    label: "Track 1",
+    title: "Individual Applicant",
+    description:
+      "A two-stage application for cultural practitioners based in India. Bursaries are available and have no bearing on how your application is assessed.",
+    cta: "Begin Application",
+    to: "/apply/individual",
+  },
+  {
+    label: "Track 2",
+    title: "Institutional Nomination",
+    description:
+      "For cultural organisations, foundations, and institutions that wish to invest in the development of a practitioner within their team.",
+    cta: "Begin Nomination",
+    to: "/apply/institution",
+  },
+  {
+    label: "Track 3",
+    title: "Nominated Application",
+    description:
+      "For nominees put forward by their institution. Complete this form independently — your institution does not see your answers before submission.",
+    cta: "Begin Application",
+    to: "/apply/track3",
+  },
+];
+
 const Apply = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -26,16 +53,10 @@ const Apply = () => {
             <h1 className="editorial-subheading mb-6">
               Apply to the Brij Cultural Leaders Fellowship
             </h1>
-            <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-2">
-              Nine months. South Asia.
-            </p>
-            <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
-              Inaugural cohort 2026–27.
-            </p>
           </motion.div>
         </section>
 
-        {/* Two Tracks */}
+        {/* Three Tracks */}
         <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 pb-20 md:pb-28">
           <motion.p
             initial={{ opacity: 0 }}
@@ -46,56 +67,31 @@ const Apply = () => {
             Choose Your Pathway
           </motion.p>
 
-          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
-            {/* Track 1 */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.15 }}
-            >
-              <Link
-                to="/apply/individual"
-                className="group block border border-border p-8 md:p-10 hover:border-foreground transition-colors h-full"
+          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+            {tracks.map((track, i) => (
+              <motion.div
+                key={track.label}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.15 + i * 0.1 }}
               >
-                <p className="label-text mb-3 text-primary">Track 1</p>
-                <h2 className="text-xl md:text-2xl font-bold mb-4 font-heading">
-                  Individual Applicant
-                </h2>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                  For practitioners applying independently. Bursaries are
-                  available and have no bearing on how your application is
-                  assessed.
-                </p>
-                <span className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide group-hover:gap-3 transition-all">
-                  Begin Application <ArrowRight size={16} />
-                </span>
-              </Link>
-            </motion.div>
-
-            {/* Track 2 */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.25 }}
-            >
-              <Link
-                to="/apply/institution"
-                className="group block border border-border p-8 md:p-10 hover:border-foreground transition-colors h-full"
-              >
-                <p className="label-text mb-3 text-primary">Track 2</p>
-                <h2 className="text-xl md:text-2xl font-bold mb-4 font-heading">
-                  Institutional Nomination
-                </h2>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                  For cultural organisations, foundations, and institutions that
-                  wish to invest in the development of a practitioner within
-                  their team.
-                </p>
-                <span className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide group-hover:gap-3 transition-all">
-                  Begin Nomination <ArrowRight size={16} />
-                </span>
-              </Link>
-            </motion.div>
+                <Link
+                  to={track.to}
+                  className="group block border border-border p-8 md:p-10 hover:border-foreground transition-colors h-full"
+                >
+                  <p className="label-text mb-3 text-primary">{track.label}</p>
+                  <h2 className="text-xl md:text-2xl font-bold mb-4 font-heading">
+                    {track.title}
+                  </h2>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                    {track.description}
+                  </p>
+                  <span className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide group-hover:gap-3 transition-all">
+                    {track.cta} <ArrowRight size={16} />
+                  </span>
+                </Link>
+              </motion.div>
+            ))}
           </div>
         </section>
 

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import serendipityLogo from "@/assets/serendipity-arts-logo.png";
-import ifiLogo from "@/assets/ifi-logo.png";
+import ifiLogo from "@/assets/ifi-logo-new.png";
+import ambassadeLogo from "@/assets/ambassade-france-logo-new.png";
 
 const PartnersSection = () => {
   return (
@@ -18,18 +18,18 @@ const PartnersSection = () => {
             as part of the wider Brij ecosystem, in partnership with Institut Français India.
           </p>
           <div className="flex flex-wrap justify-center items-center gap-16 md:gap-24">
-            <a href="https://serendipityarts.org" target="_blank" rel="noopener noreferrer">
-              <img
-                src={serendipityLogo}
-                alt="Serendipity Arts"
-                className="h-12 md:h-16 opacity-80 hover:opacity-100 transition-opacity"
-              />
-            </a>
             <a href="https://www.ifindia.in" target="_blank" rel="noopener noreferrer">
               <img
                 src={ifiLogo}
                 alt="Institut Français India"
-                className="h-12 md:h-16 opacity-80 hover:opacity-100 transition-opacity"
+                className="h-16 md:h-24 opacity-80 hover:opacity-100 transition-opacity"
+              />
+            </a>
+            <a href="https://in.ambafrance.org" target="_blank" rel="noopener noreferrer">
+              <img
+                src={ambassadeLogo}
+                alt="Ambassade de France en Inde"
+                className="h-16 md:h-24 opacity-80 hover:opacity-100 transition-opacity"
               />
             </a>
           </div>

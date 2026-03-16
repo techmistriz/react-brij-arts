@@ -14,7 +14,6 @@ import { WordCountTextarea, countWords } from "@/components/WordCountTextarea";
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 
@@ -26,7 +25,7 @@ const stage1Schema = z.object({
   country: z.string().min(1, "Required"),
   city: z.string().min(1, "Required"),
   currentRole: z.string().min(1, "Required"),
-  organisation: z.string().optional().or(z.literal("")),
+  organisation: z.string().min(1, "Required"),
   primaryDiscipline: z.string().optional(),
   yearsInCulture: z.string().min(1, "Required"),
   email: z.string().email("Please enter a valid email"),
@@ -41,18 +40,10 @@ const stage1Schema = z.object({
 /* ─── Stage 2 schema ─── */
 const stage2Schema = z.object({
   turningPoint: z.string().min(1, "Required").refine((v) => countWords(v) <= 200, "Maximum 200 words"),
-  pivotalNineMonths: z.string().min(1, "Required").refine((v) => countWords(v) <= 200, "Maximum 200 words"),
-  restatedQuestion: z.string().min(1, "Required").refine((v) => countWords(v) <= 200, "Maximum 200 words"),
+  pivotalNineMonths: z.string().min(1, "Required").refine((v) => countWords(v) <= 150, "Maximum 150 words"),
   workSampleUrl: z.string().min(1, "Please provide a link or upload"),
   workSampleDescription: z.string().min(1, "Required").refine((v) => countWords(v) <= 25, "Maximum 25 words"),
   timeCommitmentConfirm: z.boolean().refine((v) => v, "You must confirm"),
-  referenceSalutation: z.string().min(1, "Required"),
-  referenceFirstName: z.string().min(1, "Required"),
-  referenceLastName: z.string().min(1, "Required"),
-  referenceEmail: z.string().email("Please enter a valid email"),
-  referenceRelationship: z.string().min(1, "Required"),
-  referenceExternal: z.string().min(1, "Required"),
-  bursaryRequest: z.boolean().optional(),
 });
 
 type Stage1Data = z.infer<typeof stage1Schema>;
@@ -65,16 +56,13 @@ const disciplines = [
   "Cultural Management & Producing", "Cross-disciplinary", "Other",
 ];
 const yearsOptions = ["5–8 years", "8–12 years", "12+ years"];
-const salutations = ["Mr", "Ms", "Mx", "Dr", "Prof"];
 
-const ApplyIndividual = () => {
+const ApplyTrack3 = () => {
   const navigate = useNavigate();
   const [stage, setStage] = useState<1 | 2>(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [savedId, setSavedId] = useState<string | null>(null);
   const [savedAppId, setSavedAppId] = useState<string | null>(null);
-  const [stage1Snapshot, setStage1Snapshot] = useState<Stage1Data | null>(null);
-  const [bursaryFile, setBursaryFile] = useState<File | null>(null);
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
@@ -92,22 +80,18 @@ const ApplyIndividual = () => {
   const s2 = useForm<Stage2Data>({
     resolver: zodResolver(stage2Schema),
     defaultValues: {
-      turningPoint: "", pivotalNineMonths: "", restatedQuestion: "",
+      turningPoint: "", pivotalNineMonths: "",
       workSampleUrl: "", workSampleDescription: "",
-      timeCommitmentConfirm: false, bursaryRequest: false,
-      referenceSalutation: "", referenceFirstName: "", referenceLastName: "",
-      referenceEmail: "", referenceRelationship: "", referenceExternal: "",
+      timeCommitmentConfirm: false,
     },
   });
-
-  const bursaryChecked = s2.watch("bursaryRequest");
 
   /* Save Stage 1 → draft row */
   const onStage1Submit = async (data: Stage1Data) => {
     setIsSubmitting(true);
     try {
       const { data: row, error } = await supabase
-        .from("applications")
+        .from("track3_applications" as any)
         .insert({
           first_name: data.firstName,
           last_name: data.lastName,
@@ -115,7 +99,7 @@ const ApplyIndividual = () => {
           country: data.country,
           city: data.city,
           role_title: data.currentRole,
-          organisation: data.organisation || null,
+          organisation: data.organisation,
           primary_discipline: data.primaryDiscipline || null,
           years_in_culture: data.yearsInCulture,
           email: data.email,
@@ -126,15 +110,14 @@ const ApplyIndividual = () => {
           practice_description: data.practiceDescription,
           practice_question: data.practiceQuestion,
           current_stage: "stage2",
-          status: "draft" as const,
-        })
+          status: "draft",
+        } as any)
         .select("id, application_id")
         .single();
 
       if (error) throw error;
-      setSavedId(row.id);
-      setSavedAppId(row.application_id);
-      setStage1Snapshot(data);
+      setSavedId((row as any).id);
+      setSavedAppId((row as any).application_id);
       setStage(2);
       window.scrollTo(0, 0);
       toast({ title: "Stage 1 saved — continue to Stage 2" });
@@ -151,37 +134,17 @@ const ApplyIndividual = () => {
     if (!savedId) return;
     setIsSubmitting(true);
     try {
-      let bursaryDocUrl: string | null = null;
-      if (data.bursaryRequest && bursaryFile) {
-        const fileExt = bursaryFile.name.split('.').pop();
-        const fileName = `${Date.now()}-${stage1Snapshot?.email?.replace(/[^a-z0-9]/gi, '_')}.${fileExt}`;
-        const { data: uploadData, error: uploadError } = await supabase.storage
-          .from('bursary-documents')
-          .upload(fileName, bursaryFile);
-        if (uploadError) throw uploadError;
-        bursaryDocUrl = uploadData.path;
-      }
-
       const { error } = await supabase
-        .from("applications")
+        .from("track3_applications" as any)
         .update({
           turning_point: data.turningPoint,
           pivotal_nine_months: data.pivotalNineMonths,
-          restated_question: data.restatedQuestion,
           work_sample_url: data.workSampleUrl,
           work_sample_description: data.workSampleDescription,
           time_commitment_confirmed: data.timeCommitmentConfirm,
-          reference_salutation: data.referenceSalutation,
-          reference_first_name: data.referenceFirstName,
-          reference_last_name: data.referenceLastName,
-          reference_email: data.referenceEmail,
-          reference_relationship: data.referenceRelationship,
-          reference_external: data.referenceExternal,
-          bursary_requested: data.bursaryRequest || false,
-          bursary_document_url: bursaryDocUrl,
           current_stage: "submitted",
-          status: "submitted" as const,
-        })
+          status: "submitted",
+        } as any)
         .eq("id", savedId);
 
       if (error) throw error;
@@ -219,12 +182,13 @@ const ApplyIndividual = () => {
               </Link>
 
               <div>
-                <p className="label-text mb-3 text-primary">Track 1</p>
-                <h1 className="editorial-subheading mb-4">Individual Applicant</h1>
+                <p className="label-text mb-3 text-primary">Track 3</p>
+                <h1 className="editorial-subheading mb-4">Nominated Application</h1>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  This is a two-stage application. Complete Stage 1 to save your progress,
-                  then continue to Stage 2. Please confirm that you are available for both
-                  compulsory in-person moments before beginning.
+                  You have been nominated by your institution to apply for the Brij Cultural Leaders
+                  Fellowship. Complete this form independently — your institution does not see your
+                  answers before submission. Being nominated is not the same as being selected; your
+                  application is assessed by the jury on the same criteria as all other applicants.
                 </p>
                 <ul className="mt-3 space-y-1.5 text-sm text-muted-foreground">
                   <li>• Six-day residential, Goa — 20–25 June 2026</li>
@@ -240,23 +204,19 @@ const ApplyIndividual = () => {
               <p className="text-xs text-muted-foreground">Stage {stage} of 2</p>
 
               <div className="border border-border p-5">
-                <h3 className="font-bold text-sm uppercase tracking-wide mb-3">Bursaries</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-2">
-                  Ten bursaries are available, ranging from 25% to full fee coverage. Full
-                  bursary recipients also receive a travel supplement.
-                </p>
-                <p className="text-xs text-muted-foreground">
-                  Applying for a bursary has no impact on how your application is assessed.
-                  Bursary decisions are made only after the jury has completed its evaluation.
+                <h3 className="font-bold text-sm uppercase tracking-wide mb-3">Time Commitment</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  The Fellowship requires a maximum of 6 hours per week of structured engagement across
+                  nine months, plus two compulsory in-person moments in Goa.
                 </p>
               </div>
 
               <div className="border border-border p-5">
-                <h3 className="font-bold text-sm uppercase tracking-wide mb-3">Reference</h3>
+                <h3 className="font-bold text-sm uppercase tracking-wide mb-3">Important Note</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  A reference request will be sent automatically to your referee when you submit.
-                  They will be asked three questions. The submission will only be complete once
-                  your referee responds.
+                  Track 3 Fellows are not eligible for bursaries. Your institution has covered the
+                  Fellowship fee in full. Your institution's separate form must also be received before
+                  your application is considered complete.
                 </p>
               </div>
 
@@ -337,8 +297,9 @@ const ApplyIndividual = () => {
                         {fieldError(s1, "currentRole")}
                       </div>
                       <div>
-                        <Label>Organisation or Institution (if applicable)</Label>
+                        <Label>Organisation or Institution *</Label>
                         <Input {...s1.register("organisation")} className="mt-1.5" />
+                        {fieldError(s1, "organisation")}
                       </div>
                       <div>
                         <Label>Primary Discipline</Label>
@@ -369,6 +330,7 @@ const ApplyIndividual = () => {
                       </div>
                       <div>
                         <Label>Email Address *</Label>
+                        <p className="text-xs text-muted-foreground mt-0.5 mb-1">Correspondence will go to the personal email provided.</p>
                         <Input type="email" {...s1.register("email")} className="mt-1.5" />
                         {fieldError(s1, "email")}
                       </div>
@@ -397,8 +359,7 @@ const ApplyIndividual = () => {
                       Section B — Availability Confirmation
                     </h2>
                     <p className="text-xs text-muted-foreground mb-5 leading-relaxed">
-                      Both confirmations are mandatory. If you cannot confirm both, you are not eligible
-                      to apply at this time.
+                      Both confirmations are mandatory. If you cannot confirm both, you cannot proceed.
                     </p>
                     <div className="space-y-4">
                       <div className="flex items-start gap-3">
@@ -409,7 +370,7 @@ const ApplyIndividual = () => {
                           className="mt-0.5"
                         />
                         <label htmlFor="residential" className="text-sm cursor-pointer">
-                          I can attend the residential in Goa, 20–25 June 2026 *
+                          I can attend the in-person residential in Goa, 20–25 June 2026 *
                         </label>
                       </div>
                       {fieldError(s1, "residentialConfirm")}
@@ -476,16 +437,6 @@ const ApplyIndividual = () => {
               ) : (
                 /* ════════ STAGE 2 ════════ */
                 <form onSubmit={s2.handleSubmit(onStage2Submit)} className="space-y-12">
-                  {/* Recall box */}
-                  {stage1Snapshot && (
-                    <div className="bg-muted/50 border border-border p-5 text-sm">
-                      <p className="font-semibold mb-2">In Stage 1 you wrote:</p>
-                      <p className="text-muted-foreground italic">
-                        "{stage1Snapshot.practiceQuestion}"
-                      </p>
-                    </div>
-                  )}
-
                   {/* Section D — Your Thinking */}
                   <div>
                     <h2 className="font-bold text-lg mb-6 pb-3 border-b border-border">
@@ -513,25 +464,10 @@ const ApplyIndividual = () => {
                         <WordCountTextarea
                           {...s2.register("pivotalNineMonths")}
                           rows={6}
-                          maxWords={200}
+                          maxWords={150}
                           className="mt-1.5"
                         />
                         {fieldError(s2, "pivotalNineMonths")}
-                      </div>
-                      <div>
-                        <Label>
-                          In Stage 1 you told us: "What question is your practice currently circling —
-                          something you don't yet have clear language for?" Return to that question now.
-                          Has it sharpened or shifted since you wrote it? Restate it here — it can be
-                          the same, developed, or entirely different. *
-                        </Label>
-                        <WordCountTextarea
-                          {...s2.register("restatedQuestion")}
-                          rows={6}
-                          maxWords={200}
-                          className="mt-1.5"
-                        />
-                        {fieldError(s2, "restatedQuestion")}
                       </div>
                     </div>
                   </div>
@@ -589,129 +525,13 @@ const ApplyIndividual = () => {
                     {fieldError(s2, "timeCommitmentConfirm")}
                   </div>
 
-                  {/* Section G — Reference */}
-                  <div>
-                    <h2 className="font-bold text-lg mb-6 pb-3 border-b border-border">
-                      Section G — Reference
-                    </h2>
-                    <p className="text-xs text-muted-foreground mb-5 leading-relaxed">
-                      A reference request will be sent automatically to your referee when you submit.
-                      They will be asked three questions: how they know you and for how long; what
-                      quality in you makes you ready for this Fellowship right now; and anything else
-                      the panel should know. There is no form — a short letter only. The submission
-                      will only be complete once your referee responds.
-                    </p>
-                    <div className="space-y-5">
-                      <div className="grid sm:grid-cols-3 gap-5">
-                        <div>
-                          <Label>Salutation *</Label>
-                          <Select onValueChange={(v) => s2.setValue("referenceSalutation", v)}>
-                            <SelectTrigger className="mt-1.5">
-                              <SelectValue placeholder="Title" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              {salutations.map((s) => (
-                                <SelectItem key={s} value={s}>{s}</SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                          {fieldError(s2, "referenceSalutation")}
-                        </div>
-                        <div>
-                          <Label>First Name *</Label>
-                          <Input {...s2.register("referenceFirstName")} className="mt-1.5" />
-                          {fieldError(s2, "referenceFirstName")}
-                        </div>
-                        <div>
-                          <Label>Last Name *</Label>
-                          <Input {...s2.register("referenceLastName")} className="mt-1.5" />
-                          {fieldError(s2, "referenceLastName")}
-                        </div>
-                      </div>
-                      <div>
-                        <Label>Referee Email Address *</Label>
-                        <Input type="email" {...s2.register("referenceEmail")} className="mt-1.5" />
-                        {fieldError(s2, "referenceEmail")}
-                      </div>
-                      <div>
-                        <Label>Relationship to You *</Label>
-                        <Input
-                          {...s2.register("referenceRelationship")}
-                          placeholder='e.g. "Former director", "Peer curator", "Mentor"'
-                          className="mt-1.5"
-                        />
-                        {fieldError(s2, "referenceRelationship")}
-                      </div>
-                      <div>
-                        <Label>Is your referee from outside your current organisation? *</Label>
-                        <RadioGroup
-                          onValueChange={(v) => s2.setValue("referenceExternal", v, { shouldValidate: true })}
-                          className="mt-2 flex gap-6"
-                        >
-                          {["Yes", "No", "I am self-employed"].map((opt) => (
-                            <div key={opt} className="flex items-center gap-2">
-                              <RadioGroupItem value={opt} id={`ref-ext-${opt}`} />
-                              <label htmlFor={`ref-ext-${opt}`} className="text-sm cursor-pointer">{opt}</label>
-                            </div>
-                          ))}
-                        </RadioGroup>
-                        {fieldError(s2, "referenceExternal")}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Section H — Bursary Request */}
-                  <div>
-                    <h2 className="font-bold text-lg mb-6 pb-3 border-b border-border">
-                      Section H — Bursary Request
-                    </h2>
-                    <div className="space-y-4">
-                      <div className="flex items-start gap-3">
-                        <Checkbox
-                          id="bursaryRequest"
-                          checked={!!bursaryChecked}
-                          onCheckedChange={(checked) => s2.setValue("bursaryRequest", checked === true)}
-                          className="mt-0.5"
-                        />
-                        <div>
-                          <label htmlFor="bursaryRequest" className="text-sm cursor-pointer">
-                            I would like to apply for a bursary.
-                          </label>
-                          <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
-                            Applying for a bursary has no impact on how your application is assessed.
-                            The request for a bursary will be considered separately by the programme
-                            team. Bursary decisions are made only after the jury has completed its
-                            evaluation of applications.
-                          </p>
-                        </div>
-                      </div>
-
-                      {bursaryChecked && (
-                        <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          exit={{ opacity: 0, height: 0 }}
-                          className="ml-8"
-                        >
-                          <Label className="text-sm">Upload bursary statement / supporting document</Label>
-                          <Input
-                            type="file"
-                            accept=".pdf,.doc,.docx"
-                            className="mt-1.5"
-                            onChange={(e) => setBursaryFile(e.target.files?.[0] || null)}
-                          />
-                          <p className="text-xs text-muted-foreground mt-1">PDF or Word document, max 5 MB.</p>
-                        </motion.div>
-                      )}
-                    </div>
-                  </div>
-
                   {/* Disclaimers */}
                   <div className="bg-muted/50 border border-border p-5 text-xs text-muted-foreground space-y-2">
                     <p className="font-semibold text-foreground text-sm mb-3">Disclaimers</p>
-                    <p>1. If you are selected, you will be required to submit a government-issued ID for hotel bookings and flights.</p>
-                    <p>2. You are subject to a confidentiality clause upon selection.</p>
+                    <p>1. If you are selected, you will be asked to submit your government-issued ID for hotel bookings and flights.</p>
+                    <p>2. You will be under a confidentiality clause regarding fellow and jury deliberations.</p>
                     <p>3. Your completion of the Fellowship will depend on attendance and submission of all required materials.</p>
+                    <p>4. Track 3 Fellows are not eligible for bursaries. Your institution has covered the Fellowship fee in full.</p>
                   </div>
 
                   <div className="flex gap-4 pt-4">
@@ -742,4 +562,4 @@ const ApplyIndividual = () => {
   );
 };
 
-export default ApplyIndividual;
+export default ApplyTrack3;

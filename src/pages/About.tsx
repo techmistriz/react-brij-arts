@@ -4,7 +4,7 @@ import Footer from "@/components/landing/Footer";
 
 const sections = [
   {
-    label: "Introduction",
+    label: "Overview",
     title: "The Brij Cultural Leaders Fellowship",
     content: [
       "The Brij Cultural Leaders Fellowship is a nine-month programme for mid-career cultural practitioners and cross-sector professionals across South Asia — the first of its kind in the region.",
@@ -13,42 +13,45 @@ const sections = [
     ],
   },
   {
-    label: "Purpose",
-    title: "Why the Fellowship exists",
+    label: "Course Philosophy",
+    title: "How the Fellowship thinks",
     content: [
-      "The Fellowship emerged from a recognition that the cultural sector in South Asia lacks the leadership infrastructure that other industries take for granted. While artists, curators, producers and cultural practitioners across the region are building remarkable work, there are very few spaces where they can step back to examine the leadership responsibilities that come with it.",
-      "The Fellowship exists to address that gap directly, providing practitioners with the critical frameworks, professional networks, and reflective space necessary to lead with both rigour and vision.",
+      "The Fellowship is not a taught course. Fellows arrive with questions rather than answers. Through guided reflection, peer exchange, mentorship, and two in-person moments in Goa, each Fellow develops a live inquiry rooted in their own practice.",
+      "The programme is designed for practitioners who cannot step away from their work. It comes to them — structured around a maximum of six hours per week of engagement, with depth built through sustained dialogue rather than volume.",
     ],
   },
   {
-    label: "Approach",
-    title: "The Fellowship approach",
+    label: "The Three Pillars",
+    title: "What the Fellowship is built on",
     content: [
-      "The Brij Cultural Leaders Fellowship is not a taught course. Fellows arrive with questions rather than answers. Through guided reflection, peer exchange, mentorship, and two in-person moments in Goa, each Fellow develops a live inquiry rooted in their own practice.",
-      "This culminates in a public presentation at the Serendipity Arts Festival in Goa.",
+      "Mentorship — Every Fellow is matched with a senior mentor from the cultural sector. The relationship is confidential, monthly, and self-scheduled. Mentors are selected for their experience and their capacity to listen as well as to advise.",
+      "Peer Learning — The cohort of 12–15 practitioners forms the core of the experience. Fellows learn from each other's contexts, challenges, and questions across disciplines and geographies.",
+      "Institutional Exposure — Direct engagement with how cultural organisations operate, including governance, financial stewardship, reputation management, crisis response, diplomacy, and team leadership.",
     ],
   },
   {
-    label: "The Brij",
-    title: "The Brij connection",
-    content: [
-      "Serendipity Arts is currently building THE BRIJ — a 1.4 million square foot centre for arts and culture in New Delhi. The scale of this project raises a central question: what kind of leadership will the next generation of cultural institutions require?",
-      "The Fellowship is one response to that question — a space where that leadership begins to take shape.",
-    ],
-  },
-  {
-    label: "Serendipity Arts",
-    title: "Why Serendipity Arts",
+    label: "Why Serendipity Arts",
+    title: "A decade of building cultural infrastructure",
     content: [
       "For over a decade, Serendipity Arts has worked at the intersection of artistic practice, research, and cross-cultural dialogue across South Asia. Through festivals, grants, residencies, and institutional collaborations, the organisation has developed a deep understanding of the cultural sector's needs.",
       "The Fellowship is Serendipity Arts' response to a clear gap: the absence of sustained leadership development within the cultural sector. It is not a grant programme and not a residency. It is a structured environment for reflective leadership development.",
     ],
   },
   {
-    label: "Culmination",
-    title: "Public presentation",
+    label: "What Will I Learn",
+    title: "Skills and frameworks",
     content: [
-      "The Fellowship culminates at the Serendipity Arts Festival in Goa, where Fellows present their Research Inquiries to an audience of artists, institutions, and cultural practitioners.",
+      "Governance and institutional design. Financial stewardship and fundraising. Reputation management and public communication. Crisis leadership and decision-making under pressure. Cultural diplomacy and cross-sector partnership. Team-building and organisational culture.",
+      "Everything in the programme has been learned the hard way, over more than a decade of building one of South Asia's most ambitious cultural platforms. We are passing it on.",
+    ],
+  },
+  {
+    label: "Programme Phases",
+    title: "Three phases across nine months",
+    content: [
+      "Phase I (June–July) — Self and context. Who you are as a leader, where you work, and what you are carrying into the room.",
+      "Phase II (August–October) — The ecosystem. The region, the structures you operate within and sometimes against. Looking outward.",
+      "Phase III (November–March) — Leadership and futures. Where you are going, and what you will build. This culminates in a public presentation at the Serendipity Arts Festival in Goa.",
     ],
   },
 ];
@@ -73,7 +76,7 @@ const About = () => {
             </motion.div>
 
             <div className="space-y-20 md:space-y-28">
-              {sections.map((section, i) => (
+              {sections.map((section) => (
                 <motion.div
                   key={section.label}
                   initial={{ opacity: 0, y: 30 }}

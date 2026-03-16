@@ -1,0 +1,4 @@
+project_id = "bikvcqiozgvzrviflazc"
+
+[functions.send-nominee-email]
+verify_jwt = false

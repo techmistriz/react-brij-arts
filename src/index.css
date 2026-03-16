@@ -117,7 +117,3 @@
     @apply text-xs uppercase tracking-[0.2em] font-medium text-muted-foreground;
   }
 }
-
-html {
-  scroll-behavior: smooth;
-}
