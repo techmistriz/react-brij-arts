@@ -13,6 +13,7 @@ import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ContactFormData, submitContactForm } from "@/lib/api/contact";
 import { useForm } from "react-hook-form";
+import { useToast } from "@/hooks/use-toast";
 
 const contactSchema = z.object({
   name: z.string().min(1, "Name is required").max(100),
@@ -240,7 +241,8 @@ const FaqSection = ({
 );
 
 const Faq = () => {
- const {
+  const { toast } = useToast();
+  const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
@@ -249,18 +251,30 @@ const Faq = () => {
     resolver: zodResolver(contactSchema),
   });
 
-    const onSubmit = async (data: ContactFormData) => {
-    console.log("Form data", data);
+  const onSubmit = async (data: ContactFormData) => {
+    console.log(data);
     try {
-      await submitContactForm(data);
-      alert("Form submitted successfully!");
+      const res = await submitContactForm(data);
+
+      toast({
+        description: res.message || "Form submitted successfully!",
+        className: "font-semibold",
+      });
+
       reset();
     } catch (error: any) {
-      alert(error.message || "Failed to submit");
+      const message =
+        error?.response?.data?.message || //  backend message
+        error?.message || // fallback
+        "Something went wrong";
+
+      toast({
+        description: message,
+        className: "font-semibold",
+      });
     }
   };
-
-    const location = useLocation();
+  const location = useLocation();
 
   useEffect(() => {
     if (location.hash === "#contact") {
@@ -269,10 +283,10 @@ const Faq = () => {
         const yOffset = -180; // space from top (adjust if needed)
         const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
-      window.scrollTo({ top: y, behavior: "smooth" });
+        window.scrollTo({ top: y, behavior: "smooth" });
       }
     }
-}, [location]);
+  }, [location]);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -323,8 +337,7 @@ const Faq = () => {
           </div>
         </div>
 
-
-              <motion.div
+        <motion.div
           id="contact"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
