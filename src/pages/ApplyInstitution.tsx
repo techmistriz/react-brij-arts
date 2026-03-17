@@ -41,7 +41,7 @@ const schema = z.object({
   // Section C — About the Nominee
   nomineeFirstName: z.string().min(1, "Required").max(200),
   nomineeLastName: z.string().min(1, "Required").max(200),
-   nomineeEmail: z.string().email("Please enter a valid email"),
+  nomineeEmail: z.string().email("Please enter a valid email"),
   nomineeRole: z.string().min(1, "Required").max(200),
   whyNominating: z
     .string()
@@ -124,7 +124,7 @@ const ApplyInstitution = () => {
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
-    console.log(data)
+    console.log(data);
     try {
       const { data: nomination, error } = await supabase
         .from("nominations" as any)
@@ -141,7 +141,7 @@ const ApplyInstitution = () => {
           contact_position: data.signatoryRole,
           nominee_first_name: data.nomineeFirstName,
           nominee_last_name: data.nomineeLastName,
-nominee_email: data.nomineeEmail,
+          nominee_email: data.nomineeEmail,
           nominee_position: data.nomineeRole,
           nominee_years_at_institution: "N/A",
           why_nominating: data.whyNominating,
@@ -384,7 +384,6 @@ nominee_email: data.nomineeEmail,
                     exactly.
                   </p>
                   <div className="space-y-5">
-                 
                     <div className="grid sm:grid-cols-2 gap-5">
                       <div>
                         <Label>First name of nominee *</Label>
@@ -402,24 +401,21 @@ nominee_email: data.nomineeEmail,
                         />
                         {fieldError("nomineeLastName")}
                       </div>
-                        </div>
-                         <div>
-                        <Label>Nominee email *</Label>
-                       <Input
-  type="email"
-  {...register("nomineeEmail")}
-  className="mt-1.5"
-/>
-                        {fieldError("nomineeEmail")}
-                      </div>
-                      <div>
-                        <Label>Nominee's role within your organisation *</Label>
-                        <Input
-                          {...register("nomineeRole")}
-                          className="mt-1.5"
-                        />
-                        {fieldError("nomineeRole")}
-                      </div>
+                    </div>
+                    <div>
+                      <Label>Nominee email *</Label>
+                      <Input
+                        type="email"
+                        {...register("nomineeEmail")}
+                        className="mt-1.5"
+                      />
+                      {fieldError("nomineeEmail")}
+                    </div>
+                    <div>
+                      <Label>Nominee's role within your organisation *</Label>
+                      <Input {...register("nomineeRole")} className="mt-1.5" />
+                      {fieldError("nomineeRole")}
+                    </div>
                     <div>
                       <Label>
                         Why are you nominating this person, and why now? *
