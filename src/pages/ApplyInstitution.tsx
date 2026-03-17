@@ -20,66 +20,82 @@ import {
 } from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
+import { submitApplication } from "@/lib/api/register";
+import { useDropdowns } from "@/hooks/useDropdowns";
 
 const countWords = (text: string) =>
   text.trim().split(/\s+/).filter(Boolean).length;
 
 const schema = z.object({
   // Section A — About the Institution
-  institutionName: z.string().min(1, "Required").max(200),
-  institutionType: z.string().min(1, "Required"),
-  institutionCity: z.string().min(1, "Required").max(100),
-  institutionCountry: z.string().min(1, "Required").max(100),
-  institutionWebsite: z.string().max(255).optional().or(z.literal("")),
+  user_type: z.string(),
+  name: z.string().min(1, "Required").max(200),
+  institution_type_id: z.string().min(1, "Required"),
+  city: z.string().min(1, "Required").max(100),
+  country: z.string().min(1, "Required").max(100),
+  website_url: z.string().max(255).optional().or(z.literal("")),
 
   // Section B — Authorised Signatory
-  signatoryName: z.string().min(1, "Required").max(200),
-  signatoryRole: z.string().min(1, "Required").max(200),
-  signatoryEmail: z.string().email("Please enter a valid email").max(255),
-  signatoryPhone: z.string().min(5, "Required").max(20),
+  signatory_name: z.string().min(1, "Required").max(200),
+  signatory_role: z.string().min(1, "Required").max(200),
+  signatory_email: z.string().email("Please enter a valid email").max(255),
+  signatory_phone: z.string().min(5, "Required").max(20),
 
   // Section C — About the Nominee
-  nomineeFirstName: z.string().min(1, "Required").max(200),
-  nomineeLastName: z.string().min(1, "Required").max(200),
-  nomineeEmail: z.string().email("Please enter a valid email"),
-  nomineeRole: z.string().min(1, "Required").max(200),
-  whyNominating: z
+  first_name: z.string().min(1, "Required").max(200),
+  last_name: z.string().min(1, "Required").max(200),
+  email: z.string().email("Please enter a valid email"),
+  role_title: z.string().min(1, "Required").max(200),
+  nomination_reason: z
     .string()
     .min(1, "Required")
     .refine((v) => countWords(v) <= 250, "Maximum 250 words"),
-  expectedChange: z
+  expected_fellowship_impact: z
     .string()
     .min(1, "Required")
     .refine((v) => countWords(v) <= 150, "Maximum 150 words"),
 
   // Section D — Release & Availability
-  residentialConfirm: z.boolean().refine((v) => v, "You must confirm this"),
-  festivalConfirm: z.boolean().refine((v) => v, "You must confirm this"),
-  timeCommitmentConfirm: z.boolean().refine((v) => v, "You must confirm this"),
+  confirm_residential_release_and_travel: z
+    .boolean()
+    .refine((v) => v, "You must confirm this"),
+  confirm_saf_release_and_travel: z
+    .boolean()
+    .refine((v) => v, "You must confirm this"),
+  confirm_fellowship_participation_commitment: z
+    .boolean()
+    .refine((v) => v, "You must confirm this"),
 
   // Section E — Financial Commitment
-  feeConfirm: z.boolean().refine((v) => v, "You must confirm this"),
-  poNumber: z.string().max(100).optional().or(z.literal("")),
+  fee_payment_confirmation: z
+    .boolean()
+    .refine((v) => v, "You must confirm this"),
+  purchase_order_number: z.string().max(100).optional().or(z.literal("")),
 
   // Section F — Nominating Partner Agreement
-  agreementConfirm: z.boolean().refine((v) => v, "You must confirm this"),
-  signatureText: z.string().min(1, "Required").max(200),
+  partner_agreement_confirmation: z
+    .boolean()
+    .refine((v) => v, "You must confirm this"),
+  signatory_signature: z.string().min(1, "Required").max(200),
+  signature_date: z.string(),
 });
 
 type FormData = z.infer<typeof schema>;
 
-const institutionTypes = [
-  "Cultural Institution",
-  "NGO or Foundation",
-  "Government Body",
-  "Corporate",
-  "Academic Institution",
-  "Other",
-];
+// const institutionTypes = [
+//   "Cultural Institution",
+//   "NGO or Foundation",
+//   "Government Body",
+//   "Corporate",
+//   "Academic Institution",
+//   "Other",
+// ];
 
 const ApplyInstitution = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const { institutionType } = useDropdowns();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -94,77 +110,53 @@ const ApplyInstitution = () => {
   } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
-      institutionName: "",
-      institutionType: "",
-      institutionCity: "",
-      institutionCountry: "India",
-      institutionWebsite: "",
-      signatoryName: "",
-      signatoryRole: "",
-      signatoryEmail: "",
-      signatoryPhone: "",
-      nomineeFirstName: "",
-      nomineeLastName: "",
-      nomineeEmail: "",
-      nomineeRole: "",
-      whyNominating: "",
-      expectedChange: "",
-      residentialConfirm: false,
-      festivalConfirm: false,
-      timeCommitmentConfirm: false,
-      feeConfirm: false,
-      poNumber: "",
-      agreementConfirm: false,
-      signatureText: "",
+      user_type: "institutional",
+      name: "",
+      institution_type_id: "",
+      city: "",
+      country: "India",
+      website_url: "",
+      signatory_name: "",
+      signatory_role: "",
+      signatory_email: "",
+      signatory_phone: "",
+      first_name: "",
+      last_name: "",
+      email: "",
+      role_title: "",
+      nomination_reason: "",
+      expected_fellowship_impact: "",
+      confirm_residential_release_and_travel: false,
+      confirm_saf_release_and_travel: false,
+      confirm_fellowship_participation_commitment: false,
+      fee_payment_confirmation: false,
+      purchase_order_number: "",
+      partner_agreement_confirmation: false,
+      signatory_signature: "",
+      signature_date: "",
     },
   });
 
-  const whyNominating = watch("whyNominating");
-  const expectedChange = watch("expectedChange");
+  const nomination_reason = watch("nomination_reason");
+  const expected_fellowship_impact = watch("expected_fellowship_impact");
 
   const onSubmit = async (data: FormData) => {
+    console.log("form2", data);
     setIsSubmitting(true);
-    console.log(data);
-    try {
-      const { data: nomination, error } = await supabase
-        .from("nominations" as any)
-        .insert({
-          institution_name: data.institutionName,
-          institution_type: data.institutionType,
-          institution_address: `${data.institutionCity}, ${data.institutionCountry}`,
-          institution_city: data.institutionCity,
-          institution_country: data.institutionCountry,
-          institution_website: data.institutionWebsite || null,
-          contact_name: data.signatoryName,
-          contact_email: data.signatoryEmail,
-          contact_phone: data.signatoryPhone,
-          contact_position: data.signatoryRole,
-          nominee_first_name: data.nomineeFirstName,
-          nominee_last_name: data.nomineeLastName,
-          nominee_email: data.nomineeEmail,
-          nominee_position: data.nomineeRole,
-          nominee_years_at_institution: "N/A",
-          why_nominating: data.whyNominating,
-          expected_change: data.expectedChange,
-          participation_confirmed: data.residentialConfirm,
-          programme_confirmed: data.festivalConfirm,
-          time_commitment_confirmed: data.timeCommitmentConfirm,
-          fee_confirmed: data.feeConfirm,
-          po_number: data.poNumber || null,
-          agreement_confirmed: data.agreementConfirm,
-          signatory_name: data.signatureText,
-          signatory_date: new Date().toISOString().split("T")[0],
-          status: "nomination_submitted",
-        } as any)
-        .select("nominee_token, nomination_id")
-        .single();
 
-      if (error) throw error;
+    try {
+      console.log("Submitting data form2:", data);
+
+      // Call your API
+      const response = await submitApplication(data);
+
+      console.log("API response:", response);
 
       toast({ title: "Nomination submitted successfully" });
       navigate("/submission-confirmation");
     } catch (error: any) {
       console.error("Submission error:", error);
+
       toast({
         title: "Submission failed",
         description: error.message || "Please try again.",
@@ -174,13 +166,18 @@ const ApplyInstitution = () => {
       setIsSubmitting(false);
     }
   };
-
   const fieldError = (name: keyof FormData) =>
     errors[name] ? (
       <p className="text-destructive text-xs mt-1">
         {errors[name]?.message as string}
       </p>
     ) : null;
+
+
+    useEffect(() => {
+  const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+  setValue("signature_date", today);
+}, [setValue]);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -270,54 +267,52 @@ const ApplyInstitution = () => {
                     Section A — About the Institution
                   </h2>
                   <div className="space-y-5">
+                    <input
+                      type="hidden"
+                      {...register("user_type")}
+                      value="institutional"
+                    />
                     <div>
                       <Label>Full name of organisation *</Label>
-                      <Input
-                        {...register("institutionName")}
-                        className="mt-1.5"
-                      />
-                      {fieldError("institutionName")}
+                      <Input {...register("name")} className="mt-1.5" />
+                      {fieldError("name")}
                     </div>
                     <div>
                       <Label>Organisation type *</Label>
                       <Select
-                        onValueChange={(v) => setValue("institutionType", v)}
+                        onValueChange={
+                          (v) => setValue("institution_type_id", v) // convert to number
+                        }
                       >
                         <SelectTrigger className="mt-1.5">
                           <SelectValue placeholder="Select type" />
                         </SelectTrigger>
                         <SelectContent>
-                          {institutionTypes.map((t) => (
-                            <SelectItem key={t} value={t}>
-                              {t}
+                          {institutionType.map((t) => (
+                            <SelectItem key={t.id} value={t.id.toString()}>
+                              {t.name}
                             </SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
-                      {fieldError("institutionType")}
+                      {fieldError("institution_type_id")}
                     </div>
                     <div className="grid sm:grid-cols-2 gap-5">
                       <div>
                         <Label>City *</Label>
-                        <Input
-                          {...register("institutionCity")}
-                          className="mt-1.5"
-                        />
-                        {fieldError("institutionCity")}
+                        <Input {...register("city")} className="mt-1.5" />
+                        {fieldError("city")}
                       </div>
                       <div>
                         <Label>Country *</Label>
-                        <Input
-                          {...register("institutionCountry")}
-                          className="mt-1.5"
-                        />
-                        {fieldError("institutionCountry")}
+                        <Input {...register("country")} className="mt-1.5" />
+                        {fieldError("country")}
                       </div>
                     </div>
                     <div>
                       <Label>Website (optional)</Label>
                       <Input
-                        {...register("institutionWebsite")}
+                        {...register("website_url")}
                         placeholder="https://..."
                         className="mt-1.5"
                       />
@@ -338,38 +333,38 @@ const ApplyInstitution = () => {
                     <div>
                       <Label>Full name of signatory *</Label>
                       <Input
-                        {...register("signatoryName")}
+                        {...register("signatory_name")}
                         className="mt-1.5"
                       />
-                      {fieldError("signatoryName")}
+                      {fieldError("signatory_name")}
                     </div>
                     <div>
                       <Label>Role / Title *</Label>
                       <Input
-                        {...register("signatoryRole")}
+                        {...register("signatory_role")}
                         className="mt-1.5"
                       />
-                      {fieldError("signatoryRole")}
+                      {fieldError("signatory_role")}
                     </div>
                     <div>
                       <Label>Email address *</Label>
                       <Input
                         type="email"
-                        {...register("signatoryEmail")}
+                        {...register("signatory_email")}
                         placeholder="Work email"
                         className="mt-1.5"
                       />
-                      {fieldError("signatoryEmail")}
+                      {fieldError("signatory_email")}
                     </div>
                     <div>
                       <Label>Phone number *</Label>
                       <Input
                         type="tel"
-                        {...register("signatoryPhone")}
+                        {...register("signatory_phone")}
                         placeholder="Include country code"
                         className="mt-1.5"
                       />
-                      {fieldError("signatoryPhone")}
+                      {fieldError("signatory_phone")}
                     </div>
                   </div>
                 </div>
@@ -387,34 +382,28 @@ const ApplyInstitution = () => {
                     <div className="grid sm:grid-cols-2 gap-5">
                       <div>
                         <Label>First name of nominee *</Label>
-                        <Input
-                          {...register("nomineeFirstName")}
-                          className="mt-1.5"
-                        />
-                        {fieldError("nomineeFirstName")}
+                        <Input {...register("first_name")} className="mt-1.5" />
+                        {fieldError("first_name")}
                       </div>
                       <div>
                         <Label>Last name of nominee *</Label>
-                        <Input
-                          {...register("nomineeLastName")}
-                          className="mt-1.5"
-                        />
-                        {fieldError("nomineeLastName")}
+                        <Input {...register("last_name")} className="mt-1.5" />
+                        {fieldError("last_name")}
                       </div>
                     </div>
                     <div>
                       <Label>Nominee email *</Label>
                       <Input
                         type="email"
-                        {...register("nomineeEmail")}
+                        {...register("email")}
                         className="mt-1.5"
                       />
-                      {fieldError("nomineeEmail")}
+                      {fieldError("email")}
                     </div>
                     <div>
                       <Label>Nominee's role within your organisation *</Label>
-                      <Input {...register("nomineeRole")} className="mt-1.5" />
-                      {fieldError("nomineeRole")}
+                      <Input {...register("role_title")} className="mt-1.5" />
+                      {fieldError("role_title")}
                     </div>
                     <div>
                       <Label>
@@ -425,14 +414,14 @@ const ApplyInstitution = () => {
                         form cannot show?
                       </p>
                       <WordCountTextarea
-                        value={whyNominating}
+                        value={nomination_reason}
                         onChange={(e) =>
-                          setValue("whyNominating", e.target.value)
+                          setValue("nomination_reason", e.target.value)
                         }
                         maxWords={250}
                         rows={6}
                       />
-                      {fieldError("whyNominating")}
+                      {fieldError("nomination_reason")}
                     </div>
                     <div>
                       <Label>
@@ -444,14 +433,14 @@ const ApplyInstitution = () => {
                         primarily to the individual.
                       </p>
                       <WordCountTextarea
-                        value={expectedChange}
+                        value={expected_fellowship_impact}
                         onChange={(e) =>
-                          setValue("expectedChange", e.target.value)
+                          setValue("expected_fellowship_impact", e.target.value)
                         }
                         maxWords={150}
                         rows={4}
                       />
-                      {fieldError("expectedChange")}
+                      {fieldError("expected_fellowship_impact")}
                     </div>
                   </div>
                 </div>
@@ -468,55 +457,64 @@ const ApplyInstitution = () => {
                   <div className="space-y-4">
                     <div className="flex items-start gap-3">
                       <Checkbox
-                        id="residentialConfirm"
+                        id="confirm_residential_release_and_travel"
                         onCheckedChange={(checked) =>
-                          setValue("residentialConfirm", checked === true)
+                          setValue(
+                            "confirm_residential_release_and_travel",
+                            checked === true,
+                          )
                         }
                         className="mt-0.5"
                       />
                       <div>
                         <label
-                          htmlFor="residentialConfirm"
+                          htmlFor="confirm_residential_release_and_travel"
                           className="text-sm cursor-pointer"
                         >
                           We confirm we will release the nominee to attend the
                           in-person residential in Goa, 20–25 June 2026, and
                           will cover their return travel costs. *
                         </label>
-                        {fieldError("residentialConfirm")}
+                        {fieldError("confirm_residential_release_and_travel")}
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
                       <Checkbox
-                        id="festivalConfirm"
+                        id="confirm_saf_release_and_travel"
                         onCheckedChange={(checked) =>
-                          setValue("festivalConfirm", checked === true)
+                          setValue(
+                            "confirm_saf_release_and_travel",
+                            checked === true,
+                          )
                         }
                         className="mt-0.5"
                       />
                       <div>
                         <label
-                          htmlFor="festivalConfirm"
+                          htmlFor="confirm_saf_release_and_travel"
                           className="text-sm cursor-pointer"
                         >
                           We confirm we will release the nominee to attend the
                           Serendipity Arts Festival, Goa, December 2026, and
                           will cover their return travel costs. *
                         </label>
-                        {fieldError("festivalConfirm")}
+                        {fieldError("confirm_saf_release_and_travel")}
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
                       <Checkbox
-                        id="timeCommitmentConfirm"
+                        id="confirm_fellowship_participation_commitment"
                         onCheckedChange={(checked) =>
-                          setValue("timeCommitmentConfirm", checked === true)
+                          setValue(
+                            "confirm_fellowship_participation_commitment",
+                            checked === true,
+                          )
                         }
                         className="mt-0.5"
                       />
                       <div>
                         <label
-                          htmlFor="timeCommitmentConfirm"
+                          htmlFor="confirm_fellowship_participation_commitment"
                           className="text-sm cursor-pointer"
                         >
                           We confirm we will release the nominee to participate
@@ -524,7 +522,9 @@ const ApplyInstitution = () => {
                           hours per week of structured online engagement across
                           nine months. *
                         </label>
-                        {fieldError("timeCommitmentConfirm")}
+                        {fieldError(
+                          "confirm_fellowship_participation_commitment",
+                        )}
                       </div>
                     </div>
                   </div>
@@ -545,21 +545,21 @@ const ApplyInstitution = () => {
                   <div className="space-y-5">
                     <div className="flex items-start gap-3">
                       <Checkbox
-                        id="feeConfirm"
+                        id="fee_payment_confirmation"
                         onCheckedChange={(checked) =>
-                          setValue("feeConfirm", checked === true)
+                          setValue("fee_payment_confirmation", checked === true)
                         }
                         className="mt-0.5"
                       />
                       <div>
                         <label
-                          htmlFor="feeConfirm"
+                          htmlFor="fee_payment_confirmation"
                           className="text-sm cursor-pointer"
                         >
                           We confirm we will pay the Fellowship fee of ₹5,00,000
                           on invoice, on confirmation of the nominee's place. *
                         </label>
-                        {fieldError("feeConfirm")}
+                        {fieldError("fee_payment_confirmation")}
                       </div>
                     </div>
                     <div>
@@ -567,7 +567,10 @@ const ApplyInstitution = () => {
                         Purchase order number or internal reference, if required
                         for invoicing (optional)
                       </Label>
-                      <Input {...register("poNumber")} className="mt-1.5" />
+                      <Input
+                        {...register("purchase_order_number")}
+                        className="mt-1.5"
+                      />
                     </div>
                   </div>
                 </div>
@@ -588,21 +591,24 @@ const ApplyInstitution = () => {
                   <div className="space-y-5">
                     <div className="flex items-start gap-3">
                       <Checkbox
-                        id="agreementConfirm"
+                        id="partner_agreement_confirmation"
                         onCheckedChange={(checked) =>
-                          setValue("agreementConfirm", checked === true)
+                          setValue(
+                            "partner_agreement_confirmation",
+                            checked === true,
+                          )
                         }
                         className="mt-0.5"
                       />
                       <div>
                         <label
-                          htmlFor="agreementConfirm"
+                          htmlFor="partner_agreement_confirmation"
                           className="text-sm cursor-pointer"
                         >
                           We confirm we have read and agree to the terms of the
                           Nominating Partner Agreement. *
                         </label>
-                        {fieldError("agreementConfirm")}
+                        {fieldError("partner_agreement_confirmation")}
                       </div>
                     </div>
                     <div>
@@ -611,11 +617,11 @@ const ApplyInstitution = () => {
                         Type your full name as a digital signature.
                       </p>
                       <Input
-                        {...register("signatureText")}
+                        {...register("signatory_signature")}
                         placeholder="Full name"
                         className="mt-1.5"
                       />
-                      {fieldError("signatureText")}
+                      {fieldError("signatory_signature")}
                     </div>
                     <div>
                       <Label>Date</Label>
@@ -625,8 +631,15 @@ const ApplyInstitution = () => {
                           month: "long",
                           year: "numeric",
                         })}
-                        disabled
+                        readOnly
                         className="mt-1.5 bg-muted/30"
+                      />
+
+                      {/* Hidden input for form submission */}
+                      <input
+                        type="hidden"
+                        {...register("signature_date")}
+                        value={new Date().toISOString().split("T")[0]} // YYYY-MM-DD
                       />
                     </div>
                   </div>
