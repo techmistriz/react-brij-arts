@@ -22,6 +22,7 @@ import { toast } from "@/hooks/use-toast";
 import { useDropdowns } from "@/hooks/useDropdowns";
 import { getNominee, NomineeData } from "@/lib/api/nominee";
 import { submitApplication2 } from "@/lib/api/register";
+import { useAuth } from "@/context/AuthContext";
 
 /* ─── Stage 1 schema ─── */
 const stage1Schema = z.object({
@@ -101,6 +102,8 @@ const ApplyTrack3 = () => {
   const [stage1Data, setStage1Data] = useState<Stage1Data | null>(null);
 
   const { countries } = useDropdowns();
+
+  const{setIsLoggedIn} = useAuth()
 
   const toBinary = (v: boolean) => (v ? 1 : 0);
 
@@ -238,9 +241,9 @@ const ApplyTrack3 = () => {
 
    const res =  await submitApplication2(nomineeId, payload); // ✅ FIXED
 
-    localStorage.setItem("token", res.data.token);
+  localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
-      window.dispatchEvent(new Event("storage"));
+  setIsLoggedIn(true);
 
     toast({ title: "Application submitted successfully" });
     navigate("/submission-confirmation");
