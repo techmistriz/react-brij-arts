@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import heroImage from "@/assets/hero-fellowship.jpg";
-import tbclfLogo from "@/assets/tbclf-white.png";
+import tbclfLogo from "@/assets/white.png";
 
 const HeroSection = () => {
   return (

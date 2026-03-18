@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import serendipityLogo from "@/assets/serendipity-arts-logo-full.png";
 import brijLogo from "@/assets/brij-logo.png";
 
+
 const Navbar = () => {
    const [menuOpen, setMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const navigate = useNavigate()
 
   //  logout
   const handleLogout = () => {
@@ -15,6 +18,7 @@ const Navbar = () => {
     localStorage.removeItem("user");
     setIsLoggedIn(false);
     window.dispatchEvent(new Event("storage")); // update everywhere
+    navigate("/")
   };
 
   //  check auth
