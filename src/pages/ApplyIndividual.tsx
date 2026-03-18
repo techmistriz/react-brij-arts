@@ -192,7 +192,7 @@ const ApplyIndividual = () => {
 
       const res = await submitApplication(finalData);
 
-      // ✅ Save auth data
+      //  Save auth data
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
 

@@ -156,10 +156,12 @@ const ApplyInstitution = () => {
       navigate("/submission-confirmation");
     } catch (error: any) {
       console.error("Submission error:", error);
+       const message =
+        error?.response?.data?.message || error?.message || "Submission failed";
 
       toast({
         title: "Submission failed",
-        description: error.message || "Please try again.",
+        description:message || "Please try again.",
         variant: "destructive",
       });
     } finally {
