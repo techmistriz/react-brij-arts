@@ -140,34 +140,46 @@ const ApplyInstitution = () => {
   const nomination_reason = watch("nomination_reason");
   const expected_fellowship_impact = watch("expected_fellowship_impact");
 
-  const onSubmit = async (data: FormData) => {
-    console.log("form2", data);
-    setIsSubmitting(true);
+ const onSubmit = async (data: FormData) => {
+  console.log("form2", data);
+  setIsSubmitting(true);
 
-    try {
-      console.log("Submitting data form2:", data);
+  try {
+    const finalData = {
+      ...data,
 
-      // Call your API
-      const response = await submitApplication(data);
+      confirm_residential_release_and_travel: data.confirm_residential_release_and_travel ? 1 : 0,
+      confirm_saf_release_and_travel: data.confirm_saf_release_and_travel ? 1 : 0,
+      confirm_fellowship_participation_commitment:
+        data.confirm_fellowship_participation_commitment ? 1 : 0,
 
-      console.log("API response:", response);
+      fee_payment_confirmation: data.fee_payment_confirmation ? 1 : 0,
+      partner_agreement_confirmation: data.partner_agreement_confirmation ? 1 : 0,
+    };
 
-      toast({ title: "Nomination submitted successfully" });
-      navigate("/submission-confirmation");
-    } catch (error: any) {
-      console.error("Submission error:", error);
-       const message =
-        error?.response?.data?.message || error?.message || "Submission failed";
+    console.log("FINAL PAYLOAD:", finalData);
 
-      toast({
-        title: "Submission failed",
-        description:message || "Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+    const response = await submitApplication(finalData);
+
+    console.log("API response:", response);
+
+    toast({ title: "Nomination submitted successfully" });
+    navigate("/submission-confirmation");
+  } catch (error: any) {
+    console.error("Submission error:", error);
+
+    const message =
+      error?.response?.data?.message || error?.message || "Submission failed";
+
+    toast({
+      title: "Submission failed",
+      description: message,
+      variant: "destructive",
+    });
+  } finally {
+    setIsSubmitting(false);
+  }
+};
   const fieldError = (name: keyof FormData) =>
     errors[name] ? (
       <p className="text-destructive text-xs mt-1">

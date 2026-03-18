@@ -102,6 +102,8 @@ const ApplyTrack3 = () => {
 
   const { countries } = useDropdowns();
 
+  const toBinary = (v: boolean) => (v ? 1 : 0);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -205,10 +207,14 @@ const ApplyTrack3 = () => {
       email: stage1Data.email,
       contact: stage1Data.contact,
       mailing_address: stage1Data.mailing_address,
-      is_attend_residential_in_goa:
-        stage1Data.is_attend_residential_in_goa,
-      is_attend_saf_in_goa:
-        stage1Data.is_attend_saf_in_goa,
+
+     is_attend_residential_in_goa: toBinary(
+    stage1Data.is_attend_residential_in_goa
+  ),
+  is_attend_saf_in_goa: toBinary(
+    stage1Data.is_attend_saf_in_goa
+  ),
+
       practice_cultural_context:
         stage1Data.practice_cultural_context,
       current_practice_question:
@@ -223,8 +229,9 @@ const ApplyTrack3 = () => {
         data.practice_documentation,
       documentation_summary:
         data.documentation_summary,
-      agreed_fellowship_commitment:
-        data.agreed_fellowship_commitment,
+      agreed_fellowship_commitment: toBinary(
+    data.agreed_fellowship_commitment
+  ),
     };
 
     console.log("FINAL PAYLOAD:", payload);

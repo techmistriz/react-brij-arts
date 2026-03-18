@@ -41,10 +41,10 @@ const stage1Schema = z.object({
   contact: z.string().min(5, "Required"),
   mailing_address: z.string().min(1, "Required"),
   is_attend_residential_in_goa: z
-    .boolean()
+    .number()
     .refine((v) => v, "You must confirm availability"),
   is_attend_saf_in_goa: z
-    .boolean()
+    .number()
     .refine((v) => v, "You must confirm availability"),
   practice_cultural_context: z
     .string()
@@ -75,16 +75,14 @@ const stage2Schema = z.object({
     .string()
     .min(1, "Required")
     .refine((v) => countWords(v) <= 25, "Maximum 25 words"),
-  agreed_fellowship_commitment: z
-    .boolean()
-    .refine((v) => v, "You must confirm"),
+  agreed_fellowship_commitment: z.number().refine((v) => v, "You must confirm"),
   referee_title: z.string().min(1, "Required"),
   referee_first_name: z.string().min(1, "Required"),
   referee_last_name: z.string().min(1, "Required"),
   referee_email: z.string().email("Please enter a valid email"),
   referee_relationship: z.string().min(1, "Required"),
   referee_outside_current_organisation: z.string().min(1, "Required"),
-  apply_for_bursary: z.boolean().optional(),
+  apply_for_bursary: z.number().optional(),
 });
 
 type Stage1Data = z.infer<typeof stage1Schema>;
@@ -137,8 +135,8 @@ const ApplyIndividual = () => {
       email: "",
       contact: "",
       mailing_address: "",
-      is_attend_residential_in_goa: false,
-      is_attend_saf_in_goa: false,
+      is_attend_residential_in_goa: 0,
+      is_attend_saf_in_goa: 0,
       practice_cultural_context: "",
       current_practice_question: "",
     },
@@ -152,8 +150,8 @@ const ApplyIndividual = () => {
       practice_question_reflection: "",
       practice_documentation: "",
       documentation_summary: "",
-      agreed_fellowship_commitment: false,
-      apply_for_bursary: false,
+      agreed_fellowship_commitment: 0,
+      apply_for_bursary: 0,
       referee_title: "",
       referee_first_name: "",
       referee_last_name: "",
@@ -167,11 +165,11 @@ const ApplyIndividual = () => {
 
   /* Save Stage 1 → draft row */
   const onStage1Submit = async (data: Stage1Data) => {
-    console.log(data)
+    console.log(data);
     setStage1Snapshot(data); // ✅ store locally
     setStage(2);
     window.scrollTo(0, 0);
-    
+
     toast({
       description: "Stage 1 saved — continue to Stage 2",
     });
@@ -390,7 +388,10 @@ const ApplyIndividual = () => {
                           </SelectTrigger>
                           <SelectContent>
                             {countries.map((country) => (
-                              <SelectItem key={country.id} value={String(country.id)}>
+                              <SelectItem
+                                key={country.id}
+                                value={String(country.id)}
+                              >
                                 {country.name}
                               </SelectItem>
                             ))}
@@ -503,11 +504,15 @@ const ApplyIndividual = () => {
                       <div className="flex items-start gap-3">
                         <Checkbox
                           id="residential"
-                          checked={s1.watch("is_attend_residential_in_goa")}
+                          checked={
+                            s1.watch("is_attend_residential_in_goa") === 1
+                          }
                           onCheckedChange={(v) =>
-                            s1.setValue("is_attend_residential_in_goa", !!v, {
-                              shouldValidate: true,
-                            })
+                            s1.setValue(
+                              "is_attend_residential_in_goa",
+                              v ? 1 : 0,
+                              { shouldValidate: true },
+                            )
                           }
                           className="mt-0.5"
                         />
@@ -522,9 +527,9 @@ const ApplyIndividual = () => {
                       <div className="flex items-start gap-3">
                         <Checkbox
                           id="festival"
-                          checked={s1.watch("is_attend_saf_in_goa")}
+                          checked={s1.watch("is_attend_saf_in_goa") === 1}
                           onCheckedChange={(v) =>
-                            s1.setValue("is_attend_saf_in_goa", !!v, {
+                            s1.setValue("is_attend_saf_in_goa", v ? 1 : 0, {
                               shouldValidate: true,
                             })
                           }
@@ -708,11 +713,13 @@ const ApplyIndividual = () => {
                     <div className="flex items-start gap-3">
                       <Checkbox
                         id="timeCommit"
-                        checked={s2.watch("agreed_fellowship_commitment")}
+                        checked={s2.watch("agreed_fellowship_commitment") === 1}
                         onCheckedChange={(v) =>
-                          s2.setValue("agreed_fellowship_commitment", !!v, {
-                            shouldValidate: true,
-                          })
+                          s2.setValue(
+                            "agreed_fellowship_commitment",
+                            v ? 1 : 0,
+                            { shouldValidate: true },
+                          )
                         }
                         className="mt-0.5"
                       />
@@ -846,9 +853,9 @@ const ApplyIndividual = () => {
                       <div className="flex items-start gap-3">
                         <Checkbox
                           id="apply_for_bursary"
-                          checked={!!bursaryChecked}
+                          checked={s2.watch("apply_for_bursary") === 1}
                           onCheckedChange={(checked) =>
-                            s2.setValue("apply_for_bursary", checked === true)
+                            s2.setValue("apply_for_bursary", checked ? 1 : 0)
                           }
                           className="mt-0.5"
                         />
