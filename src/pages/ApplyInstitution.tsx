@@ -163,19 +163,13 @@ const ApplyInstitution = () => {
 
     console.log("API response:", response);
 
-    toast({ title: "Nomination submitted successfully" });
+    toast({ title: "Nomination submitted successfully", className:"font-semibold" });
     navigate("/submission-confirmation");
   } catch (error: any) {
-    console.error("Submission error:", error);
-
-    const message =
-      error?.response?.data?.message || error?.message || "Submission failed";
-
-    toast({
-      title: "Submission failed",
-      description: message,
-      variant: "destructive",
-    });
+  toast({
+    description: error.message, 
+    className:"font-semibold"
+  });
   } finally {
     setIsSubmitting(false);
   }

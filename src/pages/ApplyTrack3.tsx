@@ -236,7 +236,11 @@ const ApplyTrack3 = () => {
 
     console.log("FINAL PAYLOAD:", payload);
 
-    await submitApplication2(nomineeId, payload); // ✅ FIXED
+   const res =  await submitApplication2(nomineeId, payload); // ✅ FIXED
+
+    localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+      window.dispatchEvent(new Event("storage"));
 
     toast({ title: "Application submitted successfully" });
     navigate("/submission-confirmation");

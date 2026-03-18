@@ -172,6 +172,7 @@ const ApplyIndividual = () => {
 
     toast({
       description: "Stage 1 saved — continue to Stage 2",
+      className:"font-semibold"
     });
   };
 
@@ -182,7 +183,7 @@ const ApplyIndividual = () => {
     setIsSubmitting(true);
 
     try {
-      // 🔥 Merge both stages
+      // Merge both stages
       const finalData = {
         ...(stage1Snapshot as Stage1Data),
         ...data,
@@ -193,10 +194,10 @@ const ApplyIndividual = () => {
       //  Save auth data
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
-
+window.dispatchEvent(new Event("storage"));
       toast({
-        title: "Success ✅",
         description: "Application submitted successfully!",
+        className:"font-semibold"
       });
 
       navigate("/submission-confirmation");
@@ -207,7 +208,6 @@ const ApplyIndividual = () => {
         error?.response?.data?.message || error?.message || "Submission failed";
 
       toast({
-        title: "Error ❌",
         description: message,
         className: "font-semibold",
       });
