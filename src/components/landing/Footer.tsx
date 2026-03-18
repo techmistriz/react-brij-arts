@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import serendipityLogo from "@/assets/serendipity-arts-logo-full.png";
 import brijLogo from "@/assets/brij-logo.png";
-import { useAuth } from "@/context/authContext";
+import { useAuth } from "@/context/AuthContext";
 
 const Footer = () => {
   const { isLoggedIn } = useAuth();

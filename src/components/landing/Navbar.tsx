@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import serendipityLogo from "@/assets/serendipity-arts-logo-full.png";
 import brijLogo from "@/assets/brij-logo.png";
 import { logoutUser } from "@/lib/api/logout";
-import { useAuth } from "@/context/authContext";
+import { useAuth } from "@/context/AuthContext";
 
 
 const Navbar = () => {
