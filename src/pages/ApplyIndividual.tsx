@@ -24,7 +24,7 @@ import { toast } from "@/hooks/use-toast";
 import { useDropdowns } from "@/hooks/useDropdowns";
 import { submitApplication } from "@/lib/api/register";
 import { register } from "module";
-import { useAuth } from "@/context/authContext";
+import { useAuth } from "@/context/AuthContext";
 
 /* ─── Stage 1 schema ─── */
 const stage1Schema = z.object({
