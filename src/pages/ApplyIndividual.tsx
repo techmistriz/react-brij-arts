@@ -161,7 +161,7 @@ const ApplyIndividual = () => {
     },
   });
 
-  const bursaryChecked = s2.watch("apply_for_bursary");
+  const bursaryChecked = s2.watch("apply_for_bursary")===1;
 
   /* Save Stage 1 → draft row */
   const onStage1Submit = async (data: Stage1Data) => {
