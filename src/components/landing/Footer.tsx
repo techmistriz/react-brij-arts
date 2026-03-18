@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import serendipityLogo from "@/assets/serendipity-arts-logo-full.png";
 import brijLogo from "@/assets/brij-logo.png";
+import { useAuth } from "@/context/authContext";
 
 const Footer = () => {
+  const { isLoggedIn } = useAuth();
   return (
     <footer className="section-padding !py-12 border-t border-border">
       <div className="max-w-7xl mx-auto">
@@ -18,7 +20,9 @@ const Footer = () => {
           <div className="flex flex-col gap-3">
             <p className="label-text mb-2">Links</p>
             <Link to="/about" className="text-sm text-muted-foreground hover:text-foreground transition-colors">About</Link>
+              {!isLoggedIn && (
             <Link to="/apply" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Apply</Link>
+              )}
             <Link to="/publications" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Publications</Link>
             <Link to="/faq" className="text-sm text-muted-foreground hover:text-foreground transition-colors">FAQ</Link>
 

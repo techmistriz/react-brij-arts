@@ -24,6 +24,7 @@ import { toast } from "@/hooks/use-toast";
 import { useDropdowns } from "@/hooks/useDropdowns";
 import { submitApplication } from "@/lib/api/register";
 import { register } from "module";
+import { useAuth } from "@/context/authContext";
 
 /* ─── Stage 1 schema ─── */
 const stage1Schema = z.object({
@@ -115,6 +116,8 @@ const ApplyIndividual = () => {
 
   const { countries } = useDropdowns();
 
+  const{setIsLoggedIn} = useAuth()
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -166,7 +169,7 @@ const ApplyIndividual = () => {
   /* Save Stage 1 → draft row */
   const onStage1Submit = async (data: Stage1Data) => {
     console.log(data);
-    setStage1Snapshot(data); // ✅ store locally
+    setStage1Snapshot(data); // store locally
     setStage(2);
     window.scrollTo(0, 0);
 
@@ -194,7 +197,7 @@ const ApplyIndividual = () => {
       //  Save auth data
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
-window.dispatchEvent(new Event("storage"));
+  setIsLoggedIn(true);
       toast({
         description: "Application submitted successfully!",
         className:"font-semibold"

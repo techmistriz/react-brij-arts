@@ -4,36 +4,30 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import serendipityLogo from "@/assets/serendipity-arts-logo-full.png";
 import brijLogo from "@/assets/brij-logo.png";
+import { logoutUser } from "@/lib/api/logout";
+import { useAuth } from "@/context/authContext";
 
 
 const Navbar = () => {
    const [menuOpen, setMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn, setIsLoggedIn } = useAuth(); //  from context
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
 
   //  logout
-  const handleLogout = () => {
+const handleLogout = async () => {
+  try {
+    await logoutUser();
+  } catch (error) {
+    console.error("Logout failed:", error);
+  } finally {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    setIsLoggedIn(false);
-    window.dispatchEvent(new Event("storage")); // update everywhere
-    navigate("/")
-  };
 
-  //  check auth
-  useEffect(() => {
-    const checkAuth = () => {
-      const token = localStorage.getItem("token");
-      setIsLoggedIn(!!token);
-    };
-
-    checkAuth();
-
-    window.addEventListener("storage", checkAuth);
-    return () => window.removeEventListener("storage", checkAuth);
-  }, []);
-
+    setIsLoggedIn(false); // updates everywhere
+    navigate("/");
+  }
+};
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
