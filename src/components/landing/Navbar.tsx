@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -6,7 +6,30 @@ import serendipityLogo from "@/assets/serendipity-arts-logo-full.png";
 import brijLogo from "@/assets/brij-logo.png";
 
 const Navbar = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
+   const [menuOpen, setMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  //  logout
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setIsLoggedIn(false);
+    window.dispatchEvent(new Event("storage")); // update everywhere
+  };
+
+  //  check auth
+  useEffect(() => {
+    const checkAuth = () => {
+      const token = localStorage.getItem("token");
+      setIsLoggedIn(!!token);
+    };
+
+    checkAuth();
+
+    window.addEventListener("storage", checkAuth);
+    return () => window.removeEventListener("storage", checkAuth);
+  }, []);
+
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
@@ -23,9 +46,21 @@ const Navbar = () => {
           <a href="/#structure" className="label-text hover:text-foreground transition-colors">Structure</a>
           <Link to="/publications" className="label-text hover:text-foreground transition-colors">Publications</Link>
           <Link to="/faq" className="label-text hover:text-foreground transition-colors">FAQ</Link>
-          <Link to="/apply" className="bg-foreground text-background px-6 py-2.5 text-sm font-semibold tracking-wide hover:bg-primary transition-colors">
-            Apply Now
-          </Link>
+          {isLoggedIn ? (
+            <button
+              onClick={handleLogout}
+              className="bg-foreground text-background px-6 py-2.5 text-sm font-semibold"
+            >
+              Logout
+            </button>
+          ) : (
+            <Link
+              to="/apply"
+              className="bg-foreground text-background px-6 py-2.5 text-sm font-semibold"
+            >
+              Apply Now
+            </Link>
+          )}
         </div>
 
         {/* Mobile toggle */}
@@ -88,13 +123,25 @@ const Navbar = () => {
                 transition={{ delay: 0.2, duration: 0.25 }}
                 className="pt-2"
               >
+                {isLoggedIn ? (
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    setMenuOpen(false);
+                  }}
+                  className="bg-foreground text-background px-6 py-3 text-center"
+                >
+                  Logout
+                </button>
+              ) : (
                 <Link
                   to="/apply"
                   onClick={() => setMenuOpen(false)}
-                  className="block bg-foreground text-background px-6 py-3.5 text-sm font-semibold tracking-wide text-center"
+                  className="bg-foreground text-background px-6 py-3 text-center"
                 >
                   Apply Now
                 </Link>
+              )}
               </motion.div>
             </div>
           </motion.div>
@@ -105,3 +152,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
