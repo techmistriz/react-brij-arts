@@ -192,7 +192,7 @@ const ApplyIndividual = () => {
         ...data,
       };
 
-      const res = await submitApplication(finalData);
+    const res = await submitApplication(finalData, bursaryChecked ? bursaryFile! : undefined);
 
       //  Save auth data
       localStorage.setItem("token", res.data.token);
