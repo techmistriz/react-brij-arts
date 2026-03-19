@@ -168,7 +168,7 @@ const ApplyIndividual = () => {
 
   /* Save Stage 1 → draft row */
   const onStage1Submit = async (data: Stage1Data) => {
-    console.log(data);
+    // console.log(data);
     setStage1Snapshot(data); // store locally
     setStage(2);
     window.scrollTo(0, 0);
@@ -225,8 +225,8 @@ const ApplyIndividual = () => {
         {form.formState.errors[name]?.message as string}
       </p>
     ) : null;
-  console.log("Countries", countries);
-  console.log("Form1 data =", stage1Snapshot);
+  // console.log("Countries", countries);
+  // console.log("Form1 data =", stage1Snapshot);
 
   return (
     <div className="min-h-screen flex flex-col">

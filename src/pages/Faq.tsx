@@ -252,7 +252,7 @@ const Faq = () => {
   });
 
   const onSubmit = async (data: ContactFormData) => {
-    console.log(data);
+    // console.log(data);
     try {
       const res = await submitContactForm(data);
 

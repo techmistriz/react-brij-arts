@@ -155,7 +155,7 @@ const ApplyTrack3 = () => {
     const fetchNomineeData = async () => {
       try {
       const nominee = await getNominee(nomineeId);
-        console.log("Full API response:", nominee);
+        // console.log("Full API response:", nominee);
 
         s1.reset({
           ...s1.getValues(),
@@ -237,7 +237,7 @@ const ApplyTrack3 = () => {
   ),
     };
 
-    console.log("FINAL PAYLOAD:", payload);
+    // console.log("FINAL PAYLOAD:", payload);
 
    const res =  await submitApplication2(nomineeId, payload); // ✅ FIXED
 
