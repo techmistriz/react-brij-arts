@@ -2,8 +2,10 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import heroImage from "@/assets/hero-fellowship.jpg";
 import tbclfLogo from "@/assets/white.png";
+import { useAuth } from "@/context/AuthContext";
 
 const HeroSection = () => {
+  const{isLoggedIn} = useAuth()
   return (
     <section className="min-h-screen flex flex-col justify-end relative overflow-hidden">
       <div className="absolute inset-0">
@@ -27,9 +29,11 @@ const HeroSection = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
+            {!isLoggedIn && (
             <Link to="/apply" className="inline-flex items-center justify-center bg-primary text-primary-foreground px-8 py-4 font-semibold tracking-wide text-sm hover:opacity-90 transition-opacity">
               Apply Now
             </Link>
+            )}
             <Link
               to="/about"
               className="inline-flex items-center justify-center border border-background/30 text-background px-8 py-4 font-semibold tracking-wide text-sm hover:bg-background/10 transition-colors"
