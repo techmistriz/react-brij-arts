@@ -22,7 +22,7 @@ const HeroSection = () => {
           <img
             src={tbclfLogo}
             alt="The Brij Cultural Leaders Fellowship"
-            className="h-28 md:h-36 lg:h-44 mb-8"
+            className="h-28 md:h-36 lg:h-33 mb-8"
           />
           <p className="body-large text-background/80 max-w-xl mb-12">
             A leadership programme for emerging cultural practitioners

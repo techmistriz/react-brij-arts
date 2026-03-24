@@ -41,7 +41,7 @@ const handleLogout = async () => {
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-8">
           <Link to="/about" className="label-text hover:text-foreground transition-colors">About</Link>
-          <a href="/#structure" className="label-text hover:text-foreground transition-colors">Structure</a>
+          <a href="/academy/fellowship/#structure" className="label-text hover:text-foreground transition-colors">Structure</a>
           <Link to="/publications" className="label-text hover:text-foreground transition-colors">Publications</Link>
           <Link to="/faq" className="label-text hover:text-foreground transition-colors">FAQ</Link>
           {isLoggedIn ? (
@@ -94,7 +94,7 @@ const handleLogout = async () => {
             <div className="px-5 py-6 flex flex-col gap-5">
               {[
                 { to: "/about", label: "About" },
-                { to: "/#structure", label: "Structure", isHash: true },
+                { to: "/academy/fellowship/#structure", label: "Structure", isHash: true },
                 { to: "/publications", label: "Publications" },
                 { to: "/faq", label: "FAQ" },
               ].map((item, i) => (

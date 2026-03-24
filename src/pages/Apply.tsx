@@ -22,14 +22,14 @@ const tracks = [
     cta: "Begin Nomination",
     to: "/apply/institution",
   },
-  {
-    label: "Track 3",
-    title: "Nominated Application",
-    description:
-      "For nominees put forward by their institution. Complete this form independently — your institution does not see your answers before submission.",
-    cta: "Begin Application",
-    to: "/apply/track3",
-  },
+  // {
+  //   label: "Track 3",
+  //   title: "Nominated Application",
+  //   description:
+  //     "For nominees put forward by their institution. Complete this form independently — your institution does not see your answers before submission.",
+  //   cta: "Begin Application",
+  //   to: "/apply/track3",
+  // },
 ];
 
 const Apply = () => {
@@ -67,7 +67,7 @@ const Apply = () => {
             Choose Your Pathway
           </motion.p>
 
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
             {tracks.map((track, i) => (
               <motion.div
                 key={track.label}

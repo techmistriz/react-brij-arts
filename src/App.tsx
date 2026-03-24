@@ -1,3 +1,10 @@
+if (
+  window.location.pathname === "/academy" ||
+  window.location.pathname === "/academy/"
+) {
+  window.location.replace("/academy/fellowship/");
+}
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -15,6 +22,7 @@ import SubmissionConfirmation from "./pages/SubmissionConfirmation";
 import Publications from "./pages/Publications";
 import Faq from "./pages/Faq";
 import NotFound from "./pages/NotFound";
+import ScrollToHash from "./components/ScrollToHash";
 
 const queryClient = new QueryClient();
 
@@ -23,9 +31,12 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <BrowserRouter basename="/academy/fellowship">
+      {/* <BrowserRouter> */}
+      <ScrollToHash/>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/academy" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/apply" element={<Apply />} />
           <Route path="/apply/individual" element={<ApplyIndividual />} />
