@@ -103,7 +103,7 @@ const ApplyTrack3 = () => {
 
   const { countries } = useDropdowns();
 
-  const{setIsLoggedIn} = useAuth()
+  const{login} = useAuth()
 
   const toBinary = (v: boolean) => (v ? 1 : 0);
 
@@ -241,9 +241,7 @@ const ApplyTrack3 = () => {
 
    const res =  await submitApplication2(nomineeId, payload); // ✅ FIXED
 
-  localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
-  setIsLoggedIn(true);
+login(res.data.token, res.data.user)
 
     toast({ title: "Application submitted successfully" });
     navigate("/submission-confirmation");

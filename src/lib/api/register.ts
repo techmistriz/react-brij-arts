@@ -38,11 +38,12 @@ export const submitApplication = async (data: any, bursaryFile?: File) => {
   }
 };
 
-
-
 export const submitApplication2 = async (id: string, data: any) => {
   try {
-    const response = await axiosInstance.post(`/nominee-application/${id}`, data);
+    const response = await axiosInstance.post(
+      `/nominee-application/${id}`,
+      data,
+    );
     return response.data;
   } catch (error: any) {
     const res = error?.response?.data;

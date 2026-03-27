@@ -7,43 +7,73 @@ import brijLogo from "@/assets/brij-logo.png";
 import { logoutUser } from "@/lib/api/logout";
 import { useAuth } from "@/context/AuthContext";
 
-
 const Navbar = () => {
-   const [menuOpen, setMenuOpen] = useState(false);
-  const { isLoggedIn, setIsLoggedIn } = useAuth(); //  from context
+  const [menuOpen, setMenuOpen] = useState(false);
+  const { isLoggedIn, logout } = useAuth();
   const navigate = useNavigate();
 
-
   //  logout
-const handleLogout = async () => {
-  try {
-    await logoutUser();
-  } catch (error) {
-    console.error("Logout failed:", error);
-  } finally {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-
-    setIsLoggedIn(false); // updates everywhere
-    navigate("/");
-  }
-};
+  const handleLogout = async () => {
+    try {
+      await logoutUser();
+    } catch (error) {
+      console.error("Logout failed:", error);
+    } finally {
+      logout(); // handles everything (token + user + state)
+      navigate("/");
+    }
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="flex items-center justify-between px-5 md:px-12 lg:px-24 py-3 md:py-4">
         <Link to="/" className="flex items-center gap-3 md:gap-4">
           <img src={brijLogo} alt="The Brij" className="h-5 md:h-7" />
-          <span className="text-muted-foreground/40 text-lg font-light select-none">|</span>
-          <img src={serendipityLogo} alt="Serendipity Arts" className="h-7 md:h-10" />
+          <span className="text-muted-foreground/40 text-lg font-light select-none">
+            |
+          </span>
+          <img
+            src={serendipityLogo}
+            alt="Serendipity Arts"
+            className="h-7 md:h-10"
+          />
         </Link>
 
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-8">
-          <Link to="/about" className="label-text hover:text-foreground transition-colors">About</Link>
-          <a href="/academy/fellowship/#structure" className="label-text hover:text-foreground transition-colors">Structure</a>
-          <Link to="/publications" className="label-text hover:text-foreground transition-colors">Publications</Link>
-          <Link to="/faq" className="label-text hover:text-foreground transition-colors">FAQ</Link>
+          <Link
+            to="/about"
+            className="label-text hover:text-foreground transition-colors"
+          >
+            About
+          </Link>
+          <a
+            href="/academy/fellowship/#structure"
+            className="label-text hover:text-foreground transition-colors"
+          >
+            Structure
+          </a>
+          <Link
+            to="/publications"
+            className="label-text hover:text-foreground transition-colors"
+          >
+            Publications
+          </Link>
+          <Link
+            to="/faq"
+            className="label-text hover:text-foreground transition-colors"
+          >
+            FAQ
+          </Link>
+
+          {!isLoggedIn && (
+            <Link
+              to="/login"
+              className="inline-flex items-center justify-center bg-primary text-primary-foreground px-8 py-2.5 font-semibold tracking-wide text-sm hover:opacity-90 transition-opacity"
+            >
+              Login
+            </Link>
+          )}
           {isLoggedIn ? (
             <button
               onClick={handleLogout}
@@ -69,11 +99,23 @@ const handleLogout = async () => {
         >
           <AnimatePresence mode="wait">
             {menuOpen ? (
-              <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
+              <motion.div
+                key="close"
+                initial={{ rotate: -90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: 90, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
                 <X size={22} />
               </motion.div>
             ) : (
-              <motion.div key="open" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
+              <motion.div
+                key="open"
+                initial={{ rotate: 90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: -90, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
                 <Menu size={22} />
               </motion.div>
             )}
@@ -94,7 +136,11 @@ const handleLogout = async () => {
             <div className="px-5 py-6 flex flex-col gap-5">
               {[
                 { to: "/about", label: "About" },
-                { to: "/academy/fellowship/#structure", label: "Structure", isHash: true },
+                {
+                  to: "/academy/fellowship/#structure",
+                  label: "Structure",
+                  isHash: true,
+                },
                 { to: "/publications", label: "Publications" },
                 { to: "/faq", label: "FAQ" },
               ].map((item, i) => (
@@ -105,11 +151,19 @@ const handleLogout = async () => {
                   transition={{ delay: i * 0.05, duration: 0.25 }}
                 >
                   {item.isHash ? (
-                    <a href={item.to} onClick={() => setMenuOpen(false)} className="text-sm font-medium tracking-wide text-foreground">
+                    <a
+                      href={item.to}
+                      onClick={() => setMenuOpen(false)}
+                      className="text-sm font-medium tracking-wide text-foreground"
+                    >
                       {item.label}
                     </a>
                   ) : (
-                    <Link to={item.to} onClick={() => setMenuOpen(false)} className="text-sm font-medium tracking-wide text-foreground">
+                    <Link
+                      to={item.to}
+                      onClick={() => setMenuOpen(false)}
+                      className="text-sm font-medium tracking-wide text-foreground"
+                    >
                       {item.label}
                     </Link>
                   )}
@@ -122,24 +176,33 @@ const handleLogout = async () => {
                 className="pt-2"
               >
                 {isLoggedIn ? (
-                <button
-                  onClick={() => {
-                    handleLogout();
-                    setMenuOpen(false);
-                  }}
-                  className="bg-foreground text-background px-6 py-3 text-center"
-                >
-                  Logout
-                </button>
-              ) : (
-                <Link
-                  to="/apply"
-                  onClick={() => setMenuOpen(false)}
-                  className="bg-foreground text-background px-6 py-3 text-center"
-                >
-                  Apply Now
-                </Link>
-              )}
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      setMenuOpen(false);
+                    }}
+                    className="bg-foreground text-background px-6 py-3 text-center"
+                  >
+                    Logout
+                  </button>
+                ) : (
+                  <Link
+                    to="/apply"
+                    onClick={() => setMenuOpen(false)}
+                    className="bg-foreground text-background px-6 py-3 text-center"
+                  >
+                    Apply Now
+                  </Link>
+                )}
+                {!isLoggedIn && (
+                  <Link
+                    to="/login"
+                    onClick={() => setMenuOpen(false)}
+                    className="border border-foreground px-6 py-3 text-center text-sm font-medium"
+                  >
+                    Login
+                  </Link>
+                )}
               </motion.div>
             </div>
           </motion.div>
@@ -150,5 +213,3 @@ const handleLogout = async () => {
 };
 
 export default Navbar;
-
-

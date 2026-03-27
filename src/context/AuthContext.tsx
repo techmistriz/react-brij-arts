@@ -1,8 +1,22 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from "react";
+
+type User = {
+  id: number;
+  name: string;
+  email: string;
+};
 
 type AuthContextType = {
   isLoggedIn: boolean;
-  setIsLoggedIn: (value: boolean) => void;
+  user: User | null;
+  login: (token: string, user: User) => void;
+  logout: () => void;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -12,15 +26,38 @@ type AuthProviderProps = {
 };
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
 
+  //  Auto login on refresh
   useEffect(() => {
     const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
+    const storedUser = localStorage.getItem("user");
+
+    if (token && storedUser) {
+      setIsLoggedIn(true);
+      setUser(JSON.parse(storedUser));
+    }
   }, []);
 
+  //  Login function
+  const login = (token: string, user: User) => {
+    localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(user));
+
+    setIsLoggedIn(true);
+    setUser(user);
+  };
+
+  //  Logout function
+  const logout = () => {
+    localStorage.clear();
+    setIsLoggedIn(false);
+    setUser(null);
+  };
+
   return (
-    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+    <AuthContext.Provider value={{ isLoggedIn, user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

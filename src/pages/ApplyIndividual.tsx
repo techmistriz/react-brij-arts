@@ -116,7 +116,7 @@ const ApplyIndividual = () => {
 
   const { countries } = useDropdowns();
 
-  const{setIsLoggedIn} = useAuth()
+  const { login } = useAuth();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -164,7 +164,7 @@ const ApplyIndividual = () => {
     },
   });
 
-  const bursaryChecked = s2.watch("apply_for_bursary")===1;
+  const bursaryChecked = s2.watch("apply_for_bursary") === 1;
 
   /* Save Stage 1 → draft row */
   const onStage1Submit = async (data: Stage1Data) => {
@@ -175,7 +175,7 @@ const ApplyIndividual = () => {
 
     toast({
       description: "Stage 1 saved — continue to Stage 2",
-      className:"font-semibold"
+      className: "font-semibold",
     });
   };
 
@@ -192,15 +192,16 @@ const ApplyIndividual = () => {
         ...data,
       };
 
-    const res = await submitApplication(finalData, bursaryChecked ? bursaryFile! : undefined);
+      const res = await submitApplication(
+        finalData,
+        bursaryChecked ? bursaryFile! : undefined,
+      );
 
       //  Save auth data
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
-  setIsLoggedIn(true);
+      login(res.data.token, res.data.user);
       toast({
         description: "Application submitted successfully!",
-        className:"font-semibold"
+        className: "font-semibold",
       });
 
       navigate("/submission-confirmation");
