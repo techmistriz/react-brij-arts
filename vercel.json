@@ -1,5 +1,11 @@
 {
   "rewrites": [
     { "source": "/(.*)", "destination": "/" }
+  ],
+  
+  "routes": [
+    { "src": "^/academy/assets/(.*)", "dest": "/assets/$1" },
+    { "src": "^/academy/(.*)", "dest": "/index.html" }
   ]
 }
+
