@@ -1,6 +1,6 @@
 import axiosInstance from "../axios";
 export const logoutUser = async () => {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
 
   const response = await axiosInstance.post(
     "/logout",

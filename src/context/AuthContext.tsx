@@ -31,8 +31,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   //  Auto login on refresh
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const storedUser = localStorage.getItem("user");
+    const token = sessionStorage.getItem("token");
+    const storedUser = sessionStorage.getItem("user");
 
     if (token && storedUser) {
       setIsLoggedIn(true);
@@ -42,8 +42,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   //  Login function
   const login = (token: string, user: User) => {
-    localStorage.setItem("token", token);
-    localStorage.setItem("user", JSON.stringify(user));
+    sessionStorage.setItem("token", token);
+    sessionStorage.setItem("user", JSON.stringify(user));
 
     setIsLoggedIn(true);
     setUser(user);
@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   //  Logout function
   const logout = () => {
-    localStorage.clear();
+    sessionStorage.clear();
     setIsLoggedIn(false);
     setUser(null);
   };
