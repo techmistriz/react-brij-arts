@@ -98,7 +98,7 @@ const Mentors = () => {
                   {/* Info */}
                   <div className="p-5 md:p-6">
                     <h3 className="font-bold text-lg mb-1">{mentor.name}</h3>
-                    <p className="text-sm text-primary font-medium mb-0.5">{mentor.title}</p>
+                    <p className="text-sm text-brij-orange font-medium mb-0.5">{mentor.title}</p>
                     <p className="text-xs text-muted-foreground mb-3">{mentor.organisation}</p>
                     <p className="text-sm text-muted-foreground leading-relaxed">{mentor.bio}</p>
                   </div>

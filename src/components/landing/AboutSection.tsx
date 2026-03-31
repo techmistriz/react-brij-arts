@@ -7,44 +7,44 @@ const AboutSection = () => {
     <section id="about" className="section-padding">
       <div className="max-w-7xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.7 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           <p className="label-text mb-6">About the Fellowship</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12 md:gap-24">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7, delay: 0.1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
           >
             <h2 className="editorial-subheading mb-8">
-              Building the next generation of cultural leaders
+              Nine months. One question. A generation of cultural leaders.
             </h2>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7, delay: 0.2 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
             className="space-y-6"
           >
-            <p className="body-large text-muted-foreground">
-              The Brij Cultural Leaders Fellowship is a nine-month programme for mid-career
-              cultural practitioners across South Asia — the first of its kind in the region.
-              It is built on a single conviction: that the most valuable thing a Fellow develops
-              is not a deliverable, but a question.
+            <p className="text-lg md:text-xl text-muted-foreground font-body leading-relaxed">
+              The Brij Cultural Leaders Fellowship is a nine-month leadership development programme
+              for mid-career cultural practitioners and cross-sector professionals across South Asia —
+              the first programme of its kind in the region. It is delivered by Serendipity Arts Foundation.
             </p>
             <Link
               to="/about"
-              className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide hover:gap-3 transition-all"
+              className="relative overflow-hidden inline-flex items-center gap-2 text-sm font-heading font-bold tracking-wide px-6 py-3 bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97] rounded-md"
             >
-              Learn more about the Fellowship <ArrowRight size={16} />
+              <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
+              <span className="relative z-10 inline-flex items-center gap-2">Learn more about the Fellowship <ArrowRight size={16} /></span>
             </Link>
           </motion.div>
         </div>

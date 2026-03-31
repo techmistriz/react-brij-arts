@@ -8,12 +8,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { useEffect } from "react";
 import z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { ContactFormData, submitContactForm } from "@/lib/api/contact";
-import { useForm } from "react-hook-form";
 import { useToast } from "@/hooks/use-toast";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { ContactFormData, submitContactForm } from "@/lib/api/contact";
+import { useEffect } from "react";
 
 const contactSchema = z.object({
   name: z.string().min(1, "Name is required").max(100),
@@ -107,11 +107,15 @@ const individualFaq = [
       },
       {
         q: "I cannot afford the fee. Can I still apply?",
-        a: "Yes. Applying for a bursary has no bearing on your assessment — the jury never sees bursary requests. Ten bursaries are available, ranging from 25% to full fee coverage. Full bursary recipients also receive a travel supplement.",
+        a: "Yes. Applying for a bursary has no bearing on your assessment — the jury never sees bursary requests. Ten bursaries are available, ranging from 50% to full fee coverage. Full bursary recipients also receive a travel supplement.",
       },
       {
         q: "When is the fee due?",
         a: "The fee is due on confirmation of your place before the programme start date of 20 June 2026.",
+      },
+      {
+        q: "How do I apply for a bursary?",
+        a: 'In Section H of the individual application form, simply check the box labelled "I would like to apply for a bursary" and attach any supporting documentation. Your bursary request will be reviewed independently by the programme team after the jury has completed its evaluation. The bursary level awarded will be communicated to you via email. Applying for a bursary has no bearing on your assessment — the jury never sees bursary requests.',
       },
     ],
   },
@@ -121,6 +125,10 @@ const individualFaq = [
       {
         q: "Do I need to come to Goa?",
         a: "Yes, for two moments. The opening residential (20–25 June 2026) and the Serendipity Arts Festival (December 2026). Accommodation is covered. Travel is the Fellow's responsibility unless covered by bursary.",
+      },
+      {
+        q: "How will the online sessions be conducted?",
+        a: "The Fellowship will be conducted primarily online via Microsoft Teams. Selected Fellows will participate in virtual sessions throughout the programme, with the exception of two compulsory in-person moments in Goa. Once selected, Fellows will receive an induction guide with detailed instructions on accessing and joining sessions.",
       },
       {
         q: "Can I apply if English is not my first language?",
@@ -216,7 +224,7 @@ const FaqSection = ({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: startDelay + ci * 0.06 }}
       >
-        <h3 className="font-bold text-lg mb-5 pb-3 border-b border-border">
+        <h3 className="font-bold text-lg mb-5 pb-3 border-b border-border font-heading">
           {cat.title}
         </h3>
         <Accordion type="single" collapsible className="space-y-0">
@@ -226,10 +234,10 @@ const FaqSection = ({
               value={`${ci}-${ii}`}
               className="border-b border-border"
             >
-              <AccordionTrigger className="text-left text-sm font-medium py-4 hover:no-underline">
+              <AccordionTrigger className="text-left text-[15px] font-bold py-4 hover:no-underline font-heading hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all">
                 {item.q}
               </AccordionTrigger>
-              <AccordionContent className="text-sm text-muted-foreground leading-relaxed pb-4">
+              <AccordionContent className="text-sm text-muted-foreground leading-relaxed pb-4 font-body">
                 {item.a}
               </AccordionContent>
             </AccordionItem>
@@ -241,6 +249,7 @@ const FaqSection = ({
 );
 
 const Faq = () => {
+
   const { toast } = useToast();
   const {
     register,
@@ -335,9 +344,9 @@ const Faq = () => {
             </motion.div>
             <FaqSection categories={institutionFaq} startDelay={0} />
           </div>
-        </div>
 
-        <motion.div
+        </div>
+         <motion.div
           id="contact"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

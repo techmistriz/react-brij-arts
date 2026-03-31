@@ -22,8 +22,11 @@ import SubmissionConfirmation from "./pages/SubmissionConfirmation";
 import Publications from "./pages/Publications";
 import Faq from "./pages/Faq";
 import NotFound from "./pages/NotFound";
-import ScrollToHash from "./components/ScrollToHash";
+// import ScrollToHash from "./components/ScrollToHash";
 import Login from "./pages/Login";
+import StructureSection from "./components/landing/StructureSection";
+import Structure from "./pages/Structure";
+import Bursary from "./pages/Bursary";
 
 const queryClient = new QueryClient();
 
@@ -34,7 +37,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter basename="/academy/fellowship">
         {/* <BrowserRouter> */}
-        <ScrollToHash />
+        {/* <ScrollToHash /> */}
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/academy" element={<Index />} />
@@ -52,6 +55,8 @@ const App = () => (
           />
           <Route path="/publications" element={<Publications />} />
           <Route path="/faq" element={<Faq />} />
+          <Route path="/bursary" element={<Bursary />} />
+          <Route path="/structure" element={<Structure />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -15,7 +15,7 @@ export default {
     extend: {
       fontFamily: {
         heading: ['Akhand', 'Barlow Condensed', 'sans-serif'],
-        body: ['Akhand', 'Barlow', 'sans-serif'],
+        body: ['Neue Haas Grotesk', 'Barlow', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -42,6 +42,12 @@ export default {
         accent: {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
+        },
+        brij: {
+          red: "hsl(var(--primary))",
+          orange: "hsl(var(--brij-orange))",
+          pink: "hsl(var(--brij-pink))",
+          gray: "hsl(var(--brij-gray))",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",

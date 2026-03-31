@@ -1,14 +1,14 @@
 import { motion } from "framer-motion";
-import mentorshipImg from "@/assets/mentorship.jpg";
-import lecturesImg from "@/assets/lectures.jpg";
-import workshopsImg from "@/assets/workshops.jpg";
-import collaborativeImg from "@/assets/collaborative.jpg";
+import mentorshipImg from "@/assets/mentorship-new.jpg";
+import structuredLearningImg from "@/assets/structured-learning.jpg";
+import institutionalExposureImg from "@/assets/institutional-exposure.jpg";
+import peerLearningImg from "@/assets/peer-learning.jpg";
 
 const experiences = [
-  { title: "Mentorship", image: mentorshipImg, description: "Guided by established cultural leaders and institutional directors" },
-  { title: "Structured Learning", image: lecturesImg, description: "Modules on cultural policy, programme design, and leadership practice" },
-  { title: "Institutional Exposure", image: workshopsImg, description: "Direct engagement with how cultural organisations operate" },
-  { title: "Peer Learning", image: collaborativeImg, description: "Knowledge exchange within a cohort of interdisciplinary fellows" },
+  { title: "Mentorship", image: mentorshipImg, description: "One senior mentor per Fellow — matched individually, for monthly one-to-one sessions across the full nine months" },
+  { title: "Structured Learning", image: structuredLearningImg, description: "Expert-led fireside conversations, weekly live sessions, and curated frameworks across all three phases" },
+  { title: "Institutional Exposure", image: institutionalExposureImg, description: "Direct engagement with how cultural organisations operate — governance, programme design, and public impact" },
+  { title: "Peer Learning", image: peerLearningImg, description: "A cohort of exceptional mid-career practitioners — a network built through nine months of genuine shared work" },
 ];
 
 const ExperienceSection = () => {
@@ -16,10 +16,10 @@ const ExperienceSection = () => {
     <section className="section-padding">
       <div className="max-w-7xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.7 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           <p className="label-text mb-6">The Cohort Experience</p>
           <h2 className="editorial-subheading max-w-2xl mb-16">
@@ -31,11 +31,11 @@ const ExperienceSection = () => {
           {experiences.map((exp, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group relative overflow-hidden aspect-[16/9] cursor-default"
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              className="group relative overflow-hidden aspect-[16/9] cursor-default border border-border"
             >
               <img
                 src={exp.image}
@@ -46,10 +46,10 @@ const ExperienceSection = () => {
                 }}
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent transition-colors duration-500 group-hover:from-foreground/85" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent transition-colors duration-500 group-hover:from-black/80" />
               <div className="absolute bottom-0 left-0 right-0 p-5 md:p-7 transition-transform duration-500 group-hover:-translate-y-1">
-                <h3 className="text-background font-bold text-lg md:text-xl mb-1">{exp.title}</h3>
-                <p className="text-background/70 text-sm">{exp.description}</p>
+                <h3 className="text-white font-bold text-lg md:text-xl mb-1 font-heading">{exp.title}</h3>
+                <p className="text-white/70 text-sm font-body max-h-0 opacity-0 group-hover:max-h-20 group-hover:opacity-100 transition-all duration-500 overflow-hidden">{exp.description}</p>
               </div>
             </motion.div>
           ))}

@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronDown } from "lucide-react";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import { Input } from "@/components/ui/input";
@@ -18,10 +18,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
-import { useDropdowns } from "@/hooks/useDropdowns";
-import { getNominee, NomineeData } from "@/lib/api/nominee";
 import { submitApplication2 } from "@/lib/api/register";
+import { getNominee } from "@/lib/api/nominee";
+import { useDropdowns } from "@/hooks/useDropdowns";
 import { useAuth } from "@/context/AuthContext";
 
 /* ─── Stage 1 schema ─── */
@@ -73,6 +74,9 @@ const stage2Schema = z.object({
   agreed_fellowship_commitment: z
     .boolean()
     .refine((v) => v, "You must confirm"),
+  is_agree_following_principles: z.boolean().refine((v) => v === true, {
+    message: "You must accept the terms",
+  }),
 });
 
 type Stage1Data = z.infer<typeof stage1Schema>;
@@ -100,10 +104,11 @@ const ApplyTrack3 = () => {
   const [savedId, setSavedId] = useState<string | null>(null);
   const [savedAppId, setSavedAppId] = useState<string | null>(null);
   const [stage1Data, setStage1Data] = useState<Stage1Data | null>(null);
+  const [expanded, setExpanded] = useState(false);
 
   const { countries } = useDropdowns();
 
-  const{login} = useAuth()
+  const { login } = useAuth();
 
   const toBinary = (v: boolean) => (v ? 1 : 0);
 
@@ -146,6 +151,7 @@ const ApplyTrack3 = () => {
       practice_documentation: "",
       documentation_summary: "",
       agreed_fellowship_commitment: false,
+      is_agree_following_principles: false,
     },
   });
 
@@ -154,7 +160,7 @@ const ApplyTrack3 = () => {
 
     const fetchNomineeData = async () => {
       try {
-      const nominee = await getNominee(nomineeId);
+        const nominee = await getNominee(nomineeId);
         // console.log("Full API response:", nominee);
 
         s1.reset({
@@ -182,81 +188,76 @@ const ApplyTrack3 = () => {
   };
 
   /* Submit Stage 2 */
- const onStage2Submit = async (data: Stage2Data) => {
-  if (!stage1Data || !nomineeId) {
-    toast({
-      title: "Invalid nominee data",
-      variant: "destructive",
-    });
-    return;
-  }
+  const onStage2Submit = async (data: Stage2Data) => {
+    if (!stage1Data || !nomineeId) {
+      toast({
+        title: "Invalid nominee data",
+        variant: "destructive",
+      });
+      return;
+    }
 
-  setIsSubmitting(true);
+    setIsSubmitting(true);
 
-  try {
-    const payload = {
-      // Stage 1
-      user_type: stage1Data.user_type,
-      first_name: stage1Data.first_name,
-      last_name: stage1Data.last_name,
-      pronouns: stage1Data.pronouns,
-      country_id: stage1Data.country_id,
-      city: stage1Data.city,
-      role_title: stage1Data.role_title,
-      organisation: stage1Data.organisation,
-      discipline_id: stage1Data.discipline_id,
-      years_working_in_cultural_sector:
-        stage1Data.years_working_in_cultural_sector,
-      email: stage1Data.email,
-      contact: stage1Data.contact,
-      mailing_address: stage1Data.mailing_address,
+    try {
+      const payload = {
+        // Stage 1
+        user_type: stage1Data.user_type,
+        first_name: stage1Data.first_name,
+        last_name: stage1Data.last_name,
+        pronouns: stage1Data.pronouns,
+        country_id: stage1Data.country_id,
+        city: stage1Data.city,
+        role_title: stage1Data.role_title,
+        organisation: stage1Data.organisation,
+        discipline_id: stage1Data.discipline_id,
+        years_working_in_cultural_sector:
+          stage1Data.years_working_in_cultural_sector,
+        email: stage1Data.email,
+        contact: stage1Data.contact,
+        mailing_address: stage1Data.mailing_address,
 
-     is_attend_residential_in_goa: toBinary(
-    stage1Data.is_attend_residential_in_goa
-  ),
-  is_attend_saf_in_goa: toBinary(
-    stage1Data.is_attend_saf_in_goa
-  ),
+        is_attend_residential_in_goa: toBinary(
+          stage1Data.is_attend_residential_in_goa,
+        ),
+        is_attend_saf_in_goa: toBinary(stage1Data.is_attend_saf_in_goa),
 
-      practice_cultural_context:
-        stage1Data.practice_cultural_context,
-      current_practice_question:
-        stage1Data.current_practice_question,
+        practice_cultural_context: stage1Data.practice_cultural_context,
+        current_practice_question: stage1Data.current_practice_question,
 
-      // Stage 2
-      recent_work_turning_point:
-        data.recent_work_turning_point,
-      fellowship_expectations:
-        data.fellowship_expectations,
-      practice_documentation:
-        data.practice_documentation,
-      documentation_summary:
-        data.documentation_summary,
-      agreed_fellowship_commitment: toBinary(
-    data.agreed_fellowship_commitment
-  ),
-    };
+        // Stage 2
+        recent_work_turning_point: data.recent_work_turning_point,
+        fellowship_expectations: data.fellowship_expectations,
+        practice_documentation: data.practice_documentation,
+        documentation_summary: data.documentation_summary,
+        agreed_fellowship_commitment: toBinary(
+          data.agreed_fellowship_commitment,
+        ),
+        is_agree_following_principles: toBinary(
+          data.is_agree_following_principles,
+        ),
+      };
 
-    // console.log("FINAL PAYLOAD:", payload);
+      // console.log("FINAL PAYLOAD:", payload);
 
-   const res =  await submitApplication2(nomineeId, payload); // ✅ FIXED
+      const res = await submitApplication2(nomineeId, payload); //  FIXED
 
-login(res.data.token, res.data.user)
+      login(res.data.token, res.data.user);
+      // console.log(res);
 
-    toast({ title: "Application submitted successfully" });
-    navigate("/submission-confirmation");
-
-  } catch (err: any) {
-    console.error(err);
-    toast({
-      title: "Submission failed",
-      description: err.message,
-      variant: "destructive",
-    });
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+      toast({ title: "Application submitted successfully" });
+      navigate("/submission-confirmation");
+    } catch (err: any) {
+      console.error(err);
+      toast({
+        title: "Submission failed",
+        description: err.message,
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const fieldError = (form: any, name: string) =>
     form.formState.errors[name] ? (
@@ -282,11 +283,11 @@ login(res.data.token, res.data.user)
                 to="/apply"
                 className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
-                <ArrowLeft size={14} /> All Tracks
+                <ArrowLeft size={14} /> All Routes
               </Link>
 
               <div>
-                <p className="label-text mb-3 text-primary">Track 3</p>
+                <p className="label-text mb-3 text-brij-orange">Route 3</p>
                 <h1 className="editorial-subheading mb-4">
                   Nominated Application
                 </h1>
@@ -307,33 +308,33 @@ login(res.data.token, res.data.user)
               {/* Stage indicator */}
               <div className="flex gap-3">
                 <div
-                  className={`flex-1 h-1.5 rounded ${stage >= 1 ? "bg-primary" : "bg-muted"}`}
+                  className={`flex-1 h-1.5 rounded ${stage >= 1 ? "bg-accent" : "bg-muted"}`}
                 />
                 <div
-                  className={`flex-1 h-1.5 rounded ${stage >= 2 ? "bg-primary" : "bg-muted"}`}
+                  className={`flex-1 h-1.5 rounded ${stage >= 2 ? "bg-accent" : "bg-muted"}`}
                 />
               </div>
               <p className="text-xs text-muted-foreground">
                 Stage {stage} of 2
               </p>
 
-              <div className="border border-border p-5">
-                <h3 className="font-bold text-sm uppercase tracking-wide mb-3">
+              <div className="border border-border p-5 brij-gradient-grain">
+                <h3 className="font-bold text-sm uppercase tracking-wide mb-3 relative z-10 text-white">
                   Time Commitment
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-sm text-white/90 leading-relaxed relative z-10">
                   The Fellowship requires a maximum of 6 hours per week of
                   structured engagement across nine months, plus two compulsory
                   in-person moments in Goa.
                 </p>
               </div>
 
-              <div className="border border-border p-5">
-                <h3 className="font-bold text-sm uppercase tracking-wide mb-3">
+              <div className="border border-border p-5 brij-gradient-grain">
+                <h3 className="font-bold text-sm uppercase tracking-wide mb-3 relative z-10 text-white">
                   Important Note
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Track 3 Fellows are not eligible for bursaries. Your
+                <p className="text-sm text-white/90 leading-relaxed relative z-10">
+                  Route 3 Fellows are not eligible for bursaries. Your
                   institution has covered the Fellowship fee in full. Your
                   institution's separate form must also be received before your
                   application is considered complete.
@@ -416,7 +417,7 @@ login(res.data.token, res.data.user)
                           </SelectContent>
                         </Select>
                       </div>
-                       <div>
+                      <div>
                         <Label>Country of Residence *</Label>
                         <Select
                           onValueChange={(v) => s1.setValue("country_id", v)}
@@ -426,7 +427,10 @@ login(res.data.token, res.data.user)
                           </SelectTrigger>
                           <SelectContent>
                             {countries.map((country) => (
-                              <SelectItem key={country.id} value={String(country.id)}>
+                              <SelectItem
+                                key={country.id}
+                                value={String(country.id)}
+                              >
                                 {country.name}
                               </SelectItem>
                             ))}
@@ -434,7 +438,6 @@ login(res.data.token, res.data.user)
                         </Select>
                         {fieldError(s1, "country_id")}
                       </div>
-                      
                       <div>
                         <Label>City / Town *</Label>
                         <Input {...s1.register("city")} className="mt-1.5" />
@@ -623,10 +626,15 @@ login(res.data.token, res.data.user)
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="inline-flex items-center gap-2 bg-foreground text-background px-8 py-3 text-sm font-semibold tracking-wide hover:opacity-90 transition-opacity disabled:opacity-50"
+                      className="relative overflow-hidden inline-flex items-center gap-2 bg-foreground text-background px-8 py-3 text-sm font-heading font-bold tracking-wide transition-colors disabled:opacity-50 group hover:text-white"
                     >
-                      {isSubmitting ? "Saving…" : "Save & Continue to Stage 2"}
-                      <ArrowRight size={16} />
+                      <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
+                      <span className="relative z-10 inline-flex items-center gap-2">
+                        {isSubmitting
+                          ? "Saving…"
+                          : "Save & Continue to Stage 2"}{" "}
+                        <ArrowRight size={16} />
+                      </span>
                     </button>
                   </div>
                 </form>
@@ -678,18 +686,15 @@ login(res.data.token, res.data.user)
                     </h2>
                     <div className="space-y-5">
                       <div>
-                        {/* <Label>
-                          Share one piece of documentation of your practice. This can be a link, a PDF,
-                          an image set, a recording, or a written piece — whatever best represents the
-                          quality of your thinking or making. *
-                        </Label> */}
                         <Label>
                           Share one piece of documentation of your practice.
-                          This can be a google drive link or url. *
+                          This can be a link, a PDF, an image set, a recording,
+                          or a written piece — whatever best represents the
+                          quality of your thinking or making. *
                         </Label>
                         <Input
                           {...s2.register("practice_documentation")}
-                          placeholder="Google Drive link or URL "
+                          placeholder="Google Drive link or URL (max 5 MB)"
                           className="mt-1.5"
                         />
                         {fieldError(s2, "practice_documentation")}
@@ -762,6 +767,135 @@ login(res.data.token, res.data.user)
                     </p>
                   </div>
 
+                  <div className="flex items-start gap-3">
+                    <Checkbox
+                      id="is_agree_following_principles"
+                      checked={s2.watch("is_agree_following_principles")}
+                      onCheckedChange={(checked) =>
+                        s2.setValue(
+                          "is_agree_following_principles",
+                          !!checked,
+                          {
+                            shouldValidate: true,
+                          },
+                        )
+                      }
+                      className="mt-0.5"
+                    />
+
+                    <div className="flex-1">
+                      <label
+                        htmlFor="is_agree_following_principles"
+                        className="text-sm cursor-pointer"
+                      >
+                        By accessing or using this website and engaging with
+                        Serendipity Arts in any manner, you agree to comply with
+                        the following principles. *
+                      </label>
+                      {fieldError(s2, "is_agree_following_principles")}
+
+                      <div
+                        onClick={() => setExpanded(!expanded)}
+                        className="text-xs text-muted-foreground mt-1 leading-relaxed cursor-pointer"
+                      >
+                        <div className="flex items-center gap-1">
+                          <ChevronDown
+                            className={`transition-transform w-4 h-4 ${
+                              expanded ? "rotate-180" : ""
+                            }`}
+                          />
+                          <span>
+                            {expanded ? "Hide details" : "Read full terms"}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Expandable Content */}
+                      {expanded && (
+                        <div className="mt-4 space-y-3 text-xs border p-6">
+                          <div>
+                            <h4 className="font-semibold text-[16px]">
+                              Safe & Respectful Workplace (POSH)
+                            </h4>
+                            <p className="text-[12px] font-medium leading-5 text-[#333333]">
+                              We are committed to providing a safe, inclusive,
+                              and respectful environment. Sexual harassment or
+                              harassment of any kind is strictly prohibited.
+                              Complaints, if there are any, will be addressed
+                              confidentially and in accordance with applicable
+                              laws & acts. Retaliation against complainants or
+                              witnesses will not be tolerated.
+                            </p>
+                          </div>
+
+                          <div>
+                            <h4 className="font-semibold text-[16px]">
+                              Plagiarism & Intellectual Integrity
+                            </h4>
+                            <p className="text-[12px] font-medium leading-5 text-[#333333]">
+                              Plagiarism in any form is prohibited. All material
+                              being submitted must be original or properly
+                              credited. Unauthorized copying or
+                              misrepresentation may lead to disciplinary and/or
+                              legal action.
+                            </p>
+                          </div>
+
+                          <div>
+                            <h4 className="font-semibold text-[16px]">
+                              Discipline & Conduct
+                            </h4>
+                            <p className="text-[12px] font-medium leading-5 text-[#333333]">
+                              All attendees are expected to behave
+                              professionally, responsibly, and respectfully at
+                              all times. Any form of misconduct, abusive
+                              behavior, or indiscipline may result in
+                              appropriate action.
+                            </p>
+                          </div>
+
+                          <div>
+                            <h4 className="font-semibold text-[16px]">
+                              Code of Conduct
+                            </h4>
+                            <p className="text-[12px] font-medium leading-5 text-[#333333]">
+                              Users and associates must act honestly and
+                              ethically, safeguard confidential information, and
+                              use organizational resources responsibly.
+                              Conflicts of interest should be avoided and
+                              disclosed where applicable.
+                            </p>
+                          </div>
+
+                          <div>
+                            <h4 className="font-semibold text-[16px]">
+                              Ethical Standards
+                            </h4>
+                            <p className="text-[12px] font-medium leading-5 text-[#333333]">
+                              We expect the highest standards of integrity and
+                              fairness in all interactions. Fraud, corruption,
+                              misrepresentation, or unethical practices are not
+                              permitted.
+                            </p>
+                          </div>
+
+                          <div>
+                            <h4 className="font-semibold text-[16px]">
+                              Legal Compliance
+                            </h4>
+                            <p className="text-[12px] font-medium leading-5 text-[#333333]">
+                              Engaging in illegal, unlawful, or prohibited
+                              activities while using this website or associating
+                              with the organization is strictly forbidden. Any
+                              violations may result in disciplinary or legal
+                              action.
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
                   <div className="flex gap-4 pt-4">
                     <button
                       type="button"
@@ -776,10 +910,13 @@ login(res.data.token, res.data.user)
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="inline-flex items-center gap-2 bg-foreground text-background px-8 py-3 text-sm font-semibold tracking-wide hover:opacity-90 transition-opacity disabled:opacity-50"
+                      className="relative overflow-hidden inline-flex items-center gap-2 bg-foreground text-background px-8 py-3 text-sm font-heading font-bold tracking-wide transition-colors disabled:opacity-50 group hover:text-white"
                     >
-                      {isSubmitting ? "Submitting…" : "Submit Application"}
-                      <ArrowRight size={16} />
+                      <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
+                      <span className="relative z-10 inline-flex items-center gap-2">
+                        {isSubmitting ? "Submitting…" : "Submit Application"}{" "}
+                        <ArrowRight size={16} />
+                      </span>
                     </button>
                   </div>
                 </form>

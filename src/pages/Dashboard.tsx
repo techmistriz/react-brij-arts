@@ -61,7 +61,7 @@ const Dashboard = () => {
     setSearched(true);
     const all: Result[] = [];
 
-    // Track 1
+    // Route 1
     const { data: apps } = await supabase
       .from("applications")
       .select("application_id, first_name, last_name, status, created_at")
@@ -70,7 +70,7 @@ const Dashboard = () => {
     if (apps) {
       apps.forEach((a) =>
         all.push({
-          track: "Track 1 — Individual",
+          track: "Route 1 — Individual",
           id: a.application_id,
           name: `${a.first_name} ${a.last_name}`,
           status: a.status,
@@ -79,7 +79,7 @@ const Dashboard = () => {
       );
     }
 
-    // Track 2
+    // Route 2
     const { data: noms } = await supabase
       .from("nominations")
       .select("nomination_id, nominee_first_name, nominee_last_name, institution_name, status, created_at")
@@ -88,7 +88,7 @@ const Dashboard = () => {
     if (noms) {
       noms.forEach((n) =>
         all.push({
-          track: "Track 2 — Institutional",
+          track: "Route 2 — Institutional",
           id: n.nomination_id,
           name: `${n.nominee_first_name} ${n.nominee_last_name} (${n.institution_name})`,
           status: n.status,
@@ -97,7 +97,7 @@ const Dashboard = () => {
       );
     }
 
-    // Track 3
+    // Route 3
     const { data: t3 } = await supabase
       .from("track3_applications" as any)
       .select("application_id, first_name, last_name, status, created_at")
@@ -106,7 +106,7 @@ const Dashboard = () => {
     if (t3) {
       (t3 as any[]).forEach((a) =>
         all.push({
-          track: "Track 3 — Nominated",
+          track: "Route 3 — Nominated",
           id: a.application_id,
           name: `${a.first_name} ${a.last_name}`,
           status: a.status,
@@ -120,7 +120,7 @@ const Dashboard = () => {
   };
 
   const renderTimeline = (result: Result) => {
-    const isNomination = result.track.includes("Track 2");
+    const isNomination = result.track.includes("Route 2");
     const steps = isNomination ? nominationSteps : statusSteps;
     const currentIdx = getStepIndex(result.status, isNomination);
     const decisionLabel = getDecisionLabel(result.status);
@@ -149,7 +149,7 @@ const Dashboard = () => {
                 {!isLast && (
                   <div
                     className={`absolute left-[11px] top-[28px] w-0.5 h-[calc(100%-4px)] ${
-                      i < currentIdx ? "bg-primary" : "bg-border"
+                      i < currentIdx ? "bg-brij-orange" : "bg-border"
                     }`}
                   />
                 )}
@@ -157,9 +157,9 @@ const Dashboard = () => {
                 {/* Icon */}
                 <div className="relative z-10 mt-0.5 shrink-0">
                   {isCompleted ? (
-                    <CheckCircle2 size={22} className="text-primary" />
+                    <CheckCircle2 size={22} className="text-brij-orange" />
                   ) : isCurrent ? (
-                    <Clock size={22} className="text-primary animate-pulse" />
+                    <Clock size={22} className="text-brij-orange animate-pulse" />
                   ) : (
                     <Circle size={22} className="text-muted-foreground/30" />
                   )}
@@ -210,11 +210,22 @@ const Dashboard = () => {
             className="space-y-8"
           >
             <div>
-              <p className="label-text mb-2 text-primary">Application Tracker</p>
+              <p className="label-text mb-2 text-brij-orange">Application Tracker</p>
               <h1 className="editorial-subheading mb-3">Check Your Application Status</h1>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Enter the email address you used when applying, or your application / nomination ID
                 to look up the current status of your submission.
+              </p>
+            </div>
+
+            {/* Programme Platform Info */}
+            <div className="bg-muted/50 border border-border p-5 text-sm">
+              <h3 className="font-bold text-sm uppercase tracking-wide mb-3">Programme Platform</h3>
+              <p className="text-muted-foreground leading-relaxed mb-2">
+                The Fellowship will be conducted primarily online via Microsoft Teams. Selected Fellows will participate in virtual sessions throughout the programme, with the exception of two compulsory in-person moments in Goa.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                Once selected, Fellows will receive an induction guide with detailed instructions on how to access and join sessions on Microsoft Teams.
               </p>
             </div>
 

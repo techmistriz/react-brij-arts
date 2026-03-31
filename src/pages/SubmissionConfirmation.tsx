@@ -9,7 +9,7 @@ const SubmissionConfirmation = () => {
       <main className="flex-1 flex items-center justify-center section-padding">
         <div className="max-w-lg text-center">
           <div className="flex justify-center mb-8">
-            <CheckCircle className="w-16 h-16 text-primary" />
+            <CheckCircle className="w-16 h-16 text-brij-orange" />
           </div>
           <h1 className="editorial-subheading mb-4">Application Submitted</h1>
           <p className="body-large text-muted-foreground mb-4">

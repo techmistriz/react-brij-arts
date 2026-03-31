@@ -55,9 +55,10 @@ const Publications = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: i * 0.08 }}
-                  className="border border-border overflow-hidden group flex flex-col"
+                  className="border border-border overflow-hidden group flex flex-col relative"
                 >
-                  <div className="aspect-[3/2] overflow-hidden bg-secondary">
+                  <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain z-10" />
+                  <div className="aspect-[3/2] overflow-hidden bg-secondary relative z-0">
                     <img
                       src={s.image}
                       alt={s.title}
@@ -65,10 +66,10 @@ const Publications = () => {
                       loading="lazy"
                     />
                   </div>
-                  <div className="p-5 md:p-6 flex flex-col flex-1">
-                    <h2 className="font-bold text-base md:text-lg mb-2">{s.title}</h2>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-5 flex-1">{s.subtitle}</p>
-                    <span className="inline-flex items-center gap-2 text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+                  <div className="p-5 md:p-6 flex flex-col flex-1 relative z-20">
+                    <h2 className="font-bold text-base md:text-lg mb-2 group-hover:text-white transition-colors">{s.title}</h2>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-5 flex-1 group-hover:text-white/70 transition-colors">{s.subtitle}</p>
+                    <span className="inline-flex items-center gap-2 text-sm font-medium text-foreground group-hover:text-white transition-colors">
                       <ExternalLink className="w-4 h-4" />
                       {s.linkLabel}
                     </span>

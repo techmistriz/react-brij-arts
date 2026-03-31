@@ -1,5 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800&family=Barlow:wght@300;400;500;600&display=swap');
 
+@font-face {
+  font-family: 'Akhand';
+  src: url('@/assets/fonts/TheBrijAkhand-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neue Haas Grotesk';
+  src: url('@/assets/fonts/NeueHaasDisplayMedium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,34 +23,38 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 0 0% 5%;
+    --foreground: 0 0% 8%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 5%;
+    --card-foreground: 0 0% 8%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 5%;
+    --popover-foreground: 0 0% 8%;
 
-    --primary: 33 89% 53%;
+    --primary: 11 97% 55%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 5%;
+    --secondary: 30 15% 96%;
+    --secondary-foreground: 0 0% 8%;
 
     --muted: 30 10% 96%;
-    --muted-foreground: 0 0% 40%;
+    --muted-foreground: 0 0% 20%;
 
-    --accent: 30 10% 95%;
-    --accent-foreground: 0 0% 5%;
+    --accent: 28 100% 58%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 33 89% 53%;
+    --border: 233 8% 89%;
+    --input: 233 8% 89%;
+    --ring: 11 97% 55%;
 
     --radius: 0.25rem;
+
+    --brij-orange: 28 100% 58%;
+    --brij-pink: 313 83% 70%;
+    --brij-gray: 233 8% 81%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 0 0% 20%;
@@ -42,11 +62,11 @@
     --sidebar-primary-foreground: 0 0% 98%;
     --sidebar-accent: 0 0% 96%;
     --sidebar-accent-foreground: 0 0% 10%;
-    --sidebar-border: 0 0% 91%;
-    --sidebar-ring: 33 89% 53%;
+    --sidebar-border: 233 8% 89%;
+    --sidebar-ring: 11 97% 55%;
 
     --font-heading: 'Akhand', 'Barlow Condensed', sans-serif;
-    --font-body: 'Akhand', 'Barlow', sans-serif;
+    --font-body: 'Neue Haas Grotesk', 'Barlow', sans-serif;
   }
 
   .dark {
@@ -56,27 +76,30 @@
     --card-foreground: 0 0% 98%;
     --popover: 0 0% 8%;
     --popover-foreground: 0 0% 98%;
-    --primary: 33 89% 53%;
+    --primary: 11 97% 55%;
     --primary-foreground: 0 0% 100%;
     --secondary: 0 0% 15%;
     --secondary-foreground: 0 0% 98%;
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 65%;
-    --accent: 0 0% 15%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 28 100% 58%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 18%;
     --input: 0 0% 18%;
-    --ring: 33 89% 53%;
+    --ring: 11 97% 55%;
+    --brij-orange: 28 100% 58%;
+    --brij-pink: 313 83% 70%;
+    --brij-gray: 233 8% 81%;
     --sidebar-background: 0 0% 8%;
     --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 33 89% 53%;
+    --sidebar-primary: 11 97% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 0 0% 15%;
     --sidebar-accent-foreground: 0 0% 95%;
     --sidebar-border: 0 0% 15%;
-    --sidebar-ring: 33 89% 53%;
+    --sidebar-ring: 11 97% 55%;
   }
 }
 
@@ -87,10 +110,18 @@
 
   body {
     @apply bg-background text-foreground font-body antialiased;
+    font-weight: 520;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
+  }
+
+  /* Form placeholder and select trigger text lighter */
+  [data-placeholder],
+  .placeholder\:text-muted-foreground::placeholder {
+    color: hsl(var(--muted-foreground) / 0.5) !important;
+    font-weight: 400 !important;
   }
 }
 
@@ -115,5 +146,74 @@
 
   .label-text {
     @apply text-xs uppercase tracking-[0.2em] font-medium text-muted-foreground;
+  }
+
+  /* Brand mesh gradient with grain texture */
+  .brij-gradient-grain {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    background-color: hsl(20 90% 60%);
+    background-image:
+      radial-gradient(ellipse 100% 60% at 30% 0%, hsl(28 100% 60%) 0%, transparent 70%),
+      radial-gradient(ellipse 80% 50% at 70% 10%, hsl(11 97% 55%) 0%, transparent 60%),
+      radial-gradient(ellipse 90% 70% at 20% 90%, hsl(320 75% 72%) 0%, transparent 65%),
+      radial-gradient(ellipse 70% 60% at 80% 85%, hsl(313 83% 68%) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 50% at 50% 50%, hsl(15 92% 58%) 0%, transparent 60%);
+  }
+
+  .brij-gradient-grain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 2048 2048' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
+    opacity: 0.88;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .brij-gradient-grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n2)'/%3E%3C/svg%3E");
+    background-size: 128px 128px;
+    opacity: 0.5;
+    mix-blend-mode: soft-light;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* Gradient CTA button – mesh style */
+  .btn-gradient {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    background:
+      radial-gradient(ellipse at 20% 50%, hsl(14 90% 55%) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 30%, hsl(340 75% 55%) 0%, transparent 55%),
+      radial-gradient(ellipse at 50% 80%, hsl(35 95% 55%) 0%, transparent 50%),
+      radial-gradient(ellipse at 70% 60%, hsl(20 92% 56%) 0%, transparent 50%),
+      hsl(20 92% 56%);
+    color: white;
+    transition: all 0.2s ease;
+  }
+
+  .btn-gradient:hover {
+    filter: brightness(1.08);
+  }
+
+  .btn-gradient::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 2048 2048' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n3'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n3)'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
+    opacity: 0.88;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 1;
   }
 }

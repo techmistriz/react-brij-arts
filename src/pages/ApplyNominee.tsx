@@ -229,7 +229,7 @@ const ApplyNominee = () => {
               className="lg:sticky lg:top-28 lg:self-start space-y-8"
             >
               <div>
-                <p className="label-text mb-3 text-primary">Track 2 — Nominee</p>
+                <p className="label-text mb-3 text-brij-orange">Route 2 — Nominee</p>
                 <h1 className="editorial-subheading mb-4">Complete Your Application</h1>
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   You have been nominated by{" "}
@@ -473,9 +473,10 @@ const ApplyNominee = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full sm:w-auto bg-foreground text-background px-10 py-4 font-bold tracking-wide text-sm uppercase hover:opacity-90 transition-opacity disabled:opacity-50"
+                    className="relative overflow-hidden w-full sm:w-auto bg-foreground text-background px-10 py-4 font-heading font-bold tracking-wide text-sm uppercase transition-colors disabled:opacity-50 group hover:text-white"
                   >
-                    {isSubmitting ? "Submitting..." : "Submit Application"}
+                    <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
+                    <span className="relative z-10">{isSubmitting ? "Submitting..." : "Submit Application"}</span>
                   </button>
                 </div>
               </form>

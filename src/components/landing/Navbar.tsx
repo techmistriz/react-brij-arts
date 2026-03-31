@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import serendipityLogo from "@/assets/serendipity-arts-logo-full.png";
 import brijLogo from "@/assets/brij-logo.png";
-import { logoutUser } from "@/lib/api/logout";
 import { useAuth } from "@/context/AuthContext";
+import { logoutUser } from "@/lib/api/logout";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -29,7 +29,7 @@ const Navbar = () => {
       <div className="flex items-center justify-between px-5 md:px-12 lg:px-24 py-3 md:py-4">
         <Link to="/" className="flex items-center gap-3 md:gap-4">
           <img src={brijLogo} alt="The Brij" className="h-5 md:h-7" />
-          <span className="text-muted-foreground/40 text-lg font-light select-none">
+          <span className="text-brij-gray text-lg font-light select-none">
             |
           </span>
           <img
@@ -43,54 +43,71 @@ const Navbar = () => {
         <div className="hidden md:flex items-center gap-8">
           <Link
             to="/about"
-            className="label-text hover:text-foreground transition-colors"
+            className="text-sm font-heading font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
           >
             About
           </Link>
-          <a
-            href="/academy/fellowship/#structure"
-            className="label-text hover:text-foreground transition-colors"
+          <Link
+            to="/structure"
+            className="text-sm font-heading font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
           >
             Structure
-          </a>
+          </Link>
+          <Link
+            to="/bursary"
+            className="text-sm font-heading font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
+          >
+            Bursary
+          </Link>
           <Link
             to="/publications"
-            className="label-text hover:text-foreground transition-colors"
+            className="text-sm font-heading font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
           >
             Publications
           </Link>
           <Link
             to="/faq"
-            className="label-text hover:text-foreground transition-colors"
+            className="text-sm font-heading font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
           >
             FAQ
           </Link>
-
+  <div className="flex items-center gap-3">
           {!isLoggedIn && (
             <Link
               to="/login"
-              className="inline-flex items-center justify-center bg-primary text-primary-foreground px-8 py-2.5 font-semibold tracking-wide text-sm hover:opacity-90 transition-opacity"
+              className="relative overflow-hidden rounded-md px-6 py-2.5 text-sm font-heading font-bold tracking-wide bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
             >
-              Login
+              <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
+              <span className="relative z-10">Login</span>
             </Link>
           )}
           {isLoggedIn ? (
             <button
               onClick={handleLogout}
-              className="bg-foreground text-background px-6 py-2.5 text-sm font-semibold"
+              className="relative overflow-hidden rounded-md px-6 py-2.5 text-sm font-heading font-bold tracking-wide bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
             >
-              Logout
+              <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
+              <span className="relative z-10">Logout</span>
             </button>
           ) : (
             <Link
               to="/apply"
-              className="bg-foreground text-background px-6 py-2.5 text-sm font-semibold"
+              className="relative overflow-hidden rounded-md px-6 py-2.5 text-sm font-heading font-bold tracking-wide bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
             >
-              Apply Now
+              <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
+              <span className="relative z-10">Apply Now</span>
             </Link>
           )}
-        </div>
 
+         
+
+          {/* <Link to="/apply" className="relative overflow-hidden rounded-md px-6 py-2.5 text-sm font-heading font-bold tracking-wide bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]">
+
+            <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
+            <span className="relative z-10">Apply Now</span>
+          </Link> */}
+        </div>
+ </div>
         {/* Mobile toggle */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
@@ -136,11 +153,8 @@ const Navbar = () => {
             <div className="px-5 py-6 flex flex-col gap-5">
               {[
                 { to: "/about", label: "About" },
-                {
-                  to: "/academy/fellowship/#structure",
-                  label: "Structure",
-                  isHash: true,
-                },
+                { to: "/structure", label: "Structure" },
+                { to: "/bursary", label: "Bursary" },
                 { to: "/publications", label: "Publications" },
                 { to: "/faq", label: "FAQ" },
               ].map((item, i) => (
@@ -150,57 +164,51 @@ const Navbar = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05, duration: 0.25 }}
                 >
-                  {item.isHash ? (
-                    <a
-                      href={item.to}
-                      onClick={() => setMenuOpen(false)}
-                      className="text-sm font-medium tracking-wide text-foreground"
-                    >
-                      {item.label}
-                    </a>
-                  ) : (
-                    <Link
-                      to={item.to}
-                      onClick={() => setMenuOpen(false)}
-                      className="text-sm font-medium tracking-wide text-foreground"
-                    >
-                      {item.label}
-                    </Link>
-                  )}
+                  <Link
+                    to={item.to}
+                    onClick={() => setMenuOpen(false)}
+                    className="text-sm font-heading font-bold uppercase tracking-[0.15em] text-foreground hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all active:bg-gradient-to-r active:from-brij-red active:via-brij-orange active:to-brij-pink active:bg-clip-text active:text-transparent"
+                  >
+                    {item.label}
+                  </Link>
                 </motion.div>
               ))}
               <motion.div
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.25 }}
+                transition={{ delay: 0.25, duration: 0.25 }}
                 className="pt-2"
               >
+                
+                {!isLoggedIn && (
+                  <Link
+                    to="/login"
+                    onClick={() => setMenuOpen(false)}
+                    className="relative overflow-hidden block rounded-md px-6 py-3.5 text-sm font-heading font-bold tracking-wide text-center bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
+                  >
+                    <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
+                    <span className="relative z-10">Login</span>
+                  </Link>
+                )}
                 {isLoggedIn ? (
                   <button
                     onClick={() => {
                       handleLogout();
                       setMenuOpen(false);
                     }}
-                    className="bg-foreground text-background px-6 py-3 text-center"
+                    className="relative overflow-hidden  block rounded-md px-6 py-3.5 text-sm font-heading font-bold tracking-wide text-center bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
                   >
-                    Logout
+                   <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
+                    <span className="relative z-10">Logout</span>
                   </button>
                 ) : (
                   <Link
                     to="/apply"
                     onClick={() => setMenuOpen(false)}
-                    className="bg-foreground text-background px-6 py-3 text-center"
+                    className="relative overflow-hidden mt-4  block rounded-md px-6 py-3.5 text-sm font-heading font-bold tracking-wide text-center bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
                   >
-                    Apply Now
-                  </Link>
-                )}
-                {!isLoggedIn && (
-                  <Link
-                    to="/login"
-                    onClick={() => setMenuOpen(false)}
-                    className="border border-foreground px-6 py-3 text-center text-sm font-medium"
-                  >
-                    Login
+                    <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
+                    <span className="relative z-10">Apply Now</span>
                   </Link>
                 )}
               </motion.div>

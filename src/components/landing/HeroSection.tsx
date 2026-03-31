@@ -1,42 +1,42 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import heroImage from "@/assets/hero-fellowship.jpg";
-import tbclfLogo from "@/assets/white.png";
+import tbclfLogo from "@/assets/tbclf-logo-white.png";
 import { useAuth } from "@/context/AuthContext";
 
 const HeroSection = () => {
-  const{isLoggedIn} = useAuth()
+  const { isLoggedIn } = useAuth();
   return (
-    <section className="min-h-screen flex flex-col justify-end relative overflow-hidden">
-      <div className="absolute inset-0">
-        <img src={heroImage} alt="Fellowship experience" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/40 to-transparent" />
-      </div>
-
-      <div className="relative z-10 section-padding !pb-16 md:!pb-24">
+    <section className="min-h-screen flex flex-col justify-center relative overflow-hidden brij-gradient-grain">
+      <div className="relative z-10 flex flex-col items-center justify-center text-center section-padding">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: "easeOut" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col items-center"
         >
           <img
             src={tbclfLogo}
             alt="The Brij Cultural Leaders Fellowship"
-            className="h-28 md:h-36 lg:h-33 mb-8"
+            className="h-20 md:h-28 lg:h-36 mb-6 md:mb-8"
           />
-          <p className="body-large text-background/80 max-w-xl mb-12">
+
+          <p className="text-lg md:text-xl text-white/80 max-w-xl mb-12 md:mb-16 font-body leading-relaxed">
             A leadership programme for emerging cultural practitioners
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
             {!isLoggedIn && (
-            <Link to="/apply" className="inline-flex items-center justify-center bg-primary text-primary-foreground px-8 py-4 font-semibold tracking-wide text-sm hover:opacity-90 transition-opacity">
+
+              <Link
+              to="/apply"
+              className="inline-flex items-center justify-center border-2 border-white text-white px-8 py-4 font-heading font-bold tracking-wide text-sm hover:bg-white hover:text-foreground transition-colors active:scale-[0.97]"
+              >
               Apply Now
             </Link>
             )}
             <Link
               to="/about"
-              className="inline-flex items-center justify-center border border-background/30 text-background px-8 py-4 font-semibold tracking-wide text-sm hover:bg-background/10 transition-colors"
+              className="inline-flex items-center justify-center border-2 border-white text-white px-8 py-4 font-heading font-bold tracking-wide text-sm hover:bg-white hover:text-foreground transition-colors active:scale-[0.97]"
             >
               Explore the Fellowship
             </Link>

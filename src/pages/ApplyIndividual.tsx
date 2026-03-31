@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronDown } from "lucide-react";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import { Input } from "@/components/ui/input";
@@ -21,10 +21,9 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
+import { useAuth } from "@/context/AuthContext";
 import { useDropdowns } from "@/hooks/useDropdowns";
 import { submitApplication } from "@/lib/api/register";
-import { register } from "module";
-import { useAuth } from "@/context/AuthContext";
 
 /* ─── Stage 1 schema ─── */
 const stage1Schema = z.object({
@@ -84,6 +83,9 @@ const stage2Schema = z.object({
   referee_relationship: z.string().min(1, "Required"),
   referee_outside_current_organisation: z.string().min(1, "Required"),
   apply_for_bursary: z.number().optional(),
+  is_agree_following_principles: z.boolean().refine((v) => v === true, {
+    message: "You must accept the terms",
+  }),
 });
 
 type Stage1Data = z.infer<typeof stage1Schema>;
@@ -113,14 +115,15 @@ const ApplyIndividual = () => {
   const [savedAppId, setSavedAppId] = useState<string | null>(null);
   const [stage1Snapshot, setStage1Snapshot] = useState<Stage1Data | null>(null);
   const [bursaryFile, setBursaryFile] = useState<File | null>(null);
-
-  const { countries } = useDropdowns();
-
-  const { login } = useAuth();
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const { countries } = useDropdowns();
+
+  const { login } = useAuth();
 
   const s1 = useForm<Stage1Data>({
     resolver: zodResolver(stage1Schema),
@@ -161,6 +164,7 @@ const ApplyIndividual = () => {
       referee_email: "",
       referee_relationship: "",
       referee_outside_current_organisation: "",
+      is_agree_following_principles: false,
     },
   });
 
@@ -178,7 +182,6 @@ const ApplyIndividual = () => {
       className: "font-semibold",
     });
   };
-
   /* Submit Stage 2 */
   const onStage2Submit = async (data: Stage2Data) => {
     if (!stage1Snapshot) return;
@@ -196,6 +199,9 @@ const ApplyIndividual = () => {
         finalData,
         bursaryChecked ? bursaryFile! : undefined,
       );
+
+      // console.log(res);
+      // console.log(finalData);
 
       //  Save auth data
       login(res.data.token, res.data.user);
@@ -226,8 +232,6 @@ const ApplyIndividual = () => {
         {form.formState.errors[name]?.message as string}
       </p>
     ) : null;
-  // console.log("Countries", countries);
-  // console.log("Form1 data =", stage1Snapshot);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -246,11 +250,11 @@ const ApplyIndividual = () => {
                 to="/apply"
                 className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
-                <ArrowLeft size={14} /> All Tracks
+                <ArrowLeft size={14} /> All Routes
               </Link>
 
               <div>
-                <p className="label-text mb-3 text-primary">Track 1</p>
+                <p className="label-text mb-3 text-brij-orange">Route 1</p>
                 <h1 className="editorial-subheading mb-4">
                   Individual Applicant
                 </h1>
@@ -269,41 +273,36 @@ const ApplyIndividual = () => {
               {/* Stage indicator */}
               <div className="flex gap-3">
                 <div
-                  className={`flex-1 h-1.5 rounded ${stage >= 1 ? "bg-primary" : "bg-muted"}`}
+                  className={`flex-1 h-1.5 rounded ${stage >= 1 ? "bg-accent" : "bg-muted"}`}
                 />
                 <div
-                  className={`flex-1 h-1.5 rounded ${stage >= 2 ? "bg-primary" : "bg-muted"}`}
+                  className={`flex-1 h-1.5 rounded ${stage >= 2 ? "bg-accent" : "bg-muted"}`}
                 />
               </div>
               <p className="text-xs text-muted-foreground">
                 Stage {stage} of 2
               </p>
 
-              <div className="border border-border p-5">
-                <h3 className="font-bold text-sm uppercase tracking-wide mb-3">
+              <div className="border border-border p-5 brij-gradient-grain">
+                <h3 className="font-bold text-sm uppercase tracking-wide mb-3 relative z-10 text-white">
                   Bursaries
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-2">
-                  Ten bursaries are available, ranging from 25% to full fee
+                <p className="text-sm text-white/90 leading-relaxed mb-2 relative z-10">
+                  Ten bursaries are available, ranging from 50% to full fee
                   coverage. Full bursary recipients also receive a travel
                   supplement.
                 </p>
-                <p className="text-xs text-muted-foreground">
+                <p className="text-xs text-white/70 mb-3 relative z-10">
                   Applying for a bursary has no impact on how your application
                   is assessed. Bursary decisions are made only after the jury
                   has completed its evaluation.
                 </p>
-              </div>
-
-              <div className="border border-border p-5">
-                <h3 className="font-bold text-sm uppercase tracking-wide mb-3">
-                  Reference
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  A reference request will be sent automatically to your referee
-                  when you submit. They will be asked three questions. The
-                  submission will only be complete once your referee responds.
-                </p>
+                <Link
+                  to="/bursary"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-white/80 transition-colors relative z-10"
+                >
+                  Learn More <ArrowRight size={14} />
+                </Link>
               </div>
 
               <div className="border-t border-border pt-6">
@@ -401,7 +400,7 @@ const ApplyIndividual = () => {
                             ))}
                           </SelectContent>
                         </Select>
-                        {fieldError(s1, "country_id")}
+                        {fieldError(s1, "country")}
                       </div>
                       <div>
                         <Label>City / Town *</Label>
@@ -460,7 +459,7 @@ const ApplyIndividual = () => {
                             ))}
                           </SelectContent>
                         </Select>
-                        {fieldError(s1, "years_working_in_cultural_sector")}
+                        {fieldError(s1, "yearsInCulture")}
                       </div>
                       <div>
                         <Label>Email Address *</Label>
@@ -592,10 +591,15 @@ const ApplyIndividual = () => {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="inline-flex items-center gap-2 bg-foreground text-background px-8 py-3 text-sm font-semibold tracking-wide hover:opacity-90 transition-opacity disabled:opacity-50"
+                      className="relative overflow-hidden inline-flex items-center gap-2 bg-foreground text-background px-8 py-3 text-sm font-heading font-bold tracking-wide transition-colors disabled:opacity-50 group hover:text-white"
                     >
-                      {isSubmitting ? "Saving…" : "Save & Continue to Stage 2"}
-                      <ArrowRight size={16} />
+                      <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
+                      <span className="relative z-10 inline-flex items-center gap-2">
+                        {isSubmitting
+                          ? "Saving…"
+                          : "Save & Continue to Stage 2"}{" "}
+                        <ArrowRight size={16} />
+                      </span>
                     </button>
                   </div>
                 </form>
@@ -676,19 +680,15 @@ const ApplyIndividual = () => {
                     </h2>
                     <div className="space-y-5">
                       <div>
-                        {/* <Label>
+                        <Label>
                           Share one piece of documentation of your practice.
                           This can be a link, a PDF, an image set, a recording,
                           or a written piece — whatever best represents the
                           quality of your thinking or making. *
-                        </Label> */}
-                        <Label>
-                          Share one piece of documentation of your practice.
-                          This can be a google drive link or url. *
                         </Label>
                         <Input
                           {...s2.register("practice_documentation")}
-                          placeholder="Google Drive link or URL "
+                          placeholder="Google Drive link or URL (max 5 MB)"
                           className="mt-1.5"
                         />
                         {fieldError(s2, "practice_documentation")}
@@ -746,13 +746,9 @@ const ApplyIndividual = () => {
                       Section G — Reference
                     </h2>
                     <p className="text-xs text-muted-foreground mb-5 leading-relaxed">
-                      A reference request will be sent automatically to your
-                      referee when you submit. They will be asked three
-                      questions: how they know you and for how long; what
-                      quality in you makes you ready for this Fellowship right
-                      now; and anything else the panel should know. There is no
-                      form — a short letter only. The submission will only be
-                      complete once your referee responds.
+                      Once you submit your application, your referee may receive
+                      an email with a few short questions about their
+                      relationship with you and your practice.
                     </p>
                     <div className="space-y-5">
                       <div className="grid sm:grid-cols-3 gap-5">
@@ -821,9 +817,7 @@ const ApplyIndividual = () => {
                             s2.setValue(
                               "referee_outside_current_organisation",
                               v,
-                              {
-                                shouldValidate: true,
-                              },
+                              { shouldValidate: true },
                             )
                           }
                           className="mt-2 flex gap-6"
@@ -865,7 +859,7 @@ const ApplyIndividual = () => {
                         />
                         <div>
                           <label
-                            htmlFor="apply_for_bursary"
+                            htmlFor="bursaryRequest"
                             className="text-sm cursor-pointer"
                           >
                             I would like to apply for a bursary.
@@ -925,6 +919,134 @@ const ApplyIndividual = () => {
                     </p>
                   </div>
 
+                  <div className="flex items-start gap-3">
+                    <Checkbox
+                      id="is_agree_following_principles"
+                      checked={s2.watch("is_agree_following_principles")}
+                      onCheckedChange={(checked) =>
+                        s2.setValue(
+                          "is_agree_following_principles",
+                          !!checked,
+                          {
+                            shouldValidate: true,
+                          },
+                        )
+                      }
+                    />
+
+                    <div className="flex-1">
+                      <label
+                        htmlFor="is_agree_following_principles"
+                        className="text-sm cursor-pointer"
+                      >
+                        By accessing or using this website and engaging with
+                        Serendipity Arts in any manner, you agree to comply with
+                        the following principles. *
+                      </label>
+                      {fieldError(s2, "is_agree_following_principles")}
+
+                      <div
+                        onClick={() => setExpanded(!expanded)}
+                        className="text-xs text-muted-foreground mt-1 leading-relaxed cursor-pointer"
+                      >
+                        <div className="flex items-center gap-1">
+                          <ChevronDown
+                            className={`transition-transform w-4 h-4 ${
+                              expanded ? "rotate-180" : ""
+                            }`}
+                          />
+                          <span>
+                            {expanded ? "Hide details" : "Read full terms"}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Expandable Content */}
+                      {expanded && (
+                        <div className="mt-4 space-y-3 text-xs border p-6">
+                          <div>
+                            <h4 className="font-semibold text-[16px]">
+                              Safe & Respectful Workplace (POSH)
+                            </h4>
+                            <p className="text-[12px] font-medium leading-5 text-[#333333]">
+                              We are committed to providing a safe, inclusive,
+                              and respectful environment. Sexual harassment or
+                              harassment of any kind is strictly prohibited.
+                              Complaints, if there are any, will be addressed
+                              confidentially and in accordance with applicable
+                              laws & acts. Retaliation against complainants or
+                              witnesses will not be tolerated.
+                            </p>
+                          </div>
+
+                          <div>
+                            <h4 className="font-semibold text-[16px]">
+                              Plagiarism & Intellectual Integrity
+                            </h4>
+                            <p className="text-[12px] font-medium leading-5 text-[#333333]">
+                              Plagiarism in any form is prohibited. All material
+                              being submitted must be original or properly
+                              credited. Unauthorized copying or
+                              misrepresentation may lead to disciplinary and/or
+                              legal action.
+                            </p>
+                          </div>
+
+                          <div>
+                            <h4 className="font-semibold text-[16px]">
+                              Discipline & Conduct
+                            </h4>
+                            <p className="text-[12px] font-medium leading-5 text-[#333333]">
+                              All attendees are expected to behave
+                              professionally, responsibly, and respectfully at
+                              all times. Any form of misconduct, abusive
+                              behavior, or indiscipline may result in
+                              appropriate action.
+                            </p>
+                          </div>
+
+                          <div>
+                            <h4 className="font-semibold text-[16px]">
+                              Code of Conduct
+                            </h4>
+                            <p className="text-[12px] font-medium leading-5 text-[#333333]">
+                              Users and associates must act honestly and
+                              ethically, safeguard confidential information, and
+                              use organizational resources responsibly.
+                              Conflicts of interest should be avoided and
+                              disclosed where applicable.
+                            </p>
+                          </div>
+
+                          <div>
+                            <h4 className="font-semibold text-[16px]">
+                              Ethical Standards
+                            </h4>
+                            <p className="text-[12px] font-medium leading-5 text-[#333333]">
+                              We expect the highest standards of integrity and
+                              fairness in all interactions. Fraud, corruption,
+                              misrepresentation, or unethical practices are not
+                              permitted.
+                            </p>
+                          </div>
+
+                          <div>
+                            <h4 className="font-semibold text-[16px]">
+                              Legal Compliance
+                            </h4>
+                            <p className="text-[12px] font-medium leading-5 text-[#333333]">
+                              Engaging in illegal, unlawful, or prohibited
+                              activities while using this website or associating
+                              with the organization is strictly forbidden. Any
+                              violations may result in disciplinary or legal
+                              action.
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
                   <div className="flex gap-4 pt-4">
                     <button
                       type="button"
@@ -939,10 +1061,13 @@ const ApplyIndividual = () => {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="inline-flex items-center gap-2 bg-foreground text-background px-8 py-3 text-sm font-semibold tracking-wide hover:opacity-90 transition-opacity disabled:opacity-50"
+                      className="relative overflow-hidden inline-flex items-center gap-2 bg-foreground text-background px-8 py-3 text-sm font-heading font-bold tracking-wide transition-colors disabled:opacity-50 group hover:text-white"
                     >
-                      {isSubmitting ? "Submitting…" : "Submit Application"}
-                      <ArrowRight size={16} />
+                      <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
+                      <span className="relative z-10 inline-flex items-center gap-2">
+                        {isSubmitting ? "Submitting…" : "Submit Application"}{" "}
+                        <ArrowRight size={16} />
+                      </span>
                     </button>
                   </div>
                 </form>

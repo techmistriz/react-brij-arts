@@ -40,13 +40,13 @@ const Login = () => {
     try {
       const res = await loginUser(formData);
 
-      console.log("FULL RESPONSE:", res);
+      // console.log("FULL RESPONSE:", res);
 
       const token = res.data.token;
       const user = res.data.user;
 
-      console.log("TOKEN:", token);
-      console.log("USER:", user);
+      // console.log("TOKEN:", token);
+      // console.log("USER:", user);
 
       login(token, user);
 

@@ -12,37 +12,31 @@ const Footer = () => {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <img src={brijLogo} alt="The Brij" className="h-6" />
-              <span className="text-muted-foreground/40 text-lg font-light select-none">|</span>
+              <span className="text-brij-gray text-lg font-light select-none">|</span>
               <img src={serendipityLogo} alt="Serendipity Arts" className="h-8" />
             </div>
           </div>
 
           <div className="flex flex-col gap-3">
             <p className="label-text mb-2">Links</p>
-            <Link to="/about" className="text-sm text-muted-foreground hover:text-foreground transition-colors">About</Link>
-              {!isLoggedIn && (
-            <Link to="/apply" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Apply</Link>
-              )}
-            <Link to="/publications" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Publications</Link>
-            <Link to="/faq" className="text-sm text-muted-foreground hover:text-foreground transition-colors">FAQ</Link>
-
-<Link
-  to="/faq#contact" 
-  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
->
-  Contact
-</Link>     
-     </div>
+            <Link to="/about" className="text-sm text-muted-foreground hover:text-foreground transition-colors font-body">About</Link>
+               {!isLoggedIn && (
+            <Link to="/apply" className="text-sm text-muted-foreground hover:text-foreground transition-colors font-body">Apply</Link>
+               )}
+            <Link to="/publications" className="text-sm text-muted-foreground hover:text-foreground transition-colors font-body">Publications</Link>
+            <Link to="/faq" className="text-sm text-muted-foreground hover:text-foreground transition-colors font-body">FAQ</Link>
+            <Link  to="/faq#contact"  className="text-sm text-muted-foreground hover:text-foreground transition-colors font-body">Contact</Link>
+          </div>
 
           <div className="flex flex-col gap-3">
             <p className="label-text mb-2">Ecosystem</p>
-            <a href="https://thebrij.world" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors">The Brij</a>
-            <a href="https://serendipityarts.org" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Serendipity Arts</a>
+            <a href="https://thebrij.world" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors font-body">The Brij</a>
+            <a href="https://serendipityarts.org" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors font-body">Serendipity Arts</a>
           </div>
         </div>
 
         <div className="mt-16 pt-8 border-t border-border">
-          <p className="text-xs text-muted-foreground">
+          <p className="text-xs text-muted-foreground font-body">
             © {new Date().getFullYear()} The Brij Cultural Leaders Fellowship. All rights reserved.
           </p>
         </div>
