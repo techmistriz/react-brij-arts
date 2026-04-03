@@ -35,9 +35,7 @@ const AboutSection = () => {
             className="space-y-6"
           >
             <p className="text-lg md:text-xl text-muted-foreground font-body leading-relaxed">
-              The Brij Cultural Leaders Fellowship is a nine-month leadership development programme
-              for mid-career cultural practitioners and cross-sector professionals across South Asia —
-              the first programme of its kind in the region. It is delivered by Serendipity Arts Foundation.
+              The Brij Cultural Leaders Fellowship is a nine-month leadership development programme for mid-career cultural practitioners and cross-sector professionals across India — delivered by Serendipity Arts.
             </p>
             <Link
               to="/about"

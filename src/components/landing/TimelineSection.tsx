@@ -5,26 +5,32 @@ const phases = [
   {
     number: "01",
     title: "Applications Open",
-    date: "June – July",
+    date: "April",
     description: "Opens with a six-day residential in Goa — the moment the cohort comes together for the first time. Community building, personal reflection, strengths work, storytelling, and network mapping.",
   },
   {
     number: "02",
     title: "Selection Process",
-    date: "August – October",
+    date: "May",
     description: "Six expert-led fireside conversations expanding each Fellow's lens to the wider cultural field. Fellows shape every session from their own position, submitting questions in advance and driving the dialogue.",
   },
   {
     number: "03",
-    title: "Opening Residential",
-    date: "November – March",
-    description: "Leadership, future thinking, and the public articulation of each Fellow's inquiry — including three days at the Serendipity Arts Festival in Goa.",
+    title: "Phase I",
+    date: "Self & Context",
+    description: "Personal reflection, self-awareness, and the beginning of your inquiry. Opens with a six-day residential in Goa, where Fellows meet, map their strengths and networks, and draft their Question for the first time.",
   },
   {
     number: "04",
-    title: "Serendipity Arts Festival",
-    date: "December",
-    description: "Three days at the Serendipity Arts Festival in Goa — an immersive experience connecting Fellows with the wider cultural ecosystem, artists, and audiences.",
+    title: "Phase II",
+    date: "Ecosystem & Region",
+    description: "A critical engagement with the field of arts and culture across South Asia. Six expert-led fireside conversations explore equity, sustainability, entrepreneurship, diplomacy, and the forces shaping our cultural ecosystems.",
+  }, 
+  {
+    number: "05",
+    title: "Phase III",
+    date: "Leadership & Futures",
+    description: "Leadership, future thinking, and the public articulation of each Fellow's inquiry, including three days at the Serendipity Arts Festival in Goa.",
   },
 ];
 

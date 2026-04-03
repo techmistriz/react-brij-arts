@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 const profiles = [
-  "Curators, Programme Managers & Cultural Strategists",
+  "Programme Managers & Cultural Strategists",
   "Cultural and Creative Producers",
   "Researchers, Writers & Critical Thinkers",
   "Designers, Architects & Spatial Practitioners",
@@ -24,7 +24,7 @@ const WhoShouldApply = () => {
           >
             <p className="label-text mb-6">Who Should Apply</p>
             <h2 className="editorial-subheading mb-6">
-              For mid-career practitioners moving toward cultural leadership
+              For mid-career practitioners moving towards cultural leadership
             </h2>
             <p className="text-lg text-muted-foreground font-body leading-relaxed">
               The fellowship is designed for those ready to take on leadership roles within 

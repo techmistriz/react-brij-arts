@@ -187,7 +187,7 @@ const Apply = () => {
                 <ul className="space-y-3 text-sm">
                   {[
                     "7+ years of sustained, active practice in any discipline",
-                    "Based in South Asia (India, Pakistan, Bangladesh, Sri Lanka, Nepal, Bhutan, or the Maldives)",
+                    "Based in India",
                     "Available for both compulsory in-person moments in Goa",
                     "Working in the arts, culture, law, medicine, technology, business, policy, education, journalism, community development, or any adjacent field",
                     "A genuine connection to the cultural sector",
@@ -239,7 +239,7 @@ const Apply = () => {
                 <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
                   <p>
                     Bursaries are available to individual applicants only and are funded by
-                    Serendipity Arts Foundation. Eight bursaries are available for the
+                    Serendipity Arts. Eight bursaries are available for the
                     inaugural cohort.
                   </p>
                   <p>

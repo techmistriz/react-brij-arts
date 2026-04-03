@@ -27,7 +27,7 @@ const individualFaq = [
     items: [
       {
         q: "What is the Brij Cultural Leaders Fellowship?",
-        a: "A nine-month leadership programme for mid-career cultural practitioners across South Asia, delivered by Serendipity Arts and led by Course Director Smriti Rajgarhia. The Fellowship brings together 12–15 practitioners for rigorous learning — across governance, financial stewardship, reputation management, crisis leadership, diplomacy, and team-building.",
+        a: "A nine-month leadership programme for mid-career cultural practitioners across India, delivered by Serendipity Arts and led by Course Director Smriti Rajgarhia. The Fellowship brings together 12–15 practitioners for rigorous learning — across governance, financial stewardship, reputation management, crisis leadership, diplomacy, and team-building.",
       },
       {
         q: "Is this a course or a degree?",
@@ -46,13 +46,13 @@ const individualFaq = [
         q: "Am I eligible?",
         a: "The Fellowship is for practitioners mid-career in culture — typically 8–20 years into the work. You should be currently active in your practice or organisation. There is no requirement for a specific academic qualification. What matters is the quality of your thinking and the seriousness of your commitment.",
       },
-      {
-        q: "What disciplines are eligible?",
-        a: "Visual arts, music, theatre, dance, craft, film and moving image, writing and literature, curatorial practice, cultural management and producing, and cross-disciplinary practice. If your work sits at the boundary of these, apply anyway and tell us why.",
-      },
+      // {
+      //   q: "What disciplines are eligible?",
+      //   a: "Visual arts, music, theatre, dance, craft, film and moving image, writing and literature, curatorial practice, cultural management and producing, and cross-disciplinary practice. If your work sits at the boundary of these, apply anyway and tell us why.",
+      // },
       {
         q: "Which countries are eligible?",
-        a: "For the inaugural cohort, practitioners based in South Asia — India, Pakistan, Bangladesh, Sri Lanka, Nepal, Bhutan, and the Maldives.",
+        a:"For the inaugural cohort, practitioners based in India are eligible"
       },
       {
         q: "Do I need to be employed by an organisation?",
@@ -64,10 +64,39 @@ const individualFaq = [
       },
     ],
   },
+  // {
+  //   title: "The Research Inquiry",
+  //   items: [
+  //     {
+  //       q: "What is The Question?",
+  //       a: "The live inquiry at the centre of your practice — something you are genuinely circling, that does not yet have clear language. It is the most important part of your application. It does not need to be resolved or fully formed. We are looking for its authenticity and aliveness.",
+  //     },
+  //     {
+  //       q: "What is the jury looking for?",
+  //       a: "Five things: the quality and maturity of your practice; your capacity for reflection and honest self-assessment; the authenticity of your Question; whether this is the right nine months for you; and what you will bring to the cohort.",
+  //     },
+  //   ],
+  // },
   {
-    title: "The Research Inquiry",
+    title: "Programme Structure",
     items: [
       {
+        q: "How much time does it require?",
+        a: "A maximum of six hours per week of structured engagement, plus two compulsory in-person moments: the opening residential (six days, June 2026) and the Serendipity Arts Festival (three days, December 2026).",
+      },
+      {
+        q: "What does the programme cover?",
+        a: "Three Phases across nine months. Phase I (June–July): self and context. Phase II (August–October): the ecosystem and structures. Phase III (November–March): leadership and futures. Running through all Phases: governance, financial stewardship, reputation management, crisis response, diplomacy, and team leadership.",
+      },
+      {
+        q: "What is the mentor relationship?",
+        a: "Every Fellow is matched with a senior mentor from the cultural sector. Matching happens at the end of the residential. One-to-one sessions are monthly and self-scheduled.",
+      },
+      {
+        q: "What do Fellows produce?",
+        a: "A leadership proposal — a developed piece of thinking about the work you want to do, the question that has shaped your nine months, and how you intend to act on it.",
+      },
+       {
         q: "What is The Question?",
         a: "The live inquiry at the centre of your practice — something you are genuinely circling, that does not yet have clear language. It is the most important part of your application. It does not need to be resolved or fully formed. We are looking for its authenticity and aliveness.",
       },
@@ -78,32 +107,11 @@ const individualFaq = [
     ],
   },
   {
-    title: "Programme Structure",
-    items: [
-      {
-        q: "How much time does it require?",
-        a: "A maximum of six hours per week of structured engagement, plus two compulsory in-person moments: the opening residential (six days, June 2026) and the Serendipity Arts Festival (three days, December 2026). The programme is designed for people who cannot step away from their work.",
-      },
-      {
-        q: "What does the programme cover?",
-        a: "Three phases across nine months. Phase I (June–July): self and context. Phase II (August–October): the ecosystem and structures. Phase III (November–March): leadership and futures. Running through all phases: governance, financial stewardship, reputation management, crisis response, diplomacy, and team leadership.",
-      },
-      {
-        q: "What is the mentor relationship?",
-        a: "Every Fellow is matched with a senior mentor from the cultural sector. Matching happens at the end of the residential. One-to-one sessions are monthly and self-scheduled. The relationship is confidential.",
-      },
-      {
-        q: "What do Fellows produce?",
-        a: "A leadership proposal — a developed piece of thinking about the work you want to do, the question that has shaped your nine months, and how you intend to act on it. It is a working document: honest, specific, and yours.",
-      },
-    ],
-  },
-  {
     title: "Fees & Bursaries",
     items: [
       {
         q: "What does the Fellowship cost?",
-        a: "The Fellowship fee is ₹5,00,000. This covers the full nine-month programme, both in-person residential moments, accommodation, all online sessions, mentor one-to-ones, and programme materials. It does not cover travel.",
+        a: "The Fellowship fee is ₹5,00,000. This covers the full nine-month programme, both in-person residential moments, accommodation, all online sessions, mentor one-to-ones, and programme materials. The fee covers travel costs. However, Serendipity Arts is not responsible for arranging Visa permits, they must be pursued independently by the applicant.",
       },
       {
         q: "I cannot afford the fee. Can I still apply?",
@@ -115,7 +123,7 @@ const individualFaq = [
       },
       {
         q: "How do I apply for a bursary?",
-        a: 'In Section H of the individual application form, simply check the box labelled "I would like to apply for a bursary" and attach any supporting documentation. Your bursary request will be reviewed independently by the programme team after the jury has completed its evaluation. The bursary level awarded will be communicated to you via email. Applying for a bursary has no bearing on your assessment — the jury never sees bursary requests.',
+        a: 'In Section H of the individual application form, simply check the box labelled "I would like to apply for a bursary" attach any supporting document. Your bursary request will be reviewed independently by the bursary committee after the jury has completed its evaluation. The bursary level awarded will be communicated to you via email. Applying for a bursary has no bearing on your assessment — the jury never sees bursary requests.',
       },
     ],
   },
@@ -124,7 +132,7 @@ const individualFaq = [
     items: [
       {
         q: "Do I need to come to Goa?",
-        a: "Yes, for two moments. The opening residential (20–25 June 2026) and the Serendipity Arts Festival (December 2026). Accommodation is covered. Travel is the Fellow's responsibility unless covered by bursary.",
+        a: "Yes, for two moments. The opening residential (20–25 June 2026) and the Serendipity Arts Festival (December 2026). Accommodation and travel is covered in the fee.",
       },
       {
         q: "How will the online sessions be conducted?",
@@ -132,15 +140,15 @@ const individualFaq = [
       },
       {
         q: "Can I apply if English is not my first language?",
-        a: "Yes. The programme is conducted in English, but we are not selecting for literary fluency. Write clearly and honestly.",
+        a: "Yes. The programme is conducted in English but selection is not based on literary fluency. The fellow should have a working knowledge of English.",
       },
       {
         q: "Will there be an interview?",
-        a: "Shortlisted candidates may be invited for a conversation with the selection panel — a chance for us to understand your thinking more fully.",
+        a: "Shortlisted candidates may be invited for a conversation with the selection jury — a chance for us to understand your thinking more fully.",
       },
       {
         q: "I have more questions.",
-        a: "Write to us at tbf@serendipityarts.org — we will respond within five working days.",
+        a: "Write to us at tbclf@serendipityarts.org — we will respond within five working days.",
       },
     ],
   },
@@ -152,11 +160,11 @@ const institutionFaq = [
     items: [
       {
         q: "What does a nominated Fellow bring back to the institution?",
-        a: "A Fellow returns as a sharper, better-connected cultural leader — with developed frameworks for governance, financial stewardship, strategic communication, and team leadership. The institution gains a practitioner who has spent nine months thinking deeply about leadership alongside peers from across South Asia.",
+        a: "A Fellow returns as a sharper, better-connected cultural leader — with developed frameworks for governance, financial stewardship, strategic communication, and team leadership. The institution gains a practitioner who has spent nine months thinking deeply about leadership alongside peers from across India.",
       },
       {
         q: "Why should our institution invest in this?",
-        a: "The Fellowship provides leadership development that the cultural sector lacks. By nominating a practitioner, your institution invests directly in the capacity of your team — and in the wider ecosystem of cultural leadership across South Asia.",
+        a: "The Fellowship provides leadership development that the cultural sector lacks. By nominating a practitioner, your institution invests directly in the capacity of your team — and in the wider ecosystem of cultural leadership across India.",
       },
     ],
   },
@@ -195,7 +203,7 @@ const institutionFaq = [
     items: [
       {
         q: "What is the institution responsible for?",
-        a: "Paying the Fellowship fee on invoice, covering the Fellow's travel to both in-person moments, and releasing the Fellow for up to six hours per week of structured engagement. The institution does not direct the Fellow's learning.",
+        a: "Paying the Fellowship fee on invoice, covering the Fellow's travel to both in-person moments, and releasing the Fellow for up to six hours per week of structured engagement.",
       },
       {
         q: "Does nomination guarantee selection?",
@@ -203,7 +211,7 @@ const institutionFaq = [
       },
       {
         q: "How do we begin?",
-        a: "Contact us at tbf@serendipityarts.org to discuss the Nominating Partner Agreement and begin the process.",
+        a: "Contact us at tbclf@serendipityarts.org to discuss the Nominating Partner Agreement and begin the process.",
       },
     ],
   },
@@ -261,7 +269,6 @@ const Faq = () => {
   });
 
   const onSubmit = async (data: ContactFormData) => {
-    // console.log(data);
     try {
       const res = await submitContactForm(data);
 

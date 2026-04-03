@@ -11,22 +11,22 @@ const blocks = [
   {
     number: "02",
     title: "Mentorship",
-    description: "Every Fellow is matched with one senior mentor from the cultural sector for the full nine months. Monthly one-to-one sessions — confidential, self-scheduled, and driven by the Fellow.",
+    description: "Every Fellow is matched with one senior mentor from the cultural sector for the full nine months. Monthly one-to-one sessions — self-scheduled, and driven by the Fellow.",
   },
   {
     number: "03",
     title: "Peer Cohort",
-    description: "A carefully selected cohort of 10–15 Fellows — exceptional mid-career practitioners and professionals from across South Asia — a network built through nine months of genuine shared work.",
+    description: "A carefully selected cohort of 10–15 Fellows — exceptional mid-career practitioners and professionals from across India — a network built through nine months of genuine shared work.",
   },
   {
     number: "04",
-    title: "Institutional Exposure",
+    title: "Programme Engagement",
     description: "Direct engagement with how cultural organisations operate — governance, financial stewardship, reputation management, crisis response, diplomacy, and team leadership.",
   },
   {
     number: "05",
     title: "The Question",
-    description: "Fellows develop a Question Proposal: a written articulation of the intellectual inquiry they are pursuing and why it matters — a compass for the work ahead. The question belongs entirely to the Fellow.",
+    description: "Fellows develop a Question Proposal ‘in Phase III’ : a written articulation of the intellectual inquiry they are pursuing and why it matters — a compass for the work ahead. The question belongs entirely to the Fellow.",
   },
 ];
 

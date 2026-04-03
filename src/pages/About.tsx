@@ -15,7 +15,7 @@ const sections = [
     image: aboutSlider,
     imagePosition: "right" as const,
     content: [
-      "The Brij Cultural Leaders Fellowship is a nine-month leadership development programme for mid-career cultural practitioners and cross-sector professionals across South Asia — the first programme of its kind in the region. It is delivered by Serendipity Arts Foundation.",
+      "The Brij Cultural Leaders Fellowship is a nine-month leadership development programme for mid-career cultural practitioners and cross-sector professionals across India — delivered by Serendipity Arts.",
       "The Fellowship is built around a single conviction: the most important thing a leader can develop is not a product, but a question. A genuine intellectual inquiry rooted in their own practice, context, and curiosity. Fellows spend nine months developing that question — through structured learning, expert dialogue, peer exchange, and deep reflection. They leave with a Question Proposal: a written articulation of the inquiry they are pursuing and why it matters — a compass for the work ahead.",
     ],
   },
@@ -25,7 +25,7 @@ const sections = [
     image: aboutCraft,
     imagePosition: "left" as const,
     content: [
-      "Serendipity Arts Foundation exists at the intersection of arts, education, and institution-building. Its flagship Serendipity Arts Festival — held annually in Goa — is one of South Asia's most significant cultural gatherings, bringing together practitioners, thinkers, and audiences across disciplines and geographies.",
+      "Serendipity Arts exists at the intersection of arts, education, and institution-building. Its flagship Serendipity Arts Festival — held annually in Goa — is one of India's most significant cultural gatherings, bringing together practitioners, thinkers, and audiences across disciplines and geographies.",
       "The Fellowship is delivered by SAF and culminates at the Festival — where Fellows present their work publicly at the Work in Progress Symposium. The Festival is not a backdrop. It is part of the curriculum.",
     ],
   },
@@ -48,7 +48,7 @@ const sections = [
     content: [
       "A six-day residential in Goa to open the Fellowship — accommodation, meals, and all programme costs included. A senior mentor from the cultural sector, matched individually, for monthly one-to-one sessions across the full nine months.",
       "A psychometric assessment completed before arrival, used to deepen self-awareness and inform mentor matching. Six expert-led fireside conversations with practitioners, thinkers, and leaders from across the cultural sector. Weekly live sessions with the Course Director.",
-      "Three days at the Serendipity Arts Festival, Goa — full Festival accreditation, accommodation, and meals included. Curated reading materials and a peer cohort of exceptional mid-career practitioners from across South Asia.",
+      "Three days at the Serendipity Arts Festival, Goa — full Festival accreditation, accommodation, and meals included. Curated reading materials and a peer cohort of exceptional mid-career practitioners from across India.",
     ],
   },
   {
@@ -60,6 +60,7 @@ const sections = [
       "Phase I: Self & Context (June–July) — Opens with the six-day residential in Goa. Community building, personal reflection, strengths work, storytelling, and network mapping. Fellows arrive having completed a short pre-residential preparation pack. This is the foundation on which everything else is built.",
       "Phase II: Ecosystem & Region (August–October) — Six expert-led fireside conversations expanding each Fellow's lens to the wider cultural field. Key themes include cultural theory, cultural equity, regenerative practices, cultural entrepreneurship, cultural diplomacy, and crisis management.",
       "Phase III: Leadership & Futures (November–March) — Leadership, future thinking, and the public articulation of each Fellow's inquiry — including three days at the Serendipity Arts Festival. The programme closes with the submission of the final Question Proposal (1,500–2,500 words).",
+      " The programme is subject to change at the discretion of Course Director"
     ],
   },
   {

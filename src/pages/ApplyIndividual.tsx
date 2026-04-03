@@ -172,7 +172,6 @@ const ApplyIndividual = () => {
 
   /* Save Stage 1 → draft row */
   const onStage1Submit = async (data: Stage1Data) => {
-    // console.log(data);
     setStage1Snapshot(data); // store locally
     setStage(2);
     window.scrollTo(0, 0);
@@ -199,9 +198,6 @@ const ApplyIndividual = () => {
         finalData,
         bursaryChecked ? bursaryFile! : undefined,
       );
-
-      // console.log(res);
-      // console.log(finalData);
 
       //  Save auth data
       login(res.data.token, res.data.user);

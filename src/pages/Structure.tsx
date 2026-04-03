@@ -15,12 +15,12 @@ const phases = [
     date: "June–July 2026",
     description: "The foundational phase focuses on personal reflection, self-awareness, research orientation, and goal setting. The Fellowship opens with the six-day in-person residential on 20 June 2026 — the moment the cohort comes together for the first time. Fellows arrive having completed a short pre-residential preparation pack sent two weeks before. Phase I then continues online through July.",
     themes: [
-      "Completed the pre-residential preparation and arrived at the residential with a draft Personal Vision Statement, initial Strengths & Resources Map, and psychometric assessment done",
-      "Built a genuine peer community and established shared norms for learning and collaboration",
-      "Completed a Network and Ecosystem Mapping exercise and begun to understand their position in the cultural field",
-      "Established personalised learning goals to guide the rest of the Fellowship",
-      "Been introduced to the question-led approach and begun formulating an initial research question",
-      "Submitted their Phase I Reflection",
+     "Are completing the pre-residential preparation and arriving at the residential with a draft Personal Vision Statement, initial Strengths & Resources Map, and psychometric assessment done.",
+     "Are building a genuine peer community and establishing shared norms for learning and collaboration.",
+     "Are completing a Network and Ecosystem Mapping exercise and beginning to understand their position in the cultural field.",
+     "Are establishing personalised learning goals to guide the rest of the Fellowship.",
+     "Are being introduced to the question-led approach and beginning to formulate an initial research question.",
+     "Are submitting their Phase I Reflection."
     ],
   },
   {
@@ -57,7 +57,7 @@ const CollapsibleThemes = ({ themes, label }: { themes: string[]; label: string 
     <Accordion type="single" collapsible>
       <AccordionItem value={`themes-${label}`} className="border-b border-border">
         <AccordionTrigger className="text-left text-sm font-bold py-3 hover:no-underline font-heading hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all">
-          Key Themes
+          This Phase Focuses On
         </AccordionTrigger>
         <AccordionContent className="pb-4">
           <ul className="space-y-2">

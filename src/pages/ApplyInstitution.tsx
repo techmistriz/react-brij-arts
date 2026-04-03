@@ -141,7 +141,6 @@ const ApplyInstitution = () => {
   const expected_fellowship_impact = watch("expected_fellowship_impact");
 
  const onSubmit = async (data: FormData) => {
-  // console.log("form2", data);
   setIsSubmitting(true);
 
   try {
@@ -157,11 +156,9 @@ const ApplyInstitution = () => {
       partner_agreement_confirmation: data.partner_agreement_confirmation ? 1 : 0,
     };
 
-    // console.log("FINAL PAYLOAD:", finalData);
 
     const response = await submitApplication(finalData);
 
-    // console.log("API response:", response);
 
     toast({ title: "Nomination submitted successfully", className:"font-semibold" });
     navigate("/submission-confirmation");

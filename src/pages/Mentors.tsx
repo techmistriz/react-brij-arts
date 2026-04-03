@@ -15,7 +15,7 @@ const mentors = [
     name: "Mentor Name",
     title: "Senior Curator",
     organisation: "International Arts Foundation",
-    bio: "Specialises in interdisciplinary curatorial practice, with a focus on South Asian contemporary art and cross-cultural dialogue.",
+    bio: "Specialises in interdisciplinary curatorial practice, with a focus on India contemporary art and cross-cultural dialogue.",
     image: null,
   },
   {
