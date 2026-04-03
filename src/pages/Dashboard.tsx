@@ -6,6 +6,7 @@ import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
+import { getApplicationStatus, mapStatus } from "@/lib/api/statusApi";
 
 interface Result {
   track: string;
@@ -54,70 +55,40 @@ const Dashboard = () => {
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
-  const handleSearch = async () => {
-    const q = query.trim();
-    if (!q) return;
-    setLoading(true);
-    setSearched(true);
-    const all: Result[] = [];
 
-    // Route 1
-    const { data: apps } = await supabase
-      .from("applications")
-      .select("application_id, first_name, last_name, status, created_at")
-      .or(`email.ilike.%${q}%,application_id.ilike.%${q}%`);
+const handleSearch = async () => {
+  const q = query.trim();
+  if (!q) return;
 
-    if (apps) {
-      apps.forEach((a) =>
-        all.push({
-          track: "Route 1 — Individual",
-          id: a.application_id,
-          name: `${a.first_name} ${a.last_name}`,
-          status: a.status,
-          date: new Date(a.created_at).toLocaleDateString(),
-        })
-      );
+  setLoading(true);
+  setSearched(true);
+
+  try {
+    const res = await getApplicationStatus(q);
+
+    const item = res?.data; // ✅ IMPORTANT FIX
+
+    if (!item) {
+      setResults([]);
+      return;
     }
 
-    // Route 2
-    const { data: noms } = await supabase
-      .from("nominations")
-      .select("nomination_id, nominee_first_name, nominee_last_name, institution_name, status, created_at")
-      .or(`nominee_email.ilike.%${q}%,contact_email.ilike.%${q}%,nomination_id.ilike.%${q}%`);
-
-    if (noms) {
-      noms.forEach((n) =>
-        all.push({
-          track: "Route 2 — Institutional",
-          id: n.nomination_id,
-          name: `${n.nominee_first_name} ${n.nominee_last_name} (${n.institution_name})`,
-          status: n.status,
-          date: new Date(n.created_at).toLocaleDateString(),
-        })
-      );
-    }
-
-    // Route 3
-    const { data: t3 } = await supabase
-      .from("track3_applications" as any)
-      .select("application_id, first_name, last_name, status, created_at")
-      .or(`email.ilike.%${q}%,application_id.ilike.%${q}%`);
-
-    if (t3) {
-      (t3 as any[]).forEach((a) =>
-        all.push({
-          track: "Route 3 — Nominated",
-          id: a.application_id,
-          name: `${a.first_name} ${a.last_name}`,
-          status: a.status,
-          date: new Date(a.created_at).toLocaleDateString(),
-        })
-      );
-    }
-
-    setResults(all);
+    setResults([
+      {
+        track: "Route 1 — Individual",
+        id: item.id,
+        name: item.name,
+        status: mapStatus(item.status),
+        date: new Date(item.created_at).toLocaleDateString(),
+      },
+    ]);
+  } catch (error: any) {
+    console.error("Error:", error?.response || error);
+    setResults([]);
+  } finally {
     setLoading(false);
-  };
+  }
+};
 
   const renderTimeline = (result: Result) => {
     const isNomination = result.track.includes("Route 2");

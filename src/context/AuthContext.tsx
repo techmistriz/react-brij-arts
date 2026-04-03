@@ -30,20 +30,25 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
 
   //  Auto login on refresh
-  useEffect(() => {
-    const token = sessionStorage.getItem("token");
-    const storedUser = sessionStorage.getItem("user");
+ useEffect(() => {
+  const token = localStorage.getItem("token");
+  const storedUser = localStorage.getItem("user");
 
-    if (token && storedUser) {
+  if (token && storedUser) {
+    try {
       setIsLoggedIn(true);
       setUser(JSON.parse(storedUser));
+    } catch {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
     }
-  }, []);
+  }
+}, []);
 
   //  Login function
   const login = (token: string, user: User) => {
-    sessionStorage.setItem("token", token);
-    sessionStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(user));
 
     setIsLoggedIn(true);
     setUser(user);
@@ -51,10 +56,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   //  Logout function
   const logout = () => {
-    sessionStorage.clear();
-    setIsLoggedIn(false);
-    setUser(null);
-  };
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+
+  setIsLoggedIn(false);
+  setUser(null);
+};
 
   return (
     <AuthContext.Provider value={{ isLoggedIn, user, login, logout }}>

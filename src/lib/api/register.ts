@@ -24,7 +24,6 @@ export const submitApplication = async (data: any, bursaryFile?: File) => {
   } catch (error: any) {
     const res = error?.response?.data;
 
-    // console.log("API ERROR:", res);
 
     let message = "Something went wrong";
 
@@ -47,8 +46,6 @@ export const submitApplication2 = async (id: string, data: any) => {
     return response.data;
   } catch (error: any) {
     const res = error?.response?.data;
-
-    // console.log("API ERROR:", res);
 
     let message = "Something went wrong";
 

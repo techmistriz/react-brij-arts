@@ -12,15 +12,13 @@ type LoginResponse = {
 };
 
 export const loginUser = async (
-  payload: LoginPayload,
-): Promise<LoginResponse> => {
+  payload: LoginPayload
+): Promise<{ token: string; user: any }> => {
   try {
     const res = await axiosInstance.post("/auth/login", payload);
 
-    return res.data;
+    return res.data.data; //  return only inner data
   } catch (error: any) {
-    console.error("Login API error:", error);
-
     throw new Error(error?.response?.data?.message || "Login failed");
   }
 };
