@@ -209,9 +209,7 @@ const ApplyInstitution = () => {
                 <p className="label-text mb-3 text-brij-orange">Route 2</p>
                 <h1 className="editorial-subheading mb-4">Nomination by the Institution</h1>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  This form is completed by the nominating institution, independently of the
-                  nominee. Do not complete this form together with the nominee or share your
-                  answers before submission.
+              This form is completed by the nominating institution, independently of the nominee. Institutions can nominate one fellow. 
                 </p>
               </div>
 
@@ -236,15 +234,15 @@ const ApplyInstitution = () => {
                   <li>• Travel to Serendipity Arts Festival, Goa — December 2026</li>
                 </ul>
                 <p className="text-xs text-white/70 mt-4 pt-3 border-t border-white/20 relative z-10">
-                  If your nominee is not selected, no charge is made.
+                 While the Bursaries are available for our individual applicants exclusively, institutions seeking financial support with their nominations can contact us directly. If your nominee is not selected, no charge is made. Nominees are accepted on a first come first serve basis.
                 </p>
               </div>
 
               <div className="border-t border-border pt-6">
                 <p className="text-xs text-muted-foreground">
                   Questions?{" "}
-                  <a href="mailto:tbf@serendipityarts.org" className="underline hover:text-foreground transition-colors">
-                    tbf@serendipityarts.org
+                  <a href="mailto:tbclf@serendipityarts.org" className="underline hover:text-foreground transition-colors">
+                    tbclf@serendipityarts.org
                   </a>
                 </p>
               </div>
@@ -376,7 +374,7 @@ const ApplyInstitution = () => {
                     <div>
                       <Label>Why are you nominating this person, and why now? *</Label>
                       <p className="text-xs text-muted-foreground mt-1 mb-1.5">
-                        The jury looks for specificity — what do you know that a form cannot show?
+                        {/* The jury looks for specificity — what do you know that a form cannot show? */}
                       </p>
                       <WordCountTextarea
                         value={nomination_reason}
@@ -479,7 +477,7 @@ const ApplyInstitution = () => {
                   </h2>
                   <div className="bg-muted/50 border border-border p-4 mb-5 text-sm text-muted-foreground leading-relaxed">
                     Fellowship fee: ₹5,00,000 — invoiced on confirmation of the Fellow's place,
-                    prior to 20 June 2026. If the nominee is not selected, no charge is made.
+                    prior to 20 May 2026. If the nominee is not selected, no charge is made.
                     If the Fellow withdraws within 8 weeks of the programme start date, the
                     institution remains liable for the full fee.
                   </div>
@@ -566,10 +564,7 @@ const ApplyInstitution = () => {
                 {/* Submit */}
                 <div className="border-t border-border pt-8">
                   <p className="text-xs text-muted-foreground mb-6">
-                    By submitting this nomination, you are confirming the institution's commitment to fund
-                    the Fellowship fee, cover travel to both Goa moments, and release the Fellow to participate
-                    fully. The nominee's form must also be received. The application is only considered
-                    complete when both forms are in.
+                 By submitting this nomination, you are confirming the institution’s commitment to fund the Fellowship fee, cover travel to both Goa moments, and release the Fellow to participate fully. The nominee’s form must also be received. The nomination is only considered complete when both forms are in. 
                   </p>
                   <button
                     type="submit"

@@ -51,7 +51,7 @@ const Apply = () => {
           >
             <p className="label-text mb-4">Open Call</p>
             <h1 className="editorial-subheading mb-6">
-              Apply to the Brij Cultural Leaders Fellowship
+              Apply to THE BRIJ Cultural Leaders Fellowship
             </h1>
             <p className="text-muted-foreground max-w-3xl leading-relaxed">
               The Fellowship draws from two entry routes. The difference is in how Fellows enter and how participation is funded. Once selected, all Fellows share the same curriculum, mentors, and cohort experience.
@@ -93,7 +93,7 @@ const Apply = () => {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Places</span>
-                      <span className="font-medium">10 Fellows</span>
+                      <span className="font-medium">8 Fellows</span>
                     </div>
                   </div>
                   <span className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-brij-orange group-hover:text-white group-hover:gap-3 transition-all">
@@ -187,7 +187,7 @@ const Apply = () => {
                 <ul className="space-y-3 text-sm">
                   {[
                     "7+ years of sustained, active practice in any discipline",
-                    "Based in India",
+                    "Indian Nationals only, based in India",
                     "Available for both compulsory in-person moments in Goa",
                     "Working in the arts, culture, law, medicine, technology, business, policy, education, journalism, community development, or any adjacent field",
                     "A genuine connection to the cultural sector",
@@ -210,10 +210,10 @@ const Apply = () => {
                     </Link>{" "}
                     or contact{" "}
                     <a
-                      href="mailto:tbf@serendipityarts.org"
+                      href="mailto:tbclf@serendipityarts.org"
                       className="underline hover:text-foreground transition-colors"
                     >
-                      tbf@serendipityarts.org
+                      tbclf@serendipityarts.org
                     </a>
                   </p>
                   <a
@@ -243,10 +243,7 @@ const Apply = () => {
                     inaugural cohort.
                   </p>
                   <p>
-                    Every individual applicant is invited to submit a bursary application
-                    alongside their Fellowship application. The bursary section is seen only
-                    by the Course Director and Programme Manager — never by the jury. All
-                    applications are assessed on merit alone.
+                   Every individual applicant is invited to submit a bursary application alongside their Fellowship application. The bursary section is seen only by the Bursary Committee – never by the jury. All applications are assessed on merit alone. 
                   </p>
                   <div className="border border-border p-4 mt-4">
                     <p className="font-medium text-foreground mb-3">Bursary Levels</p>

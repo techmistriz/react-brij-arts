@@ -14,7 +14,7 @@ const ApplyCtaSection = () => {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           <h2 className="editorial-subheading text-white mb-6">
-            Applications for the Brij Cultural Leaders Fellowship are now open.
+            Applications for THE BRIJ Cultural Leaders Fellowship are now open.
           </h2>
           <p className="text-white/75 text-lg mb-10 max-w-xl mx-auto font-body">
             Apply through our open call to join the next cohort of cultural leaders.

@@ -15,12 +15,12 @@ const phases = [
     date: "June–July 2026",
     description: "The foundational phase focuses on personal reflection, self-awareness, research orientation, and goal setting. The Fellowship opens with the six-day in-person residential on 20 June 2026 — the moment the cohort comes together for the first time. Fellows arrive having completed a short pre-residential preparation pack sent two weeks before. Phase I then continues online through July.",
     themes: [
-     "Are completing the pre-residential preparation and arriving at the residential with a draft Personal Vision Statement, initial Strengths & Resources Map, and psychometric assessment done.",
-     "Are building a genuine peer community and establishing shared norms for learning and collaboration.",
-     "Are completing a Network and Ecosystem Mapping exercise and beginning to understand their position in the cultural field.",
-     "Are establishing personalised learning goals to guide the rest of the Fellowship.",
-     "Are being introduced to the question-led approach and beginning to formulate an initial research question.",
-     "Are submitting their Phase I Reflection."
+     "Completing the pre-residential preparation and arriving at the residential with a draft Personal Vision Statement, initial Strengths & Resources Map, and psychometric assessment completed.",
+     "Building a genuine peer community and establishing shared norms for learning and collaboration.",
+     "Completing a Network and Ecosystem Mapping exercise and beginning to understand one’s position in the cultural field.",
+     "Establishing personalised learning goals to guide the rest of the Fellowship.",
+     "Being introduced to the question-led approach and beginning to formulate an initial research inquiry.",
+     "Submitting the Phase I Reflection."
     ],
   },
   {
@@ -47,7 +47,7 @@ const phases = [
       "Leading creative teams — high-performing teams, psychometric insights, and leadership typologies",
       "Futures thinking — technology, innovation, and the cultural sector of tomorrow",
       "Legal and governance frameworks — IP, arts law, institutional compliance",
-      "The Question — from question to abstract to written proposal",
+      "The Question - from question to abstract to written enquiry proposal",
     ],
   },
 ];

@@ -16,7 +16,7 @@ const HeroSection = () => {
         >
           <img
             src={tbclfLogo}
-            alt="The Brij Cultural Leaders Fellowship"
+            alt="THE BRIJ Cultural Leaders Fellowship"
             className="h-20 md:h-28 lg:h-36 mb-6 md:mb-8"
           />
 

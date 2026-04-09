@@ -289,9 +289,8 @@ const ApplyIndividual = () => {
                   supplement.
                 </p>
                 <p className="text-xs text-white/70 mb-3 relative z-10">
-                  Applying for a bursary has no impact on how your application
-                  is assessed. Bursary decisions are made only after the jury
-                  has completed its evaluation.
+                 Applying for a bursary has no impact on how your application is assessed. Bursary decisions are made only after the jury has completed its evaluation. 
+If you are a mid-career professional working as a full time employee at an institution, we encourage you to approach your institution to nominate you. 
                 </p>
                 <Link
                   to="/bursary"
@@ -310,10 +309,10 @@ const ApplyIndividual = () => {
                 <p className="text-xs text-muted-foreground mt-3">
                   Questions?{" "}
                   <a
-                    href="mailto:tbf@serendipityarts.org"
+                    href="mailto:tbclf@serendipityarts.org"
                     className="underline hover:text-foreground transition-colors"
                   >
-                    tbf@serendipityarts.org
+                    tbclf@serendipityarts.org
                   </a>
                 </p>
               </div>

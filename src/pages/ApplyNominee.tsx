@@ -203,10 +203,10 @@ const ApplyNominee = () => {
             <h1 className="text-xl font-bold mb-4">Application Unavailable</h1>
             <p className="text-muted-foreground text-sm mb-6">{error}</p>
             <a
-              href="mailto:tbf@serendipityarts.org"
+              href="mailto:tbclf@serendipityarts.org"
               className="text-sm underline hover:text-foreground transition-colors"
             >
-              Contact tbf@serendipityarts.org
+              Contact tbclf@serendipityarts.org
             </a>
           </div>
         </main>
@@ -236,7 +236,7 @@ const ApplyNominee = () => {
                   <span className="text-foreground font-medium">
                     {nominationData?.institutionName}
                   </span>{" "}
-                  for the Brij Cultural Leaders Fellowship.
+                  for THE BRIJ Cultural Leaders Fellowship.
                 </p>
                 <p className="text-sm text-muted-foreground leading-relaxed mt-3">
                   Please complete the application below. Your responses are confidential —
@@ -252,8 +252,8 @@ const ApplyNominee = () => {
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   Some fields have been pre-filled from your nomination and are locked.
                   If any information is incorrect, please contact{" "}
-                  <a href="mailto:tbf@serendipityarts.org" className="underline hover:text-foreground transition-colors">
-                    tbf@serendipityarts.org
+                  <a href="mailto:tbclf@serendipityarts.org" className="underline hover:text-foreground transition-colors">
+                    tbclf@serendipityarts.org
                   </a>.
                 </p>
               </div>
@@ -274,8 +274,8 @@ const ApplyNominee = () => {
                 </p>
                 <p className="text-xs text-muted-foreground mt-2">
                   Questions?{" "}
-                  <a href="mailto:tbf@serendipityarts.org" className="underline hover:text-foreground transition-colors">
-                    tbf@serendipityarts.org
+                  <a href="mailto:tbclf@serendipityarts.org" className="underline hover:text-foreground transition-colors">
+                    tbclf@serendipityarts.org
                   </a>
                 </p>
               </div>

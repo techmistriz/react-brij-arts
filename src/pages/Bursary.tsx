@@ -46,7 +46,7 @@ const Bursary = () => {
                       Bursaries are available to individual applicants only (Route 1) and are funded by Serendipity Arts. Eight bursaries are available for the inaugural cohort.
                     </p>
                     <p className="text-muted-foreground leading-relaxed">
-                      Every individual applicant is invited to submit a bursary application alongside their Fellowship application, responding to a set of financial need questions. The bursary section of the application is seen only by the Course Director and Programme Manager — never by the jury.
+                      Every individual applicant is invited to submit a bursary application alongside their Fellowship application, responding to a set of financial need questions. The bursary section of the application is seen only by Bursary Committee – never by the jury.
                     </p>
                     <p className="text-muted-foreground leading-relaxed">
                       All applications are assessed independently, with no knowledge of whether an applicant has applied for a bursary or at what level.
@@ -170,10 +170,10 @@ const Bursary = () => {
                         <span className="text-brij-orange mt-0.5">•</span>
                         <span>A Fellow who accepts a bursary and subsequently withdraws from the programme without exceptional cause may be asked to return a portion of the bursary. This will be mentioned in in the Fellow Agreement.</span>
                       </li>
-                      <li className="flex items-start gap-3">
+                      {/* <li className="flex items-start gap-3">
                         <span className="text-brij-orange mt-0.5">•</span>
                         <span>If a bursary recipient's financial circumstances change materially before the programme begins, they are expected to declare this to the Course Director. The bursary will not be revised downward, but a waiver must be agreed.</span>
-                      </li>
+                      </li> */}
                       <li className="flex items-start gap-3">
                         <span className="text-brij-orange mt-0.5">•</span>
                         <span>Institutional nominees (Route 2) are not eligible for bursaries. The institution covers the fee.</span>
@@ -203,7 +203,7 @@ const Bursary = () => {
                     </span>
                   </Link>
                   <p className="text-xs text-muted-foreground mt-4">
-                    Questions? <a href="mailto:tbf@serendipityarts.org" className="underline hover:text-foreground transition-colors">tbf@serendipityarts.org</a>
+                    Questions? <a href="mailto:tbclf@serendipityarts.org" className="underline hover:text-foreground transition-colors">tbclf@serendipityarts.org</a>
                   </p>
                 </div>
               </motion.div>

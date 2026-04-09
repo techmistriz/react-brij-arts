@@ -13,7 +13,7 @@ const SubmissionConfirmation = () => {
           </div>
           <h1 className="editorial-subheading mb-4">Application Submitted</h1>
           <p className="body-large text-muted-foreground mb-4">
-            Thank you for applying to the Brij Cultural Leaders Fellowship. 
+            Thank you for applying to THE BRIJ Cultural Leaders Fellowship. 
             Your application is now under review by the selection committee 
             at Serendipity Arts.
           </p>

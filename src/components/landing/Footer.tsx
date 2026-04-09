@@ -11,7 +11,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-12">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <img src={brijLogo} alt="The Brij" className="h-6" />
+              <img src={brijLogo} alt="THE BRIJ" className="h-6" />
               <span className="text-brij-gray text-lg font-light select-none">|</span>
               <img src={serendipityLogo} alt="Serendipity Arts" className="h-8" />
             </div>
@@ -30,14 +30,14 @@ const Footer = () => {
 
           <div className="flex flex-col gap-3">
             <p className="label-text mb-2">Ecosystem</p>
-            <a href="https://thebrij.world" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors font-body">The Brij</a>
+            <a href="https://thebrij.world" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors font-body">THE BRIJ</a>
             <a href="https://serendipityarts.org" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors font-body">Serendipity Arts</a>
           </div>
         </div>
 
         <div className="mt-16 pt-8 border-t border-border">
           <p className="text-xs text-muted-foreground font-body">
-            © {new Date().getFullYear()} The Brij Cultural Leaders Fellowship. All rights reserved.
+            © {new Date().getFullYear()} THE BRIJ Cultural Leaders Fellowship. All rights reserved.
           </p>
         </div>
       </div>

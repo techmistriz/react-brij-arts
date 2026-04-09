@@ -28,7 +28,7 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="flex items-center justify-between px-5 md:px-12 lg:px-24 py-3 md:py-4">
         <Link to="/" className="flex items-center gap-3 md:gap-4">
-          <img src={brijLogo} alt="The Brij" className="h-5 md:h-7" />
+          <img src={brijLogo} alt="THE BRIJ" className="h-5 md:h-7" />
           <span className="text-brij-gray text-lg font-light select-none">
             |
           </span>

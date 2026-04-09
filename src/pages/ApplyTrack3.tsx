@@ -347,10 +347,10 @@ const ApplyTrack3 = () => {
                 <p className="text-xs text-muted-foreground mt-3">
                   Questions?{" "}
                   <a
-                    href="mailto:tbf@serendipityarts.org"
+                    href="mailto:tbclf@serendipityarts.org"
                     className="underline hover:text-foreground transition-colors"
                   >
-                    tbf@serendipityarts.org
+                    tbclf@serendipityarts.org
                   </a>
                 </p>
               </div>

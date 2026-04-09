@@ -26,7 +26,7 @@ const individualFaq = [
     title: "The Fellowship",
     items: [
       {
-        q: "What is the Brij Cultural Leaders Fellowship?",
+        q: "What is THE BRIJ Cultural Leaders Fellowship?",
         a: "A nine-month leadership programme for mid-career cultural practitioners across India, delivered by Serendipity Arts and led by Course Director Smriti Rajgarhia. The Fellowship brings together 12–15 practitioners for rigorous learning — across governance, financial stewardship, reputation management, crisis leadership, diplomacy, and team-building.",
       },
       {
@@ -52,7 +52,7 @@ const individualFaq = [
       // },
       {
         q: "Which countries are eligible?",
-        a:"For the inaugural cohort, practitioners based in India are eligible"
+        a:"For the inaugural cohort, Indian Nationals are eligible"
       },
       {
         q: "Do I need to be employed by an organisation?",
@@ -94,11 +94,11 @@ const individualFaq = [
       },
       {
         q: "What do Fellows produce?",
-        a: "A leadership proposal — a developed piece of thinking about the work you want to do, the question that has shaped your nine months, and how you intend to act on it.",
+        a: "Research Inquiry proposal – a developed piece of thinking about the work you want to do, the question that has shaped your nine months, and how you intend to act on it.",
       },
        {
         q: "What is The Question?",
-        a: "The live inquiry at the centre of your practice — something you are genuinely circling, that does not yet have clear language. It is the most important part of your application. It does not need to be resolved or fully formed. We are looking for its authenticity and aliveness.",
+        a: "The research inquiry at the centre of your practice — something you are genuinely circling, that does not yet have clear language. It is the most important part of your application. It does not need to be resolved or fully formed. We are looking for its authenticity and aliveness.",
       },
       {
         q: "What is the jury looking for?",
@@ -119,7 +119,7 @@ const individualFaq = [
       },
       {
         q: "When is the fee due?",
-        a: "The fee is due on confirmation of your place before the programme start date of 20 June 2026.",
+        a: "The fee is due on confirmation of your place.",
       },
       {
         q: "How do I apply for a bursary?",
@@ -164,7 +164,7 @@ const institutionFaq = [
       },
       {
         q: "Why should our institution invest in this?",
-        a: "The Fellowship provides leadership development that the cultural sector lacks. By nominating a practitioner, your institution invests directly in the capacity of your team — and in the wider ecosystem of cultural leadership across India.",
+        a: "The Fellowship provides a form of leadership development that is often missing across sectors. By supporting a participant, your organisation invests directly in the capacity of your team — and in the wider ecosystem of cultural leadership across India.For organisations working within or alongside the cultural sector, this is an opportunity to strengthen leadership, deepen contextual understanding, and build meaningful connections across disciplines, industries, and regions.",
       },
     ],
   },
@@ -175,13 +175,13 @@ const institutionFaq = [
         q: "What does the institution cover?",
         a: "The Fellowship fee of ₹5,00,000 (invoiced on confirmation), the Fellow's travel to both in-person moments in Goa (June and December 2026). Accommodation during both moments is provided by the programme.",
       },
-      {
-        q: "What if our nominee is not selected?",
-        a: "The institution is not charged. The fee is invoiced only on confirmation of the Fellow's place.",
-      },
+      // {
+      //   q: "What if our nominee is not selected?",
+      //   a: "The institution is not charged. The fee is invoiced only on confirmation of the Fellow's place.",
+      // },
       {
         q: "What if the Fellow needs to withdraw?",
-        a: "Fellows who withdraw more than eight weeks before the programme start date will not be charged. Within eight weeks, the institution may be liable for costs already committed. Full terms are set out in the Nominating Partner Agreement.",
+        a: "Fellows can withdraw before 20th May.",
       },
     ],
   },
@@ -190,11 +190,11 @@ const institutionFaq = [
     items: [
       {
         q: "Who can nominate?",
-        a: "Any cultural institution, organisation, foundation, or cross-sector body that has entered into a Nominating Partner Agreement with the Fellowship. Contact us to begin the process.",
+        a: "Any cultural institution, organisation, foundation, or cross-sector body that has entered into a Nominating Partner Agreement with the Fellowship. Fill the Institutional Application form to begin the process.",
       },
       {
         q: "Can we nominate more than one person?",
-        a: "You may submit more than one nomination, but for the inaugural cohort a maximum of one per institution will be accepted into the cohort.",
+        a: " No, institutions can nominate only one fellow.",
       },
     ],
   },
@@ -205,14 +205,15 @@ const institutionFaq = [
         q: "What is the institution responsible for?",
         a: "Paying the Fellowship fee on invoice, covering the Fellow's travel to both in-person moments, and releasing the Fellow for up to six hours per week of structured engagement.",
       },
-      {
-        q: "Does nomination guarantee selection?",
-        a: "No. Nomination opens the door — it does not guarantee a place. All nominees are assessed by the jury on the same criteria as every other applicant.",
-      },
-      {
-        q: "How do we begin?",
-        a: "Contact us at tbclf@serendipityarts.org to discuss the Nominating Partner Agreement and begin the process.",
-      },
+      // {
+      //   q: "Does nomination guarantee selection?",
+      //   a: "No. Nomination opens the door — it does not guarantee a place. All nominees are assessed by the jury on the same criteria as every other applicant.",
+      // },
+    {
+  q: "How do we begin?",
+  a: "Fill the form to begin. If you have any questions, write to us at",
+  email: "tbclf@serendipityarts.org",
+}
     ],
   },
 ];
@@ -246,7 +247,12 @@ const FaqSection = ({
                 {item.q}
               </AccordionTrigger>
               <AccordionContent className="text-sm text-muted-foreground leading-relaxed pb-4 font-body">
-                {item.a}
+                <p>
+  {item.a}{" "}
+  <a className="text-[#2563eb]" href={`mailto:${item.email}`}>
+    {item.email}
+  </a>
+</p>
               </AccordionContent>
             </AccordionItem>
           ))}

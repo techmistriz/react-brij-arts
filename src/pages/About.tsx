@@ -15,8 +15,8 @@ const sections = [
     image: aboutSlider,
     imagePosition: "right" as const,
     content: [
-      "The Brij Cultural Leaders Fellowship is a nine-month leadership development programme for mid-career cultural practitioners and cross-sector professionals across India — delivered by Serendipity Arts.",
-      "The Fellowship is built around a single conviction: the most important thing a leader can develop is not a product, but a question. A genuine intellectual inquiry rooted in their own practice, context, and curiosity. Fellows spend nine months developing that question — through structured learning, expert dialogue, peer exchange, and deep reflection. They leave with a Question Proposal: a written articulation of the inquiry they are pursuing and why it matters — a compass for the work ahead.",
+      "THE BRIJ Cultural Leaders Fellowship is a nine-month leadership development programme for mid-career cultural practitioners and cross-sector professionals across India — delivered by Serendipity Arts.",
+      "The Fellowship is built around a single conviction: the most important thing a leader can develop is not a product, but a question. A genuine intellectual inquiry rooted in their own practice, context, and curiosity. Fellows spend nine months developing that question — through structured learning, expert dialogue, peer exchange, and deep reflection. They leave with a Research Inquiry Proposal: a written articulation of the inquiry they are pursuing and why it matters — a compass for the work ahead.",
     ],
   },
   {
@@ -26,7 +26,7 @@ const sections = [
     imagePosition: "left" as const,
     content: [
       "Serendipity Arts exists at the intersection of arts, education, and institution-building. Its flagship Serendipity Arts Festival — held annually in Goa — is one of India's most significant cultural gatherings, bringing together practitioners, thinkers, and audiences across disciplines and geographies.",
-      "The Fellowship is delivered by SAF and culminates at the Festival — where Fellows present their work publicly at the Work in Progress Symposium. The Festival is not a backdrop. It is part of the curriculum.",
+      "The Fellowship is delivered by SAF and culminates at the Festival — where Fellows present their work publicly at the Work in Progress Presentation. The Festival is not a backdrop. It is part of the curriculum.",
     ],
   },
   {
@@ -90,7 +90,7 @@ const About = () => {
             >
               <p className="label-text mb-6">About</p>
               <h1 className="editorial-subheading max-w-3xl">
-                The Brij Cultural Leaders Fellowship
+                THE BRIJ Cultural Leaders Fellowship
               </h1>
             </motion.div>
 

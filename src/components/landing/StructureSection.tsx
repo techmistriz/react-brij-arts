@@ -6,7 +6,7 @@ const blocks = [
   {
     number: "01",
     title: "Structured Learning",
-    description: "Weekly live sessions with the Course Director, six expert-led fireside conversations, and curated frameworks across cultural policy, institutional practice, and creative leadership.",
+    description: "Weekly live sessions with the Course Director to Fellowship Team., six expert-led fireside conversations, and curated frameworks across cultural policy, institutional practice, and creative leadership.",
   },
   {
     number: "02",

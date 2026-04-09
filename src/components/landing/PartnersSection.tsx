@@ -15,7 +15,7 @@ const PartnersSection = () => {
         >
           <p className="label-text mb-6">Partners</p>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-16 font-body leading-relaxed">
-            The Brij Cultural Leaders Fellowship is delivered by Serendipity Arts 
+            THE BRIJ Cultural Leaders Fellowship is delivered by Serendipity Arts 
             as part of the wider Brij ecosystem, in partnership with Institut Français India.
           </p>
             <div className="flex flex-wrap justify-center items-center gap-16 md:gap-24">
