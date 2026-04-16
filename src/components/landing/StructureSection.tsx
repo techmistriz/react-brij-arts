@@ -6,8 +6,8 @@ const blocks = [
   {
     number: "01",
     title: "Structured Learning",
-    description: "Weekly live sessions with the Course Director to Fellowship Team., six expert-led fireside conversations, and curated frameworks across cultural policy, institutional practice, and creative leadership.",
-  },
+    description: "Weekly live sessions with the Fellowship Team, six expert-led fireside conversations, and curated frameworks across cultural policy, institutional practice, and creative leadership." 
+   },
   {
     number: "02",
     title: "Mentorship",
@@ -26,7 +26,7 @@ const blocks = [
   {
     number: "05",
     title: "The Question",
-    description: "Fellows develop a Question Proposal ‘in Phase III’ : a written articulation of the intellectual inquiry they are pursuing and why it matters — a compass for the work ahead. The question belongs entirely to the Fellow.",
+    description: "Fellows develop a Research Inquiry Proposal ‘in Phase III’ : a written articulation of the intellectual inquiry they are pursuing and why it matters — a compass for the work ahead. The question belongs entirely to the Fellow.",
   },
 ];
 

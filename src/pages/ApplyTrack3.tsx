@@ -341,7 +341,7 @@ const ApplyTrack3 = () => {
               <div className="border-t border-border pt-6">
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   <strong>Note:</strong> Selection is at the discretion of the
-                  review committee. Submitting an application does not guarantee
+                  “Jury”. Submitting an application does not guarantee
                   a place.
                 </p>
                 <p className="text-xs text-muted-foreground mt-3">

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Download } from "lucide-react";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
-
+const fileUrl = import.meta.env.VITE_FILE_PATH;
 const routes = [
   {
     label: "Route 1",
@@ -132,7 +132,7 @@ const Apply = () => {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Places</span>
-                      <span className="font-medium">5 Fellows</span>
+                      <span className="font-medium">8 Fellows</span>
                     </div>
                   </div>
                   <span className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-brij-orange group-hover:text-white group-hover:gap-3 transition-all">
@@ -217,7 +217,7 @@ const Apply = () => {
                     </a>
                   </p>
                   <a
-                    href="/BrijCLF_ProgrammeBible.pdf"
+                    href={`${fileUrl}/TBCLF_Prospectus.pdf`}
                     download
                     className="inline-flex items-center gap-2 text-xs font-heading font-bold tracking-wide px-4 py-2 border border-border hover:border-foreground transition-colors"
                   >
@@ -263,8 +263,7 @@ const Apply = () => {
                     </div>
                   </div>
                   <p className="text-xs pt-2">
-                    Bursary decisions are made by the jury after selection decisions are confirmed
-                    and are entirely independent of whether a Fellow is selected.
+                   Bursary decisions are made by the Bursary Committee following the confirmation of selections, and are applicable only to selected fellows.
                   </p>
                   <Link
                     to="/bursary"

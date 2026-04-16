@@ -41,13 +41,13 @@ const phases = [
     label: "Phase III",
     title: "Leadership & Futures",
     date: "November 2026–March 2027",
-    description: "The final phase is dedicated to leadership, the Festival experience, and the public articulation of each Fellow's Question. Fellows arrive in Phase III with a clear sense of their question — Phase III is about finding the confidence, rigour, and language to share it with the world. The phase closes with a Question Proposal: a developed, written articulation of the question Fellows are pursuing and why it matters.",
+    description: "The final phase is dedicated to leadership, the Festival experience, and the public articulation of each Fellow's Question. Fellows arrive in Phase III with a clear sense of their question — Phase III is about finding the confidence, rigour, and language to share it with the world. The phase closes with a Research Inquiry Proposal: a developed, written articulation of the question Fellows are pursuing and why it matters.",
     themes: [
       "Leadership foundations — values-based, adaptive, and distributed leadership in creative contexts",
       "Leading creative teams — high-performing teams, psychometric insights, and leadership typologies",
       "Futures thinking — technology, innovation, and the cultural sector of tomorrow",
       "Legal and governance frameworks — IP, arts law, institutional compliance",
-      "The Question - from question to abstract to written enquiry proposal",
+      "The Research Inquiry Proposal — from question to a written inquiry proposal",
     ],
   },
 ];

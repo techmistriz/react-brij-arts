@@ -52,7 +52,7 @@ const individualFaq = [
       // },
       {
         q: "Which countries are eligible?",
-        a:"For the inaugural cohort, Indian Nationals are eligible"
+        a:"For the inaugural cohort, eligibility is limited to Indian nationals."
       },
       {
         q: "Do I need to be employed by an organisation?",
@@ -97,12 +97,12 @@ const individualFaq = [
         a: "Research Inquiry proposal – a developed piece of thinking about the work you want to do, the question that has shaped your nine months, and how you intend to act on it.",
       },
        {
-        q: "What is The Question?",
+        q: "What is the Research Inquiry Proposal? ",
         a: "The research inquiry at the centre of your practice — something you are genuinely circling, that does not yet have clear language. It is the most important part of your application. It does not need to be resolved or fully formed. We are looking for its authenticity and aliveness.",
       },
       {
         q: "What is the jury looking for?",
-        a: "Five things: the quality and maturity of your practice; your capacity for reflection and honest self-assessment; the authenticity of your Question; whether this is the right nine months for you; and what you will bring to the cohort.",
+        a: "Five things: the depth and evolution of your practice; your ability to reflect and engage in honest self-inquiry; your openness to discovering and shaping a meaningful Question during the fellowship; whether this is the right nine-month period for you to commit; and what you will bring to the cohort experience.",
       },
     ],
   },
@@ -111,12 +111,12 @@ const individualFaq = [
     items: [
       {
         q: "What does the Fellowship cost?",
-        a: "The Fellowship fee is ₹5,00,000. This covers the full nine-month programme, both in-person residential moments, accommodation, all online sessions, mentor one-to-ones, and programme materials. The fee covers travel costs. However, Serendipity Arts is not responsible for arranging Visa permits, they must be pursued independently by the applicant.",
-      },
+        a: "This covers the full nine-month programme, both in-person residential moments, accommodation, all online sessions, mentor one-to-ones, and programme materials, as well as Travel costs for Individual Applicants."
+        },
       {
         q: "I cannot afford the fee. Can I still apply?",
-        a: "Yes. Applying for a bursary has no bearing on your assessment — the jury never sees bursary requests. Ten bursaries are available, ranging from 50% to full fee coverage. Full bursary recipients also receive a travel supplement.",
-      },
+        a: "Eight bursaries are available, ranging from 50% to full fee coverage"
+            },
       {
         q: "When is the fee due?",
         a: "The fee is due on confirmation of your place.",
@@ -160,8 +160,8 @@ const institutionFaq = [
     items: [
       {
         q: "What does a nominated Fellow bring back to the institution?",
-        a: "A Fellow returns as a sharper, better-connected cultural leader — with developed frameworks for governance, financial stewardship, strategic communication, and team leadership. The institution gains a practitioner who has spent nine months thinking deeply about leadership alongside peers from across India.",
-      },
+        a: "A Fellow returns as a more effective cultural leader, equipped to create tangible institutional impact. Through immersive engagement with the festival ecosystem, the Fellow brings back practical insights and strengthened networks across India. Close, one-on-one engagement with the Course Director and sustained peer exchange sharpen their capacity for administrative problem-solving and leadership. The institution benefits from a practitioner who can share knowledge, mentor teams, and contribute to long-term growth."
+          },
       {
         q: "Why should our institution invest in this?",
         a: "The Fellowship provides a form of leadership development that is often missing across sectors. By supporting a participant, your organisation invests directly in the capacity of your team — and in the wider ecosystem of cultural leadership across India.For organisations working within or alongside the cultural sector, this is an opportunity to strengthen leadership, deepen contextual understanding, and build meaningful connections across disciplines, industries, and regions.",
@@ -181,7 +181,7 @@ const institutionFaq = [
       // },
       {
         q: "What if the Fellow needs to withdraw?",
-        a: "Fellows can withdraw before 20th May.",
+        a: "Fellows may withdraw before 20th May without penalty. Withdrawals after this date will incur charges for expenses already committed, such as hotel bookings, tickets, and related costs.",
       },
     ],
   },

@@ -59,7 +59,7 @@ const sections = [
     content: [
       "Phase I: Self & Context (June–July) — Opens with the six-day residential in Goa. Community building, personal reflection, strengths work, storytelling, and network mapping. Fellows arrive having completed a short pre-residential preparation pack. This is the foundation on which everything else is built.",
       "Phase II: Ecosystem & Region (August–October) — Six expert-led fireside conversations expanding each Fellow's lens to the wider cultural field. Key themes include cultural theory, cultural equity, regenerative practices, cultural entrepreneurship, cultural diplomacy, and crisis management.",
-      "Phase III: Leadership & Futures (November–March) — Leadership, future thinking, and the public articulation of each Fellow's inquiry — including three days at the Serendipity Arts Festival. The programme closes with the submission of the final Question Proposal (1,500–2,500 words).",
+      "Phase III: Leadership & Futures (November–March) — Leadership, future thinking, and the public articulation of each Fellow's inquiry — including three days at the Serendipity Arts Festival. The programme closes with the submission of the final Research Inquiry Proposal (1,500–2,500 words).",
       " The programme is subject to change at the discretion of Course Director"
     ],
   },
@@ -70,7 +70,7 @@ const sections = [
     imagePosition: "left" as const,
     content: [
       "Duration: Nine months — 20 June 2026 to end of March 2027. Format: Online learning with two compulsory in-person moments in Goa. Online commitment: Maximum 6 hours per week of structured engagement.",
-      "Cohort size: Approximately 10–15 Fellows. Opening: Six-day residential in Goa beginning 20 June 2026. Festival moment: Three days at the Serendipity Arts Festival, December 2026. Final deliverable: Question Proposal — 1,500–2,500 words.",
+      "Cohort size: Approximately 10–15 Fellows. Opening: Six-day residential in Goa beginning 20 June 2026. Festival moment: Three days at the Serendipity Arts Festival, December 2026. Final deliverable: Research Inquiry Proposal — Approximately `1500 words.",
     ],
   },
 ];
