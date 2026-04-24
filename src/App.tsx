@@ -27,6 +27,7 @@ import Login from "./pages/Login";
 import StructureSection from "./components/landing/StructureSection";
 import Structure from "./pages/Structure";
 import Bursary from "./pages/Bursary";
+import AnalyticsTracker from "./components/AnalyticsTracker";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +39,9 @@ const App = () => (
       <BrowserRouter basename="/academy/fellowship">
         {/* <BrowserRouter> */}
         {/* <ScrollToHash /> */}
+
+         <AnalyticsTracker />
+         
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/academy" element={<Index />} />

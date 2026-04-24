@@ -19,6 +19,7 @@ const contactSchema = z.object({
   name: z.string().min(1, "Name is required").max(100),
   email: z.string().email("Enter a valid email"),
   contact: z.string().min(10, "Enter a valid phone number"),
+  message: z.string().min(1, "Message is required"),
 });
 
 const individualFaq = [
@@ -52,7 +53,7 @@ const individualFaq = [
       // },
       {
         q: "Which countries are eligible?",
-        a:"For the inaugural cohort, eligibility is limited to Indian nationals."
+        a: "For the inaugural cohort, eligibility is limited to Indian nationals.",
       },
       {
         q: "Do I need to be employed by an organisation?",
@@ -96,7 +97,7 @@ const individualFaq = [
         q: "What do Fellows produce?",
         a: "Research Inquiry proposal – a developed piece of thinking about the work you want to do, the question that has shaped your nine months, and how you intend to act on it.",
       },
-       {
+      {
         q: "What is the Research Inquiry Proposal? ",
         a: "The research inquiry at the centre of your practice — something you are genuinely circling, that does not yet have clear language. It is the most important part of your application. It does not need to be resolved or fully formed. We are looking for its authenticity and aliveness.",
       },
@@ -111,12 +112,12 @@ const individualFaq = [
     items: [
       {
         q: "What does the Fellowship cost?",
-        a: "This covers the full nine-month programme, both in-person residential moments, accommodation, all online sessions, mentor one-to-ones, and programme materials, as well as Travel costs for Individual Applicants."
-        },
+        a: "This covers the full nine-month programme, both in-person residential moments, accommodation, all online sessions, mentor one-to-ones, and programme materials, as well as Travel costs for Individual Applicants.",
+      },
       {
         q: "I cannot afford the fee. Can I still apply?",
-        a: "Eight bursaries are available, ranging from 50% to full fee coverage"
-            },
+        a: "Eight bursaries are available, ranging from 50% to full fee coverage",
+      },
       {
         q: "When is the fee due?",
         a: "The fee is due on confirmation of your place.",
@@ -160,8 +161,8 @@ const institutionFaq = [
     items: [
       {
         q: "What does a nominated Fellow bring back to the institution?",
-        a: "A Fellow returns as a more effective cultural leader, equipped to create tangible institutional impact. Through immersive engagement with the festival ecosystem, the Fellow brings back practical insights and strengthened networks across India. Close, one-on-one engagement with the Course Director and sustained peer exchange sharpen their capacity for administrative problem-solving and leadership. The institution benefits from a practitioner who can share knowledge, mentor teams, and contribute to long-term growth."
-          },
+        a: "A Fellow returns as a more effective cultural leader, equipped to create tangible institutional impact. Through immersive engagement with the festival ecosystem, the Fellow brings back practical insights and strengthened networks across India. Close, one-on-one engagement with the Course Director and sustained peer exchange sharpen their capacity for administrative problem-solving and leadership. The institution benefits from a practitioner who can share knowledge, mentor teams, and contribute to long-term growth.",
+      },
       {
         q: "Why should our institution invest in this?",
         a: "The Fellowship provides a form of leadership development that is often missing across sectors. By supporting a participant, your organisation invests directly in the capacity of your team — and in the wider ecosystem of cultural leadership across India.For organisations working within or alongside the cultural sector, this is an opportunity to strengthen leadership, deepen contextual understanding, and build meaningful connections across disciplines, industries, and regions.",
@@ -209,11 +210,11 @@ const institutionFaq = [
       //   q: "Does nomination guarantee selection?",
       //   a: "No. Nomination opens the door — it does not guarantee a place. All nominees are assessed by the jury on the same criteria as every other applicant.",
       // },
-    {
-  q: "How do we begin?",
-  a: "Fill the form to begin. If you have any questions, write to us at",
-  email: "tbclf@serendipityarts.org",
-}
+      {
+        q: "How do we begin?",
+        a: "Fill the form to begin. If you have any questions, write to us at",
+        email: "tbclf@serendipityarts.org",
+      },
     ],
   },
 ];
@@ -248,11 +249,11 @@ const FaqSection = ({
               </AccordionTrigger>
               <AccordionContent className="text-sm text-muted-foreground leading-relaxed pb-4 font-body">
                 <p>
-  {item.a}{" "}
-  <a className="text-[#2563eb]" href={`mailto:${item.email}`}>
-    {item.email}
-  </a>
-</p>
+                  {item.a}{" "}
+                  <a className="text-[#2563eb]" href={`mailto:${item.email}`}>
+                    {item.email}
+                  </a>
+                </p>
               </AccordionContent>
             </AccordionItem>
           ))}
@@ -263,7 +264,6 @@ const FaqSection = ({
 );
 
 const Faq = () => {
-
   const { toast } = useToast();
   const {
     register,
@@ -357,9 +357,8 @@ const Faq = () => {
             </motion.div>
             <FaqSection categories={institutionFaq} startDelay={0} />
           </div>
-
         </div>
-         <motion.div
+        <motion.div
           id="contact"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -418,6 +417,20 @@ const Faq = () => {
                     </p>
                   )}
                 </div>
+              </div>
+              {/* Message */}
+              <div className="w-full">
+                <textarea
+                  rows={3}
+                  {...register("message")}
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#f5a442]"
+                  placeholder="Enter your message..."
+                />
+                {errors.message && (
+                  <p className="text-red-500 text-xs mt-1 text-left">
+                    {errors.message.message}
+                  </p>
+                )}
               </div>
 
               {/* Button */}
