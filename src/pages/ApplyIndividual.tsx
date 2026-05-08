@@ -31,7 +31,7 @@ const stage1Schema = z.object({
   first_name: z.string().min(1, "Required"),
   last_name: z.string().min(1, "Required"),
   pronouns: z.string().optional(),
-  country_id: z.string().min(1, "Required"),
+  // country_id: z.string().min(1, "Required"),
   city: z.string().min(1, "Required"),
   role_title: z.string().min(1, "Required"),
   organisation: z.string().optional().or(z.literal("")),
@@ -194,19 +194,26 @@ const ApplyIndividual = () => {
         ...data,
       };
 
-      const res = await submitApplication(
-        finalData,
-        bursaryChecked ? bursaryFile! : undefined,
-      );
+      {
+        /*temperory disabled */
+      }
+      // const res = await submitApplication(
+      //   finalData,
+      //   bursaryChecked ? bursaryFile! : undefined,
+      // );
 
       //  Save auth data
-      login(res.data.token, res.data.user);
+      // login(res.data.token, res.data.user);
+      // toast({
+      //   description: "Application submitted successfully!",
+      //   className: "font-semibold",
+      // });
+      // navigate("/submission-confirmation");
+
       toast({
-        description: "Application submitted successfully!",
+        description: "Application submittion disabled",
         className: "font-semibold",
       });
-
-      navigate("/submission-confirmation");
     } catch (error: any) {
       console.error(error);
 
@@ -289,8 +296,12 @@ const ApplyIndividual = () => {
                   supplement.
                 </p>
                 <p className="text-xs text-white/70 mb-3 relative z-10">
-                 Applying for a bursary has no impact on how your application is assessed. Bursary decisions are made only after the jury has completed its evaluation. 
-If you are a mid-career professional working as a full time employee at an institution, we encourage you to approach your institution to nominate you. 
+                  Applying for a bursary has no impact on how your application
+                  is assessed. Bursary decisions are made only after the jury
+                  has completed its evaluation. If you are a mid-career
+                  professional working as a full time employee at an
+                  institution, we encourage you to approach your institution to
+                  nominate you.
                 </p>
                 <Link
                   to="/bursary"
@@ -303,8 +314,7 @@ If you are a mid-career professional working as a full time employee at an insti
               <div className="border-t border-border pt-6">
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   <strong>Note:</strong> Selection is at the discretion of the
-                  “Jury”. Submitting an application does not guarantee
-                  a place.
+                  “Jury”. Submitting an application does not guarantee a place.
                 </p>
                 <p className="text-xs text-muted-foreground mt-3">
                   Questions?{" "}
@@ -583,7 +593,7 @@ If you are a mid-career professional working as a full time employee at an insti
                   </div>
 
                   <div className="pt-4">
-                    <button
+                    {/* <button
                       type="submit"
                       disabled={isSubmitting}
                       className="relative overflow-hidden inline-flex items-center gap-2 bg-foreground text-background px-8 py-3 text-sm font-heading font-bold tracking-wide transition-colors disabled:opacity-50 group hover:text-white"
@@ -593,6 +603,18 @@ If you are a mid-career professional working as a full time employee at an insti
                         {isSubmitting
                           ? "Saving…"
                           : "Save & Continue to Stage 2"}{" "}
+                        <ArrowRight size={16} />
+                      </span>
+                    </button> */}
+
+                    {/*button disabled*/}
+                    <button
+                      type="submit"
+                      disabled
+                      className="relative overflow-hidden inline-flex items-center gap-2 bg-foreground text-background px-8 py-3 text-sm font-heading font-bold tracking-wide opacity-50 cursor-not-allowed"
+                    >
+                      <span className="relative z-10 inline-flex items-center gap-2">
+                        Save & Continue to Stage 2
                         <ArrowRight size={16} />
                       </span>
                     </button>
@@ -860,11 +882,11 @@ If you are a mid-career professional working as a full time employee at an insti
                             I would like to apply for a bursary.
                           </label>
                           <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
-                            Applying for a bursary has no impact on how your
-                            application is assessed. The request for a bursary
-                            will be considered separately by the programme team.
-                            Bursary decisions are made only after the jury has
-                            completed its evaluation of applications.
+                            Applicants requesting a bursary are invited to share
+                            a brief statement outlining their financial
+                            contexts, the relevance of the fellowship to their
+                            current work, practice, or institutional context,
+                            and the impact this support would enable.
                           </p>
                         </div>
                       </div>
@@ -1053,7 +1075,7 @@ If you are a mid-career professional working as a full time employee at an insti
                     >
                       <ArrowLeft size={16} /> Back to Stage 1
                     </button>
-                    <button
+                    {/* <button
                       type="submit"
                       disabled={isSubmitting}
                       className="relative overflow-hidden inline-flex items-center gap-2 bg-foreground text-background px-8 py-3 text-sm font-heading font-bold tracking-wide transition-colors disabled:opacity-50 group hover:text-white"
@@ -1061,6 +1083,18 @@ If you are a mid-career professional working as a full time employee at an insti
                       <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
                       <span className="relative z-10 inline-flex items-center gap-2">
                         {isSubmitting ? "Submitting…" : "Submit Application"}{" "}
+                        <ArrowRight size={16} />
+                      </span>
+                    </button> */}
+                    {/*button disabled*/}
+                    <button
+                      type="submit"
+                      disabled
+                      className="relative overflow-hidden inline-flex items-center gap-2 bg-foreground text-background px-8 py-3 text-sm font-heading font-bold tracking-wide opacity-50 cursor-not-allowed"
+                    >
+                      <span className="absolute inset-0 opacity-0"></span>
+                      <span className="relative z-10 inline-flex items-center gap-2">
+                        Submit Application
                         <ArrowRight size={16} />
                       </span>
                     </button>
