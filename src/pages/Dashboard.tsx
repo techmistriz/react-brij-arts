@@ -66,7 +66,7 @@ const handleSearch = async () => {
   try {
     const res = await getApplicationStatus(q);
 
-    const item = res?.data; // ✅ IMPORTANT FIX
+    const item = res?.data; //  IMPORTANT FIX
 
     if (!item) {
       setResults([]);
@@ -119,7 +119,7 @@ const handleSearch = async () => {
                 {/* Vertical line */}
                 {!isLast && (
                   <div
-                    className={`absolute left-[11px] top-[28px] w-0.5 h-[calc(100%-4px)] ${
+                    className={`absolute left-[11px] mt-6 top-[1px] w-0.5 h-[calc(100%-20px)] ${
                       i < currentIdx ? "bg-brij-orange" : "bg-border"
                     }`}
                   />

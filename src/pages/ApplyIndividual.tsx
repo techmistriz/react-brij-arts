@@ -24,6 +24,7 @@ import { toast } from "@/hooks/use-toast";
 import { useAuth } from "@/context/AuthContext";
 import { useDropdowns } from "@/hooks/useDropdowns";
 import { submitApplication } from "@/lib/api/register";
+import { getDisciplines } from "@/lib/api/getDisciples";
 
 /* ─── Stage 1 schema ─── */
 const stage1Schema = z.object({
@@ -31,7 +32,7 @@ const stage1Schema = z.object({
   first_name: z.string().min(1, "Required"),
   last_name: z.string().min(1, "Required"),
   pronouns: z.string().optional(),
-  // country_id: z.string().min(1, "Required"),
+  country_id: z.string().min(1, "Required"),
   city: z.string().min(1, "Required"),
   role_title: z.string().min(1, "Required"),
   organisation: z.string().optional().or(z.literal("")),
@@ -83,7 +84,7 @@ const stage2Schema = z.object({
   referee_relationship: z.string().min(1, "Required"),
   referee_outside_current_organisation: z.string().min(1, "Required"),
   apply_for_bursary: z.number().optional(),
-  is_agree_following_principles: z.boolean().refine((v) => v === true, {
+  is_agree_following_principles: z.number().refine((v) => v === 1, {
     message: "You must accept the terms",
   }),
 });
@@ -92,18 +93,7 @@ type Stage1Data = z.infer<typeof stage1Schema>;
 type Stage2Data = z.infer<typeof stage2Schema>;
 
 const pronounOptions = ["He/Him", "She/Her", "They/Them", "Prefer not to say"];
-const disciplines = [
-  "Visual Arts",
-  "Performing Arts",
-  "Music",
-  "Craft",
-  "Film & Moving Image",
-  "Writing & Literature",
-  "Curatorial Practice",
-  "Cultural Management & Producing",
-  "Cross-disciplinary",
-  "Other",
-];
+
 const yearsOptions = ["5–8 years", "8–12 years", "12+ years"];
 const salutations = ["Mr", "Ms", "Mx", "Dr", "Prof"];
 
@@ -116,6 +106,23 @@ const ApplyIndividual = () => {
   const [stage1Snapshot, setStage1Snapshot] = useState<Stage1Data | null>(null);
   const [bursaryFile, setBursaryFile] = useState<File | null>(null);
   const [expanded, setExpanded] = useState(false);
+
+  const [disciplines, setDisciplines] = useState<
+    { id: number; name: string }[]
+  >([]);
+
+  useEffect(() => {
+    const fetchDisciplines = async () => {
+      try {
+        const data = await getDisciplines();
+        setDisciplines(data);
+      } catch (err) {
+        console.error("Failed to load disciplines", err);
+      }
+    };
+
+    fetchDisciplines();
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -164,7 +171,7 @@ const ApplyIndividual = () => {
       referee_email: "",
       referee_relationship: "",
       referee_outside_current_organisation: "",
-      is_agree_following_principles: false,
+      is_agree_following_principles: 0,
     },
   });
 
@@ -197,12 +204,13 @@ const ApplyIndividual = () => {
       {
         /*temperory disabled */
       }
-      // const res = await submitApplication(
-      //   finalData,
-      //   bursaryChecked ? bursaryFile! : undefined,
-      // );
+      const res = await submitApplication(
+        finalData,
+        bursaryChecked ? bursaryFile! : undefined,
+      );
 
-      //  Save auth data
+      // console.log("Response", res);
+      // //  Save auth data
       // login(res.data.token, res.data.user);
       // toast({
       //   description: "Application submitted successfully!",
@@ -210,10 +218,10 @@ const ApplyIndividual = () => {
       // });
       // navigate("/submission-confirmation");
 
-      toast({
-        description: "Application submittion disabled",
-        className: "font-semibold",
-      });
+      // toast({
+      //   description: "Application submittion disabled",
+      //   className: "font-semibold",
+      // });
     } catch (error: any) {
       console.error(error);
 
@@ -437,10 +445,11 @@ const ApplyIndividual = () => {
                           <SelectTrigger className="mt-1.5">
                             <SelectValue placeholder="Select discipline" />
                           </SelectTrigger>
+
                           <SelectContent>
                             {disciplines.map((d) => (
-                              <SelectItem key={d} value={d}>
-                                {d}
+                              <SelectItem key={d.id} value={String(d.id)}>
+                                {d.name}
                               </SelectItem>
                             ))}
                           </SelectContent>
@@ -938,14 +947,15 @@ const ApplyIndividual = () => {
 
                   <div className="flex items-start gap-3">
                     <Checkbox
-                      id="is_agree_following_principles"
-                      checked={s2.watch("is_agree_following_principles")}
+                      checked={s2.watch("is_agree_following_principles") === 1}
                       onCheckedChange={(checked) =>
                         s2.setValue(
                           "is_agree_following_principles",
-                          !!checked,
+                          checked ? 1 : 0,
                           {
                             shouldValidate: true,
+                            shouldDirty: true,
+                            shouldTouch: true,
                           },
                         )
                       }
