@@ -8,7 +8,11 @@
   ],
   "rewrites": [
     {
-      "source": "/academy/fellowship/:path*",
+      "source": "/academy/fellowship",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/academy/fellowship/:path((?!assets).*)",
       "destination": "/index.html"
     }
   ]
