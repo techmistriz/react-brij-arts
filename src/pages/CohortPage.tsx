@@ -103,7 +103,7 @@ const cohortData = [
     // linkedin: "https://linkedin.com",
     role: "The BRIJ Cultural Leaders Fellow 2026",
     description:
-      "Pooja is an Artist Curator with the Serendipity Arts Festival, and works with the travel, logistics and boarding teams for visiting artists and productions.",
+      "Pooja Yadav manages artist travel, accommodation, and logistics for the Serendipity Arts Festival. She oversees the seamless movement and stay of a large and diverse cohort of artists, curators, and participants, ensuring that every aspect of their journey is carefully coordinated.",
     image: pooja,
   },
   {
@@ -174,19 +174,21 @@ const CohortPage = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px- py-10 ">
+<div className="max-w-7xl mx-auto px-4 md:px-0 py-6 md:py-10">
       <Navbar />
       {/* Header */}
-      <div className="mt-20 ">
-        <h1 className="text-3xl md:text-4xl font-bold">Cohort 2026–2027</h1>
-        <p className="text-[#333] mt-2 max-w-2xl">
+      <div className="mt-16 md:mt-20">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">
+          Cohort 2026–2027
+        </h1>
+        <p className="text-[#333] mt-3 max-w-2xl text-sm sm:text-base leading-relaxed">
           Meet the inaugural Brij Fellows, convening over nine months of
           residentials, research and exchange.
         </p>
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 my-20 pb-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 my-12 md:my-20 pb-10">
         {cohortData.map((person, index) => {
           const row = Math.floor(index / 3);
 
@@ -220,18 +222,18 @@ const CohortPage = () => {
                 <img
                   src={person.image}
                   alt={person.name}
-                  className="w-full h-auto object-cover"
+                  className="w-full h-auto  object-cover"
                 />
               </div>
 
               {/* Content */}
-              <div className="p-5 relative mb-2">
-                <h3 className="text-[20px] font-bold mb-4 uppercase">
+              <div className="p-4 md:p-5 flex flex-col">
+                <h3 className="text-lg md:text-[20px] font-bold mb-3 uppercase leading-tight">
                   {person.name}
                 </h3>
 
                 <p
-                  className={`text-[#333] text-sm font-medium leading-[22px] transition-all duration-300 ${
+                  className={`text-[#333] text-sm md:text-[14px] font-medium leading-6 transition-all duration-300 ${
                     expandedCards.includes(index) ? "" : "line-clamp-5"
                   }`}
                 >

@@ -171,7 +171,7 @@ const Navbar = () => {
                 { to: "/about", label: "About" },
                 { to: "/structure", label: "Structure" },
                 { to: "/bursary", label: "Bursary" },
-                { to: "/cohort", label: "Cohort" },
+                { to: "/cohort/2026-2027", label: "Cohort" },
                 { to: "/publications", label: "Publications" },
                 { to: "/faq", label: "FAQ" },
               ].map((item, i) => (
