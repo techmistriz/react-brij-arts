@@ -38,7 +38,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-    <BrowserRouter basename={import.meta.env.VITE_BASENAME || ""}>
+      <BrowserRouter basename="/academy/fellowship">
         {/* <BrowserRouter> */}
         {/* <ScrollToHash /> */}
 
