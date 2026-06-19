@@ -1,4 +1,5 @@
 if (
+  window.location.pathname === "/" ||
   window.location.pathname === "/academy" ||
   window.location.pathname === "/academy/"
 ) {
@@ -75,4 +76,3 @@ const App = () => (
 );
 
 export default App;
-
