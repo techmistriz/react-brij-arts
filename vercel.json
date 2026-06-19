@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/academy",
+      "destination": "/academy/fellowship"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/academy/fellowship/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
