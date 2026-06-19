@@ -2,12 +2,13 @@
   "redirects": [
     {
       "source": "/academy",
-      "destination": "/academy/fellowship"
+      "destination": "/academy/fellowship",
+      "permanent": false
     }
   ],
   "rewrites": [
     {
-      "source": "/academy/fellowship/(.*)",
+      "source": "/academy/fellowship/:path*",
       "destination": "/index.html"
     }
   ]
