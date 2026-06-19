@@ -29,6 +29,7 @@ import Structure from "./pages/Structure";
 import Bursary from "./pages/Bursary";
 import AnalyticsTracker from "./components/AnalyticsTracker";
 import ApplicationsClosedModal from "./pages/PopupModal";
+import CohortPage from "./pages/CohortPage";
 
 const queryClient = new QueryClient();
 
@@ -64,6 +65,8 @@ const App = () => (
           <Route path="/faq" element={<Faq />} />
           <Route path="/bursary" element={<Bursary />} />
           <Route path="/structure" element={<Structure />} />
+          <Route path="/cohort/2026-2027" element={<CohortPage />} />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

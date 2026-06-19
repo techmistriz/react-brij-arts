@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import serendipityLogo from "@/assets/serendipity-arts-logo-full.png";
 import brijLogo from "@/assets/brij-logo.png";
@@ -59,6 +59,24 @@ const Navbar = () => {
           >
             Bursary
           </Link>
+          <div className="relative group">
+            <button className="flex items-center gap-1 text-sm font-heading font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all">
+              Cohort
+              <ChevronDown className="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" />
+            </button>
+
+            <div className="absolute left-0 top-full mt-2 min-w-[180px] bg-white shadow-lg border border-gray-200 rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+              <Link
+                to="/cohort/2026-2027"
+                className="block px-4 py-3 text-sm font-bold    hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
+                style={{
+                  fontFamily: '"Akhand", "Barlow Condensed", sans-serif',
+                }}
+              >
+                2026-2027
+              </Link>
+            </div>
+          </div>
           <Link
             to="/publications"
             className="text-sm font-heading font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
@@ -71,43 +89,41 @@ const Navbar = () => {
           >
             FAQ
           </Link>
-  <div className="flex items-center gap-3">
-          {!isLoggedIn && (
-            <Link
-              to="/login"
-              className="relative overflow-hidden rounded-md px-6 py-2.5 text-sm font-heading font-bold tracking-wide bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
-            >
-              <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
-              <span className="relative z-10">Login</span>
-            </Link>
-          )}
-          {isLoggedIn ? (
-            <button
-              onClick={handleLogout}
-              className="relative overflow-hidden rounded-md px-6 py-2.5 text-sm font-heading font-bold tracking-wide bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
-            >
-              <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
-              <span className="relative z-10">Logout</span>
-            </button>
-          ) : (
-            <Link
-              to="/apply"
-              className="relative overflow-hidden rounded-md px-6 py-2.5 text-sm font-heading font-bold tracking-wide bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
-            >
-              <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
-              <span className="relative z-10">Apply Now</span>
-            </Link>
-          )}
+          <div className="flex items-center gap-3">
+            {!isLoggedIn && (
+              <Link
+                to="/login"
+                className="relative overflow-hidden rounded-md px-6 py-2.5 text-sm font-heading font-bold tracking-wide bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
+              >
+                <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
+                <span className="relative z-10">Login</span>
+              </Link>
+            )}
+            {isLoggedIn ? (
+              <button
+                onClick={handleLogout}
+                className="relative overflow-hidden rounded-md px-6 py-2.5 text-sm font-heading font-bold tracking-wide bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
+              >
+                <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
+                <span className="relative z-10">Logout</span>
+              </button>
+            ) : (
+              <Link
+                to="/apply"
+                className="relative overflow-hidden rounded-md px-6 py-2.5 text-sm font-heading font-bold tracking-wide bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
+              >
+                <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
+                <span className="relative z-10">Apply Now</span>
+              </Link>
+            )}
 
-         
-
-          {/* <Link to="/apply" className="relative overflow-hidden rounded-md px-6 py-2.5 text-sm font-heading font-bold tracking-wide bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]">
+            {/* <Link to="/apply" className="relative overflow-hidden rounded-md px-6 py-2.5 text-sm font-heading font-bold tracking-wide bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]">
 
             <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
             <span className="relative z-10">Apply Now</span>
           </Link> */}
+          </div>
         </div>
- </div>
         {/* Mobile toggle */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
@@ -155,6 +171,7 @@ const Navbar = () => {
                 { to: "/about", label: "About" },
                 { to: "/structure", label: "Structure" },
                 { to: "/bursary", label: "Bursary" },
+                { to: "/cohort", label: "Cohort" },
                 { to: "/publications", label: "Publications" },
                 { to: "/faq", label: "FAQ" },
               ].map((item, i) => (
@@ -179,7 +196,6 @@ const Navbar = () => {
                 transition={{ delay: 0.25, duration: 0.25 }}
                 className="pt-2"
               >
-                
                 {!isLoggedIn && (
                   <Link
                     to="/login"
@@ -198,7 +214,7 @@ const Navbar = () => {
                     }}
                     className="relative overflow-hidden  block rounded-md px-6 py-3.5 text-sm font-heading font-bold tracking-wide text-center bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
                   >
-                   <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
+                    <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
                     <span className="relative z-10">Logout</span>
                   </button>
                 ) : (

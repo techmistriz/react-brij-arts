@@ -204,10 +204,10 @@ const ApplyIndividual = () => {
       {
         /*temperory disabled */
       }
-      const res = await submitApplication(
-        finalData,
-        bursaryChecked ? bursaryFile! : undefined,
-      );
+      // const res = await submitApplication(
+      //   finalData,
+      //   bursaryChecked ? bursaryFile! : undefined,
+      // );
 
       // console.log("Response", res);
       // //  Save auth data
