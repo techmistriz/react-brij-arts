@@ -1,5 +1,4 @@
 if (
-  window.location.pathname === "/" ||
   window.location.pathname === "/academy" ||
   window.location.pathname === "/academy/"
 ) {
@@ -39,7 +38,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter basename="/academy/fellowship">
+    <BrowserRouter basename={import.meta.env.VITE_BASENAME || ""}>
         {/* <BrowserRouter> */}
         {/* <ScrollToHash /> */}
 
@@ -49,6 +48,7 @@ const App = () => (
          
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/academy" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/apply" element={<Apply />} />
           <Route path="/login" element={<Login />} />
