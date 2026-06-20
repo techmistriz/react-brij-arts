@@ -1,4 +1,16 @@
 {
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/academy/fellowship/",
+      "permanent": false
+    },
+    {
+      "source": "/academy",
+      "destination": "/academy/fellowship/",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
       "source": "/academy/assets/(.*)",
