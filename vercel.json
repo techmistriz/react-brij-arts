@@ -1,0 +1,20 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/academy/fellowship/",
+      "permanent": false
+    },
+    {
+      "source": "/academy",
+      "destination": "/academy/fellowship/",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/academy/fellowship/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
