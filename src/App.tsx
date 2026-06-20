@@ -38,7 +38,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter basename="/academy/fellowship">  live 
+      <BrowserRouter basename="/academy/fellowship">  
         {/* <BrowserRouter> */}
         {/* <ScrollToHash /> */}
 
