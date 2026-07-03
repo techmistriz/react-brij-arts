@@ -26,7 +26,7 @@ const links: NavLink[] = [
   },
   {
     label: "Education & Research",
-    to: "/academy/fellowship",
+    // to: "/academy/fellowship",
     children: [
       {
         label: "THE BRIJ Cultural Leaders Fellowship",
