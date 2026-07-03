@@ -5,10 +5,6 @@ if (
   window.location.replace("/academy/fellowship/");
 }
 
-if (window.location.pathname === "/") {
-  window.location.replace("/brij");
-}
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -94,9 +90,9 @@ const App = () => (
           />
 
           {/* Brij */}
-          <Route path="/brij" element={<Brij />} />
-          <Route path="/brij/about" element={<BrijAbout />} />
-          <Route path="/brij/credits" element={<BrijCredits />} />
+          <Route path="/" element={<Brij />} />
+          <Route path="/about" element={<BrijAbout />} />
+          <Route path="/credits" element={<BrijCredits />} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>

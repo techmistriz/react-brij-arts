@@ -403,7 +403,8 @@ const Brij = () => {
                 "Innovation & Incubation": [
                   {
                     label: "THE BRIJ Incubator",
-                    to: "/brij/incubator",
+                    to: "https://thebrij.world/incubator/",
+                    external: true,
                     gradient: brijGradientIncubator,
                   },
                 ],
@@ -495,14 +496,14 @@ const Brij = () => {
 
       <Footer
         links={[
-          { label: "About Us", href: "/brij/about" },
+          { label: "About Us", href: "/about" },
           {
             label: "Incubator",
             href: "https://thebrij.world/incubator/",
             external: true,
           },
           { label: "Fellowship", href: "/academy/fellowship" },
-          { label: "Our Team", href: "/brij/credits" },
+          { label: "Our Team", href: "/credits" },
         ]}
         ecosystem={[
           {

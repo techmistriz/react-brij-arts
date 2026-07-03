@@ -436,14 +436,14 @@ const BrijAbout = () => {
 
       <Footer
         links={[
-          { label: "About Us", href: "/brij/about" },
+          { label: "About Us", href: "/about" },
           {
             label: "Incubator",
             href: "https://thebrij.world/incubator/",
             external: true,
           },
           { label: "Fellowship", href: "/academy/fellowship" },
-          { label: "Our Team", href: "/brij/credits" },
+          { label: "Our Team", href: "/credits" },
         ]}
         ecosystem={[
           {

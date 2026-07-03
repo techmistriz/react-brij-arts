@@ -12,7 +12,7 @@ type NavLink = {
 
 const links: NavLink[] = [
   { label: "Home", to: "/brij" },
-  { label: "About Us", to: "/brij/about" },
+  { label: "About Us", to: "/about" },
   {
     label: "Innovation & Incubation",
     to: "https://thebrij.world/incubator/",
@@ -46,7 +46,7 @@ const links: NavLink[] = [
       { label: "SAF 2026 — Curators", href: "/saf-2026/curators" },
     ],
   },
-  { label: "Our Team", to: "/brij/credits" },
+  { label: "Our Team", to: "/credits" },
 ];
 
 const mobileLinks = links;
@@ -54,7 +54,7 @@ const desktopLinks = links.filter((l) => l.label !== "Home");
 
 const BrijNav = () => {
   const { pathname } = useLocation();
-  const isBrijHome = pathname === "/brij" || pathname === "/brij/about";
+  const isBrijHome = pathname === "/brij" || pathname === "/about";
   const isSafHome = pathname === "/saf-2026";
   const hideUntilScroll = isBrijHome || isSafHome;
   const [scrolled, setScrolled] = useState(false);
@@ -101,7 +101,7 @@ const BrijNav = () => {
     >
       <div className="flex items-center justify-between px-6 md:px-10 lg:px-14 h-16 md:h-20">
         <Link
-          to="/brij"
+          to="/"
           className={`flex items-center transition-opacity duration-300 ${
             scrolled ? "opacity-100" : "opacity-0 pointer-events-none"
           }`}

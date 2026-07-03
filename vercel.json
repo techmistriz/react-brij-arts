@@ -1,11 +1,6 @@
 {
   "redirects": [
     {
-      "source": "/",
-      "destination": "/brij",
-      "permanent": false
-    },
-    {
       "source": "/academy",
       "destination": "/academy/fellowship",
       "permanent": false
