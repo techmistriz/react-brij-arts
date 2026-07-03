@@ -42,7 +42,7 @@ const links: NavLink[] = [
         href: "https://serendipityarts.org",
         external: true,
       },
-      { label: "Serendipity Arts Festival 2026", href: "https://serendipityartsfestival.com/" },
+      { label: "Serendipity Arts Festival 2026", href: "https://serendipityartsfestival.com/", external: true, },
       // { label: "SAF 2026 — Curators", href: "/saf-2026/curators" },
     ],
   },
