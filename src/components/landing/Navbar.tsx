@@ -27,7 +27,7 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="flex items-center justify-between px-5 md:px-12 lg:px-24 py-3 md:py-4">
-        <Link to="/" className="flex items-center gap-3 md:gap-4">
+        <Link to="/academy/fellowship" className="flex items-center gap-3 md:gap-4">
           <img src={brijLogo} alt="THE BRIJ" className="h-5 md:h-7" />
           <span className="text-brij-gray text-lg font-light select-none">
             |
@@ -42,19 +42,19 @@ const Navbar = () => {
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-8">
           <Link
-            to="/about"
+            to="/academy/fellowship/about"
             className="text-sm font-heading font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
           >
             About
           </Link>
           <Link
-            to="/structure"
+            to="/academy/fellowship/structure"
             className="text-sm font-heading font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
           >
             Structure
           </Link>
           <Link
-            to="/bursary"
+            to="/academy/fellowship/bursary"
             className="text-sm font-heading font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
           >
             Bursary
@@ -67,7 +67,7 @@ const Navbar = () => {
 
             <div className="absolute left-0 top-full mt-2 min-w-[180px] bg-white shadow-lg border border-gray-200 rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
               <Link
-                to="/cohort/2026-2027"
+                to="/academy/fellowship/cohort/2026-2027"
                 className="block px-4 py-3 text-sm font-bold    hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
                 style={{
                   fontFamily: '"Akhand", "Barlow Condensed", sans-serif',
@@ -78,13 +78,13 @@ const Navbar = () => {
             </div>
           </div>
           <Link
-            to="/publications"
+            to="/academy/fellowship/publications"
             className="text-sm font-heading font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
           >
             Publications
           </Link>
           <Link
-            to="/faq"
+            to="/academy/fellowship/faq"
             className="text-sm font-heading font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
           >
             FAQ
@@ -92,7 +92,7 @@ const Navbar = () => {
           <div className="flex items-center gap-3">
             {!isLoggedIn && (
               <Link
-                to="/login"
+                to="/academy/fellowship/login"
                 className="relative overflow-hidden rounded-md px-6 py-2.5 text-sm font-heading font-bold tracking-wide bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
               >
                 <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
@@ -109,7 +109,7 @@ const Navbar = () => {
               </button>
             ) : (
               <Link
-                to="/apply"
+                to="/academy/fellowship/apply"
                 className="relative overflow-hidden rounded-md px-6 py-2.5 text-sm font-heading font-bold tracking-wide bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
               >
                 <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
@@ -168,12 +168,12 @@ const Navbar = () => {
           >
             <div className="px-5 py-6 flex flex-col gap-5">
               {[
-                { to: "/about", label: "About" },
-                { to: "/structure", label: "Structure" },
-                { to: "/bursary", label: "Bursary" },
-                { to: "/cohort/2026-2027", label: "Cohort" },
-                { to: "/publications", label: "Publications" },
-                { to: "/faq", label: "FAQ" },
+                { to: "/academy/fellowship/about", label: "About" },
+                { to: "/academy/fellowship/structure", label: "Structure" },
+                { to: "/academy/fellowship/bursary", label: "Bursary" },
+                { to: "/academy/fellowship/cohort/2026-2027", label: "Cohort" },
+                { to: "/academy/fellowship/publications", label: "Publications" },
+                { to: "/academy/fellowship/faq", label: "FAQ" },
               ].map((item, i) => (
                 <motion.div
                   key={item.label}
@@ -198,7 +198,7 @@ const Navbar = () => {
               >
                 {!isLoggedIn && (
                   <Link
-                    to="/login"
+                    to="/academy/fellowship/login"
                     onClick={() => setMenuOpen(false)}
                     className="relative overflow-hidden block rounded-md px-6 py-3.5 text-sm font-heading font-bold tracking-wide text-center bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
                   >
@@ -219,7 +219,7 @@ const Navbar = () => {
                   </button>
                 ) : (
                   <Link
-                    to="/apply"
+                    to="/academy/fellowship/apply"
                     onClick={() => setMenuOpen(false)}
                     className="relative overflow-hidden mt-4  block rounded-md px-6 py-3.5 text-sm font-heading font-bold tracking-wide text-center bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
                   >

@@ -12,7 +12,7 @@ const routes = [
     description:
       "Mid-career practitioners applying on their own initiative, self-funded or with bursary support. This is the primary route into the Fellowship.",
     cta: "Begin Application",
-    to: "/apply/individual",
+    to: "/academy/fellowship/apply/individual",
   },
   {
     label: "Route 2",
@@ -20,7 +20,7 @@ const routes = [
     description:
       "Cultural organisations, foundations, and institutions that wish to invest in the development of a practitioner within their team. The institution funds participation in full.",
     cta: "Begin Nomination",
-    to: "/apply/institution",
+    to: "/academy/fellowship/apply/institution",
   },
   {
     label: "Route 3",
@@ -28,7 +28,7 @@ const routes = [
     description:
       "For nominees put forward by their institution. Complete this form independently — your institution does not see your answers before submission.",
     cta: "Begin Application",
-    to: "/apply/track3",
+    to: "/academy/fellowship/apply/track3",
   },
 ];
 
@@ -72,7 +72,7 @@ const Apply = () => {
                 transition={{ duration: 0.5 }}
               >
                 <Link
-                  to="/apply/individual"
+                  to="/academy/fellowship/apply/individual"
                   className="group block border border-border p-8 md:p-10 hover:border-brij-orange transition-colors h-full relative overflow-hidden"
                 >
                   <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain" />
@@ -111,7 +111,7 @@ const Apply = () => {
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
                 <Link
-                  to="/apply/institution"
+                  to="/academy/fellowship/apply/institution"
                   className="group block border border-border p-8 md:p-10 hover:border-brij-orange transition-colors h-full relative overflow-hidden"
                 >
                   <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain" />
@@ -266,7 +266,7 @@ const Apply = () => {
                    Bursary decisions are made by the Bursary Committee following the confirmation of selections, and are applicable only to selected fellows.
                   </p>
                   <Link
-                    to="/bursary"
+                    to="/academy/fellowship/bursary"
                     className="inline-flex items-center gap-2 text-sm font-semibold text-brij-orange hover:text-brij-red transition-colors mt-2"
                   >
                     Learn More <ArrowRight size={14} />

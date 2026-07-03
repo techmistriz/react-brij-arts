@@ -19,13 +19,13 @@ const Footer = () => {
 
           <div className="flex flex-col gap-3">
             <p className="label-text mb-2">Links</p>
-            <Link to="/about" className="text-sm text-muted-foreground hover:text-foreground transition-colors font-body">About</Link>
+            <Link to="/academy/fellowship/about" className="text-sm text-muted-foreground hover:text-foreground transition-colors font-body">About</Link>
                {!isLoggedIn && (
-            <Link to="/apply" className="text-sm text-muted-foreground hover:text-foreground transition-colors font-body">Apply</Link>
+            <Link to="/academy/fellowship/apply" className="text-sm text-muted-foreground hover:text-foreground transition-colors font-body">Apply</Link>
                )}
-            <Link to="/publications" className="text-sm text-muted-foreground hover:text-foreground transition-colors font-body">Publications</Link>
-            <Link to="/faq" className="text-sm text-muted-foreground hover:text-foreground transition-colors font-body">FAQ</Link>
-            <Link  to="/faq#contact"  className="text-sm text-muted-foreground hover:text-foreground transition-colors font-body">Contact</Link>
+            <Link to="/academy/fellowship/publications" className="text-sm text-muted-foreground hover:text-foreground transition-colors font-body">Publications</Link>
+            <Link to="/academy/fellowship/faq" className="text-sm text-muted-foreground hover:text-foreground transition-colors font-body">FAQ</Link>
+            <Link  to="/academy/fellowship/faq#contact"  className="text-sm text-muted-foreground hover:text-foreground transition-colors font-body">Contact</Link>
           </div>
 
           <div className="flex flex-col gap-3">

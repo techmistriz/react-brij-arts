@@ -194,7 +194,7 @@ const Bursary = () => {
                 <div className="text-center">
                   <p className="text-muted-foreground mb-6">Ready to apply?</p>
                   <Link
-                    to="/apply/individual"
+                    to="/academy/fellowship/apply/individual"
                     className="relative overflow-hidden inline-flex items-center gap-2 bg-foreground text-background px-8 py-3 text-sm font-heading font-bold tracking-wide group hover:text-white transition-colors"
                   >
                     <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain" />

@@ -38,7 +38,7 @@ const AboutSection = () => {
               THE BRIJ Cultural Leaders Fellowship is a nine-month leadership development programme for mid-career cultural practitioners and cross-sector professionals across India — delivered by Serendipity Arts.
             </p>
             <Link
-              to="/about"
+              to="/academy/fellowship/about"
               className="relative overflow-hidden inline-flex items-center gap-2 text-sm font-heading font-bold tracking-wide px-6 py-3 bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97] rounded-md"
             >
               <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>

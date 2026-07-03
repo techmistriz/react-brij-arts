@@ -312,7 +312,7 @@ const ApplyIndividual = () => {
                   nominate you.
                 </p>
                 <Link
-                  to="/bursary"
+                  to="/academy/fellowship/bursary"
                   className="inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-white/80 transition-colors relative z-10"
                 >
                   Learn More <ArrowRight size={14} />

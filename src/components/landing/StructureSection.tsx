@@ -71,7 +71,7 @@ const StructureSection = () => {
           className="mt-12"
         >
           <Link
-            to="/structure"
+            to="/academy/fellowship/structure"
             className="relative overflow-hidden inline-flex items-center gap-2 bg-foreground text-background px-8 py-3 text-sm font-heading font-bold tracking-wide group hover:text-white transition-colors"
           >
             <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain" />

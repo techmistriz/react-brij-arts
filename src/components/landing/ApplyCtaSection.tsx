@@ -22,7 +22,7 @@ const ApplyCtaSection = () => {
           {!isLoggedIn && (
 
           <Link
-            to="/apply"
+            to="/academy/fellowship/apply"
             className="inline-flex items-center justify-center border-2 border-white text-white px-10 py-4 font-heading font-bold tracking-wide text-sm hover:bg-white hover:text-foreground transition-colors active:scale-[0.97]"
           >
             Start Application

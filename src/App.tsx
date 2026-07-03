@@ -5,6 +5,10 @@ if (
   window.location.replace("/academy/fellowship/");
 }
 
+if (window.location.pathname === "/") {
+  window.location.replace("/brij");
+}
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -30,6 +34,10 @@ import Bursary from "./pages/Bursary";
 import AnalyticsTracker from "./components/AnalyticsTracker";
 import ApplicationsClosedModal from "./pages/PopupModal";
 import CohortPage from "./pages/CohortPage";
+import Brij from "./pages/Brij-Pages/Brij";
+import BrijAbout from "./pages/Brij-Pages/BrijAbout";
+import BrijCredits from "./pages/Brij-Pages/BrijCredits";
+import FellowshipModal from "./components/FellowshipModal";
 
 const queryClient = new QueryClient();
 
@@ -38,34 +46,57 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter basename="/academy/fellowship">  
+      <BrowserRouter>
         {/* <BrowserRouter> */}
         {/* <ScrollToHash /> */}
 
-           <ApplicationsClosedModal />
+        <FellowshipModal />
 
-         <AnalyticsTracker />
-         
+        <AnalyticsTracker />
+
         <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/academy" element={<Index />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/apply" element={<Apply />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/apply/individual" element={<ApplyIndividual />} />
-          <Route path="/apply/institution" element={<ApplyInstitution />} />
-          <Route path="/apply/nominee" element={<ApplyNominee />} />
-          <Route path="/apply/track3" element={<ApplyTrack3 />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          {/* <Route path="/" element={<Index />} /> */}
+          <Route path="/academy/fellowship" element={<Index />} />
+          <Route path="/academy/fellowship/about" element={<About />} />
+          <Route path="/academy/fellowship/apply" element={<Apply />} />
+          <Route path="/academy/fellowship/login" element={<Login />} />
           <Route
-            path="/submission-confirmation"
+            path="/academy/fellowship/apply/individual"
+            element={<ApplyIndividual />}
+          />
+          <Route
+            path="/academy/fellowship/apply/institution"
+            element={<ApplyInstitution />}
+          />
+          <Route
+            path="/academy/fellowship/apply/nominee"
+            element={<ApplyNominee />}
+          />
+          <Route
+            path="/academy/fellowship/apply/track3"
+            element={<ApplyTrack3 />}
+          />
+          <Route path="/academy/fellowship/dashboard" element={<Dashboard />} />
+          <Route
+            path="/academy/fellowship/submission-confirmation"
             element={<SubmissionConfirmation />}
           />
-          <Route path="/publications" element={<Publications />} />
-          <Route path="/faq" element={<Faq />} />
-          <Route path="/bursary" element={<Bursary />} />
-          <Route path="/structure" element={<Structure />} />
-          <Route path="/cohort/2026-2027" element={<CohortPage />} />
+          <Route
+            path="/academy/fellowship/publications"
+            element={<Publications />}
+          />
+          <Route path="/academy/fellowship/faq" element={<Faq />} />
+          <Route path="/academy/fellowship/bursary" element={<Bursary />} />
+          <Route path="/academy/fellowship/structure" element={<Structure />} />
+          <Route
+            path="/academy/fellowship/cohort/2026-2027"
+            element={<CohortPage />}
+          />
+
+          {/* Brij */}
+          <Route path="/brij" element={<Brij />} />
+          <Route path="/brij/about" element={<BrijAbout />} />
+          <Route path="/brij/credits" element={<BrijCredits />} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>

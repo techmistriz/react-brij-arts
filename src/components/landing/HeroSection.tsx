@@ -28,14 +28,14 @@ const HeroSection = () => {
             {!isLoggedIn && (
 
               <Link
-              to="/apply"
+              to="/academy/fellowship/apply"
               className="inline-flex items-center justify-center border-2 border-white text-white px-8 py-4 font-heading font-bold tracking-wide text-sm hover:bg-white hover:text-foreground transition-colors active:scale-[0.97]"
               >
               Apply Now
             </Link>
             )}
             <Link
-              to="/about"
+              to="/academy/fellowship/about"
               className="inline-flex items-center justify-center border-2 border-white text-white px-8 py-4 font-heading font-bold tracking-wide text-sm hover:bg-white hover:text-foreground transition-colors active:scale-[0.97]"
             >
               Explore the Fellowship
