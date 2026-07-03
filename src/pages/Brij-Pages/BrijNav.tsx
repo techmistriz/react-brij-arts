@@ -15,7 +15,7 @@ const links: NavLink[] = [
   { label: "About Us", to: "/about" },
   {
     label: "Innovation & Incubation",
-    to: "https://thebrij.world/incubator/",
+    // to: "https://thebrij.world/incubator/",
     children: [
       {
         label: "THE BRIJ Incubator",
