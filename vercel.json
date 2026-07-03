@@ -2,22 +2,18 @@
   "redirects": [
     {
       "source": "/",
-      "destination": "/academy/fellowship/",
+      "destination": "/brij",
       "permanent": false
     },
     {
       "source": "/academy",
-      "destination": "/academy/fellowship/",
+      "destination": "/academy/fellowship",
       "permanent": false
     }
   ],
   "rewrites": [
     {
-      "source": "/academy/assets/(.*)",
-      "destination": "/assets/$1"
-    },
-    {
-      "source": "/academy/(.*)",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
