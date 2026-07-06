@@ -165,7 +165,7 @@ const ApplyNominee = () => {
       if (updateError) throw updateError;
 
       toast({ title: "Application submitted successfully" });
-      navigate("/submission-confirmation");
+      navigate("/academy/fellowship/submission-confirmation");
     } catch (err: any) {
       console.error("Submission error:", err);
       toast({

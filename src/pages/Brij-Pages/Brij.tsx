@@ -12,12 +12,6 @@ import brijGradientFellowship from "@/assets/brij-gradient-fellowship.jpg";
 import brijGradientIncubator from "@/assets/brij-gradient-incubator.jpg";
 import brijGradientSAF from "@/assets/brij-gradient-saf.jpg";
 import brijGradientSAFFestival from "@/assets/brij-gradient-saf-festival.jpg";
-// import slice01 from "@/assets/brij-more/slice-01.jpg.asset.json";
-// import slice02 from "@/assets/brij-more/slice-02.jpg.asset.json";
-// import slice03 from "@/assets/brij-more/slice-03.jpg.asset.json";
-// import slice04 from "@/assets/brij-more/slice-04.jpg.asset.json";
-// import slice05 from "@/assets/brij-more/slice-05.jpg.asset.json";
-// import slice06 from "@/assets/brij-more/slice-06.jpg.asset.json";
 import slice01 from "@/assets/images/brij-more-slice-01.jpg";
 import slice02 from "@/assets/images/brij-more-slice-02.jpg";
 import slice03 from "@/assets/images/brij-more-slice-03.jpg";
@@ -152,12 +146,12 @@ const Brij = () => {
         <div className="max-w-7xl mx-auto">
           <motion.h2
             {...fadeUp}
-            className="font-heading font-bold text-foreground uppercase text-[36px] md:text-[47px] leading-tight mb-14"
+            className="font-heading font-ligatures font-bold text-foreground uppercase text-[36px] md:text-[47px] leading-tight mb-14"
           >
             Where THE BRIJ Lives Today
           </motion.h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+          <div className="font-ligatures grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
             {[
               {
                 title: "The Brij Cultural Leaders Fellowship",
@@ -193,7 +187,7 @@ const Brij = () => {
                 cta: "Experience The Festival",
                 bg: brijGradientFellowship,
                 bgPosition: "right center",
-                bgSize: "auto 160%",
+                // bgSize: "auto 160%",
               },
             ].map((card, i) => {
               const cardClass =
@@ -362,7 +356,7 @@ const Brij = () => {
       >
         <div className="max-w-7xl mx-auto">
           <motion.div {...fadeUp} className="mb-14">
-            <h2 className="font-heading font-bold text-foreground uppercase text-[36px] md:text-[47px] leading-tight">
+            <h2 className="font-ligatures font-heading font-bold text-foreground uppercase text-[36px] md:text-[47px] leading-tight">
               Elements of THE BRIJ
             </h2>
           </motion.div>

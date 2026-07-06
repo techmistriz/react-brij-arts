@@ -13,7 +13,7 @@ serve(async (req) => {
   try {
     const { nomineeEmail, nomineeFirstName, nomineeLastName, institutionName, contactName, nomineeToken, siteUrl } = await req.json();
 
-    const nomineeLink = `${siteUrl}/apply/nominee?token=${nomineeToken}`;
+    const nomineeLink = `${siteUrl}/academy/fellowship/apply/nominee?token=${nomineeToken}`;
 
     // Log the email that would be sent (in production, integrate with email service)
     console.log(`   Sending nominee invitation email to: ${nomineeEmail}`);

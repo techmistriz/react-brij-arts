@@ -169,7 +169,7 @@ const ApplyInstitution = () => {
       //   title: "Nomination submitted successfully",
       //   className: "font-semibold",
       // });
-      // navigate("/submission-confirmation");
+      // navigate("/academy/fellowship/submission-confirmation");
 
       console.log("Form Submission disabled");
       toast({

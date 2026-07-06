@@ -28,7 +28,7 @@ const SubmissionConfirmation = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              to="/dashboard"
+              to="/academy/fellowship/dashboard"
               className="inline-flex items-center justify-center bg-foreground text-background px-6 py-3 font-semibold tracking-wide text-sm hover:opacity-90 transition-opacity"
             >
               View Dashboard

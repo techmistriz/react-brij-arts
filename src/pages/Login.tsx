@@ -47,7 +47,7 @@ const user = res.user;
       login(token, user);
 
       toast.success("Login successful!");
-      navigate("/dashboard");
+      navigate("/academy/fellowship/dashboard");
     } catch (error: any) {
       const message =
         error?.response?.data?.message || error?.message || "Login failed";

@@ -217,3 +217,22 @@
     z-index: 1;
   }
 }
+
+
+@layer utilities {
+  .font-ligatures {
+    font-feature-settings:
+      "liga" 1,
+      "clig" 1,
+      "dlig" 1,
+      "hlig" 1,
+      "calt" 1,
+      "rlig" 1;
+
+    font-variant-ligatures:
+      common-ligatures
+      discretionary-ligatures
+      historical-ligatures
+      contextual;
+  }
+}

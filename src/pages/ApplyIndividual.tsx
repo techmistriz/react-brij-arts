@@ -216,7 +216,7 @@ const ApplyIndividual = () => {
       //   description: "Application submitted successfully!",
       //   className: "font-semibold",
       // });
-      // navigate("/submission-confirmation");
+      // navigate("/academy/fellowship/submission-confirmation");
 
       // toast({
       //   description: "Application submittion disabled",

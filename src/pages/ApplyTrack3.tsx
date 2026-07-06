@@ -243,7 +243,7 @@ const ApplyTrack3 = () => {
       login(res.data.token, res.data.user);
 
       toast({ title: "Application submitted successfully" });
-      navigate("/submission-confirmation");
+      navigate("/academy/fellowship/submission-confirmation");
     } catch (err: any) {
       console.error(err);
       toast({

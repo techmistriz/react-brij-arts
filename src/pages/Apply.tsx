@@ -152,7 +152,7 @@ const Apply = () => {
               className="mt-8"
             >
               <Link
-                to="/apply/track3"
+                to="/academy/fellowship/apply/track3"
                 className="group block border border-border p-6 md:p-8 hover:border-brij-orange transition-colors relative overflow-hidden"
               >
                 <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain" />
@@ -203,7 +203,7 @@ const Apply = () => {
                   <p className="text-xs text-muted-foreground">
                     Unsure?{" "}
                     <Link
-                      to="/faq"
+                      to="/academy/fellowship/faq"
                       className="underline hover:text-foreground transition-colors"
                     >
                       Read the full eligibility criteria

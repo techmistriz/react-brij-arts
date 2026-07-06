@@ -15,10 +15,10 @@ interface FooterProps {
 }
 
 const defaultLinks: FooterLink[] = [
-  { label: "About", href: "/about" },
-  { label: "Apply", href: "/apply" },
-  { label: "Publications", href: "/publications" },
-  { label: "FAQ", href: "/faq" },
+  { label: "About", href: "/academy/fellowship/about" },
+  { label: "Apply", href: "/academy/fellowship/apply" },
+  { label: "Publications", href: "/academy/fellowship/publications" },
+  { label: "FAQ", href: "/academy/fellowship/faq" },
   { label: "Contact", href: "mailto:tbf@serendipityarts.org", external: true },
 ];
 

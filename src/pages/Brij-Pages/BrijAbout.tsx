@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import {
+  Play,
   Volume2,
   VolumeX,
-  Play,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
@@ -13,6 +13,8 @@ import brijAboutHero from "@/assets/brij-about-hero.jpg";
 import safFestivalPoster from "@/assets/saf-festival-poster.jpg";
 import brijLogo from "@/assets/brij-logo.png";
 import BrijNav from "./BrijNav";
+import brijVideo from "@/assets/videos/THE BRIJ(1080P_HD).mp4";
+import safVideo from "@/assets/videos/Moments of Serendipity_ A Decade _ Official Launch Film(1080P_HD).mp4";
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -39,8 +41,7 @@ const SectionHeader = ({
 
 type FilmSlide = {
   id: string;
-  videoId: string;
-  start?: number;
+  video: string;
   poster: string;
   headline: string;
   showLogo: boolean;
@@ -49,86 +50,53 @@ type FilmSlide = {
 const slides: FilmSlide[] = [
   {
     id: "brij",
-    videoId: "DR3Jvn4AljM",
-    start: 7,
+    video: brijVideo,
     poster: brijAboutHero,
     headline: "The Permanent Home For What's Next",
     showLogo: true,
   },
   {
     id: "saf",
-    videoId: "AT2y5gz1TRg",
+    video: safVideo,
     poster: safFestivalPoster,
     headline: "Serendipity Arts Festival 2026",
     showLogo: false,
   },
 ];
-
 /* ───── single film slide ───── */
 const FilmSlideView = ({ slide }: { slide: FilmSlide }) => {
-  const playerRef = useRef<HTMLIFrameElement>(null);
-  const ytPlayerRef = useRef<any>(null);
+  // const playerRef = useRef<HTMLIFrameElement>(null);
+  // const ytPlayerRef = useRef<any>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [mode, setMode] = useState<"static" | "playing">("static");
   const [isMuted, setIsMuted] = useState(true);
 
   const toggleMute = () => {
-    const p = ytPlayerRef.current;
-    if (!p) return;
-    if (isMuted) {
-      p.unMute();
-      p.setVolume(80);
-      setIsMuted(false);
-    } else {
-      p.mute();
-      setIsMuted(true);
-    }
+    if (!videoRef.current) return;
+
+    videoRef.current.muted = !videoRef.current.muted;
+    setIsMuted(videoRef.current.muted);
   };
 
-  const startFilm = () => setMode("playing");
+  const startFilm = () => {
+    setMode("playing");
+
+    setTimeout(() => {
+      videoRef.current?.play();
+    }, 0);
+  };
   const resetToStatic = () => {
-    try {
-      ytPlayerRef.current?.destroy?.();
-    } catch {
-      /* noop */
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+      videoRef.current.muted = true;
     }
-    ytPlayerRef.current = null;
+
     setMode("static");
     setIsMuted(true);
   };
 
-  useEffect(() => {
-    if (mode !== "playing") return;
-    let cancelled = false;
-    const init = () => {
-      if (cancelled || !playerRef.current) return;
-      ytPlayerRef.current = new (window as any).YT.Player(playerRef.current, {
-        events: {
-          onReady: (e: any) => {
-            e.target.mute();
-            e.target.playVideo();
-          },
-          onStateChange: (e: any) => {
-            if (e.data === 0) resetToStatic();
-          },
-        },
-      });
-    };
-    if ((window as any).YT?.Player) {
-      init();
-    } else {
-      const prev = (window as any).onYouTubeIframeAPIReady;
-      (window as any).onYouTubeIframeAPIReady = () => {
-        prev?.();
-        init();
-      };
-    }
-    return () => {
-      cancelled = true;
-    };
-  }, [mode]);
-
   const isPlaying = mode === "playing";
-  const startParam = slide.start ? `&start=${slide.start}` : "";
   const isMobileLandscape =
     typeof window !== "undefined" &&
     window.matchMedia("(min-width: 768px)").matches;
@@ -147,15 +115,16 @@ const FilmSlideView = ({ slide }: { slide: FilmSlide }) => {
 
       {/* Film iframe */}
       {isPlaying && (
-        <div className="absolute inset-0 z-[5] overflow-hidden bg-foreground">
-          <iframe
-            ref={playerRef}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-screen h-[56.25vw] md:w-[max(100vw,177.78vh)] md:h-[max(100vh,56.25vw)]"
-            src={`https://www.youtube.com/embed/${slide.videoId}?enablejsapi=1&autoplay=1&mute=1${startParam}&controls=1&modestbranding=1&rel=0&showinfo=0&playsinline=1&playlist=${slide.videoId}`}
-            title="THE BRIJ film"
-            frameBorder={0}
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
+        <div className="absolute inset-0 z-[5] overflow-hidden bg-black">
+          <video
+            ref={videoRef}
+            className="absolute inset-0 w-full h-full object-cover"
+            src={slide.video}
+            autoPlay
+            muted={isMuted}
+            playsInline
+            controls
+            onEnded={resetToStatic}
           />
         </div>
       )}
@@ -233,15 +202,6 @@ const BrijAbout = () => {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [activeIdx, setActiveIdx] = useState(0);
 
-  // Preload YouTube IFrame API once
-  useEffect(() => {
-    if ((window as any).YT?.Player) return;
-    const tag = document.createElement("script");
-    tag.src = "https://www.youtube.com/iframe_api";
-    const firstScript = document.getElementsByTagName("script")[0];
-    firstScript.parentNode?.insertBefore(tag, firstScript);
-  }, []);
-
   const goTo = (idx: number) => {
     const el = scrollerRef.current;
     if (!el) return;
@@ -264,7 +224,7 @@ const BrijAbout = () => {
         <div
           ref={scrollerRef}
           onScroll={onScroll}
-          className="flex overflow-x-auto snap-x snap-mandatory h-[calc(56.25vw+260px)] md:h-[calc(100vh-5rem)] [&::-webkit-scrollbar]:hidden [scrollbar-width:none]"
+          className="font-ligatures flex overflow-x-auto snap-x snap-mandatory h-[calc(56.25vw+260px)] md:h-[calc(100vh-5rem)] [&::-webkit-scrollbar]:hidden [scrollbar-width:none]"
         >
           {slides.map((s) => (
             <FilmSlideView key={s.id} slide={s} />
@@ -343,7 +303,7 @@ const BrijAbout = () => {
       </section>
 
       {/* ── Rethinking Cultural Institution ── */}
-      <section className="px-6 md:px-12 lg:px-20 py-20 md:py-28 bg-background">
+      <section className="font-ligatures px-6 md:px-12 lg:px-20 py-20 md:py-28 bg-background">
         <div className="max-w-5xl mx-auto">
           <SectionHeader title="Rethinking What A Cultural Institution Can Look Like" />
           <motion.div
@@ -369,7 +329,7 @@ const BrijAbout = () => {
       </section>
 
       {/* ── Three Pillars ── */}
-      <section className="px-6 md:px-12 lg:px-20 py-20 md:py-28 bg-background">
+      <section className="font-ligatures px-6 md:px-12 lg:px-20 py-20 md:py-28 bg-background">
         <div className="max-w-5xl mx-auto">
           <SectionHeader title="Three Pillars. One Future Ecosystem." />
           <motion.p

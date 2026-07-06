@@ -54,7 +54,7 @@ const desktopLinks = links.filter((l) => l.label !== "Home");
 
 const BrijNav = () => {
   const { pathname } = useLocation();
-  const isBrijHome = pathname === "/brij" || pathname === "/about";
+  const isBrijHome = pathname === "/" || pathname === "/about";
   const isSafHome = pathname === "/saf-2026";
   const hideUntilScroll = isBrijHome || isSafHome;
   const [scrolled, setScrolled] = useState(false);
@@ -84,7 +84,7 @@ const BrijNav = () => {
   const handleAnchor = (e: React.MouseEvent<HTMLAnchorElement>, to: string) => {
     if (!to.includes("#")) return;
     const [, hash] = to.split("#");
-    if (pathname === "/brij") {
+    if (pathname === "/") {
       e.preventDefault();
       document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" });
     }

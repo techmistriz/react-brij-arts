@@ -11,6 +11,43 @@ export const aims = [
 import brijElement1 from "@/assets/brij-element-1.jpg";
 import brijElement2 from "@/assets/brij-element-2.jpg";
 import brijElement3 from "@/assets/brij-element-3-innovation.jpg";
+import sunil from "@/assets/images/sunil-kant.png"
+import sefali from "@/assets/images/sefali.png"
+import saroj from "@/assets/images/saroj.png"
+import akshay from "@/assets/images/akshay.png"
+import ranjit from "@/assets/images/ranjit.png"
+import manu from "@/assets/images/manu.png"
+import shubha from "@/assets/images/shubha.png"
+import aneesh from "@/assets/images/aneesh.png"
+import anuradha from "@/assets/images/anuradha.png"
+import gavin from "@/assets/images/Gavin-Robotham-1.png"
+import dikshu from "@/assets/images/dikshu.png"
+
+import arup from "@/assets/images/Webb-Yates.png"
+import webb from "@/assets/images/Webb-Yates.png"
+import maxxfordham from "@/assets/images/Max-Fordham.png"
+import bes from "@/assets/images/bes.jpg"
+import crab from "@/assets/images/crab.jpg"
+import dew from "@/assets/images/dew.jpg"
+import eds from "@/assets/images/eds.jpg"
+import hill from "@/assets/images/hill.jpg"
+import id from "@/assets/images/ID.jpg"
+import ihd from "@/assets/images/ihd.jpg"
+import mc from "@/assets/images/manish c..jpg"
+import lb from "@/assets/images/LB.jpg"
+import max from "@/assets/images/max.jpg"
+import cp from "@/assets/images/cp.jpg"
+import ayq from "@/assets/images/ayw.jpg"
+import aecom from "@/assets/images/aecom.jpg"
+import turner from "@/assets/images/turner.jpg"
+import tcp  from "@/assets/images/tcp.jpg"
+import vital   from "@/assets/images/vital.jpg"
+import saviram  from "@/assets/images/saviram.jpg"
+
+
+import EDS from "@/assets/images/EDS.png"
+import BCG from "@/assets/images/bcg.png"
+import logo from "@/assets/images/2x4_logo.gif"
 
 export const elements = [
   {
@@ -35,7 +72,7 @@ export const elements = [
 
 export const founderData = {
   name: "Sunil Kant Munjal",
-  image: "https://thebrij.world/wp-content/uploads/2023/01/Untitled-design-35.png",
+  image: sunil,
   bio: [
     "A patron of the arts and a philanthropist, Sunil Kant Munjal has supported healthcare, education, and the arts in India for over 30 years. One of the founder promoters of the Hero Group, the world's leading two-wheeler company, he is currently the Chairman of Hero Enterprise, where he actively oversees higher education, healthcare, and capacity building projects managed by various family trusts.",
     "In addition, he runs diverse operating businesses, an active Investment Office, and sits on the boards of multiple global organisations.",
@@ -45,15 +82,15 @@ export const founderData = {
 export const boardMembers = [
   {
     name: "Shefali Munjal",
-    image: "https://thebrij.world/wp-content/uploads/2022/12/Rectangle-5-1-1-500x450.png",
+    image: sefali,
   },
   {
     name: "Saroj Poddar",
-    image: "https://thebrij.world/wp-content/uploads/2022/12/Rectangle-5-1-2-500x450.png",
+    image: saroj,
   },
   {
     name: "Akshay Poddar",
-    image: "https://thebrij.world/wp-content/uploads/2022/12/Rectangle-5-3.png",
+    image: akshay,
   },
 ];
 
@@ -76,45 +113,45 @@ export const boardAdvisors = [
 ];
 
 export const advisors = [
-  { name: "Ranjit Hoskote", image: "https://thebrij.world/wp-content/uploads/2022/12/Rectangle-5-7-1.png" },
-  { name: "Manu Chandra", image: "https://thebrij.world/wp-content/uploads/2022/12/Rectangle-5-7-2.png" },
-  { name: "Shubha Mudgal", image: "https://thebrij.world/wp-content/uploads/2022/12/Rectangle-5-7-3.png" },
-  { name: "Aneesh Pradhan", image: "https://thebrij.world/wp-content/uploads/2022/12/Rectangle-5-7-4.png" },
-  { name: "Anuradha Kapur", image: "https://thebrij.world/wp-content/uploads/2022/12/Rectangle-5-7-5.png" },
+  { name: "Ranjit Hoskote", image: ranjit },
+  { name: "Manu Chandra", image: manu },
+  { name: "Shubha Mudgal", image: shubha },
+  { name: "Aneesh Pradhan", image: aneesh },
+  { name: "Anuradha Kapur", image: anuradha },
 ];
 
 export const architectureExperts = [
-  { name: "Gavin Robotham", image: "https://thebrij.world/wp-content/uploads/2022/12/Gavin-Robotham-1.png" },
-  { name: "Dikshu Kukreja", image: "https://thebrij.world/wp-content/uploads/2022/12/Gavin-Robotham-1-1.png" },
+  { name: "Gavin Robotham", image: gavin },
+  { name: "Dikshu Kukreja", image: dikshu },
 ];
 
 export const buildingConsultants = [
-  { name: "Arup", image: "https://thebrij.world/wp-content/uploads/2022/12/Arup.png" },
-  { name: "Webb Yates", image: "https://thebrij.world/wp-content/uploads/2022/12/Webb-Yates.png" },
-  { name: "Max Fordham", image: "https://thebrij.world/wp-content/uploads/2022/12/Max-Fordham.png" },
-  { name: "Saviram Engineering Consultants Pvt Ltd", image: "https://thebrij.world/wp-content/uploads/2023/08/34-450x450.jpg" },
-  { name: "Vital Concepts and Designs LLP", image: "https://thebrij.world/wp-content/uploads/2023/08/32-450x450.jpg" },
-  { name: "TPC Technical Project Consultants Pvt Ltd", image: "https://thebrij.world/wp-content/uploads/2023/08/33-450x450.jpg" },
-  { name: "Turner Project Management India Pvt. Ltd", image: "https://thebrij.world/wp-content/uploads/2023/08/31-450x450.jpg" },
-  { name: "AECOM India Pvt. Ltd", image: "https://thebrij.world/wp-content/uploads/2023/08/30-450x450.jpg" },
-  { name: "Anthony W Yuen", image: "https://thebrij.world/wp-content/uploads/2023/08/27-450x450.jpg" },
-  { name: "CP Kukreja Architects", image: "https://thebrij.world/wp-content/uploads/2023/08/25-450x450.jpg" },
-  { name: "BES Consultant Pvt. Ltd", image: "https://thebrij.world/wp-content/uploads/2023/08/26-450x450.jpg" },
-  { name: "Cook Robotham Architectural Bureau (CRAB)", image: "https://thebrij.world/wp-content/uploads/2023/08/24-450x450.jpg" },
-  { name: "Dew Point Services Consultants LLP", image: "https://thebrij.world/wp-content/uploads/2023/08/23-450x450.jpg" },
-  { name: "Environmental Design Solutions Pvt. Ltd. (EDS)", image: "https://thebrij.world/wp-content/uploads/2023/08/22-450x450.jpg" },
-  { name: "Hill International Cost Consultant India Pvt Ltd", image: "https://thebrij.world/wp-content/uploads/2023/08/21-450x450.jpg" },
-  { name: "Integral Designs International Studio Pvt Ltd", image: "https://thebrij.world/wp-content/uploads/2023/08/20-450x450.jpg" },
-  { name: "IhD Technology Consultants India Pvt. Ltd", image: "https://thebrij.world/wp-content/uploads/2023/08/19-450x450.jpg" },
-  { name: "Manish Consultants", image: "https://thebrij.world/wp-content/uploads/2023/08/18-450x450.jpg" },
-  { name: "Lerch Bates Pvt. Ltd", image: "https://thebrij.world/wp-content/uploads/2023/08/17-450x450.jpg" },
-  { name: "Max Protection Services Pvt Ltd", image: "https://thebrij.world/wp-content/uploads/2023/08/16-450x450.jpg" },
+  { name: "Arup", image: arup },
+  { name: "Webb Yates", image: webb},
+  { name: "Max Fordham", image: maxxfordham},
+  { name: "Saviram Engineering Consultants Pvt Ltd", image: saviram },
+  { name: "Vital Concepts and Designs LLP", image: vital },
+  { name: "TPC Technical Project Consultants Pvt Ltd", image: tcp },
+  { name: "Turner Project Management India Pvt. Ltd", image: turner},
+  { name: "AECOM India Pvt. Ltd", image:aecom},
+  { name: "Anthony W Yuen", image:ayq},
+  { name: "CP Kukreja Architects", image:cp },
+  { name: "BES Consultant Pvt. Ltd", image: bes},
+  { name: "Cook Robotham Architectural Bureau (CRAB)", image: crab },
+  { name: "Dew Point Services Consultants LLP", image: dew },
+  { name: "Environmental Design Solutions Pvt. Ltd. (EDS)", image: eds },
+  { name: "Hill International Cost Consultant India Pvt Ltd", image: hill },
+  { name: "Integral Designs International Studio Pvt Ltd", image: id },
+  { name: "IhD Technology Consultants India Pvt. Ltd", image: ihd },
+  { name: "Manish Consultants", image: mc },
+  { name: "Lerch Bates Pvt. Ltd", image: lb },
+  { name: "Max Protection Services Pvt Ltd", image: max },
 ];
 
 export const otherConsultants = [
-  { category: "Sustainability Consultant", name: "EDS", image: "https://thebrij.world/wp-content/uploads/2022/12/EDS.png" },
-  { category: "Strategy Consultant", name: "BCG", image: "https://thebrij.world/wp-content/uploads/2022/12/bcg.png" },
-  { category: "Design & Branding Consultant", name: "2×4", image: "https://thebrij.world/wp-content/uploads/2023/04/2x4_logo.gif" },
+  { category: "Sustainability Consultant", name: "EDS", image: EDS },
+  { category: "Strategy Consultant", name: "BCG", image: BCG },
+  { category: "Design & Branding Consultant", name: "2×4", image: logo },
 ];
 
 export const brijNavLinks = [
