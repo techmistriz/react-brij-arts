@@ -10,6 +10,7 @@ import {
   boardMembers,
   advisors,
   founderData,
+  foundersData,
 } from "@/data/brijData";
 import BrijNav from "./BrijNav";
 
@@ -111,51 +112,58 @@ const BrijCredits = () => {
       </section>
 
       {/* ── Founder ── */}
-      <section className="bg-background px-6 md:px-12 lg:px-20 pb-12 md:pb-16">
-        <div className="max-w-7xl mx-auto">
-          <motion.h2
-            {...fadeUp}
-            className="font-heading font-bold text-primary uppercase text-[28px] md:text-[36px] leading-tight mb-8 md:mb-10"
-          >
-            Founder
-          </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_3fr] items-stretch">
-            <motion.div {...fadeUp} className="relative">
-              <img
-                src={founderData.image}
-                alt={founderData.name}
-                className="w-full h-full object-cover object-top min-h-[280px] max-h-[420px] md:min-h-[240px] md:max-h-[420px]"
-                loading="lazy"
-              />
-            </motion.div>
-            <motion.div
-              {...fadeUp}
-              transition={{ ...fadeUp.transition, delay: 0.1 }}
-              className="relative px-8 md:px-12 lg:px-16 py-14 md:py-16 text-white overflow-hidden"
-              style={{
-                backgroundImage: `url(${patronGradient})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            >
-              <div className="relative">
-                <h2 className="font-heading font-bold text-white uppercase text-[36px] md:text-[47px] leading-tight mb-6">
-                  {founderData.name}
-                </h2>
-                {founderData.bio.map((paragraph, i) => (
-                  <p
-                    key={i}
-                    className="font-body text-white text-[16px] md:text-[18px] leading-relaxed mb-3"
-                  >
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+  {foundersData.map((founder, index) => (
+  <section
+    key={founder.name}
+    className="bg-background px-6 md:px-12 lg:px-20 pb-12 md:pb-16"
+  >
+    <div className="max-w-7xl mx-auto">
+      <motion.h2
+        {...fadeUp}
+        className="font-heading font-bold text-primary uppercase text-[28px] md:text-[36px] leading-tight mb-8 md:mb-10"
+      >
+        {index === 0 ? "Founder" : "Co-Founder"}
+      </motion.h2>
 
+      <div className="grid grid-cols-1 md:grid-cols-[1fr_3fr] items-stretch">
+        <motion.div {...fadeUp} className="relative">
+         <img
+  src={founder.image}
+  alt={founder.name}
+  className="w-full h-full object-contain"
+  loading="lazy"
+/>
+        </motion.div>
+
+        <motion.div
+          {...fadeUp}
+          transition={{ ...fadeUp.transition, delay: 0.1 }}
+          className="relative px-8 md:px-12 lg:px-16 py-14 md:py-10 text-white overflow-hidden"
+          style={{
+            backgroundImage: `url(${patronGradient})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <div className="relative">
+            <h2 className="font-heading font-bold text-white uppercase text-[36px] md:text-[47px] leading-tight mb-6">
+              {founder.name}
+            </h2>
+
+            {founder.bio.map((paragraph, i) => (
+              <p
+                key={i}
+                className="font-body text-white text-[16px] md:text-[18px] leading-relaxed mb-3"
+              >
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  </section>
+))}
       {/* Board Members */}
       <section className="px-6 md:px-12 lg:px-20 py-20 md:py-24 bg-background">
         <div className="max-w-7xl mx-auto">

@@ -1,13 +1,14 @@
 import { createRoot } from "react-dom/client";
+import { HelmetProvider } from "react-helmet-async";
+
 import App from "./App.tsx";
 import "./index.css";
 import { AuthProvider } from "./context/AuthContext.tsx";
-import ApplicationsClosedModal from "./pages/PopupModal.tsx";
 
 createRoot(document.getElementById("root")!).render(
-  <AuthProvider>
- 
-    <App />
-  </AuthProvider>,
+  <HelmetProvider>
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  </HelmetProvider>
 );
-

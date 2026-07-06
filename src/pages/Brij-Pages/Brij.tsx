@@ -21,6 +21,7 @@ import slice06 from "@/assets/images/brij-more-slice-06.jpg";
 import { aims, elements } from "@/data/brijData";
 import BrijNav from "./BrijNav";
 import Footer from "./Footer";
+import { Helmet } from "react-helmet-async";
 
 const BrijModelViewer = lazy(
   () => import("@/pages/Brij-Pages/BrijModelViewer"),
@@ -54,7 +55,45 @@ const Brij = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  return (
+return (
+  <>
+  
+  <Helmet prioritizeSeoTags>
+    <title>THE BRIJ | A Creative Ecosystem for Everyone</title>
+
+    <meta
+      name="description"
+      content="Explore THE BRIJ, a global arts and culture ecosystem advancing creative leadership through education, research, innovation, incubation, and transformative experiences."
+      key="description"
+    />
+
+    <meta
+      property="og:title"
+      content="THE BRIJ | A Creative Ecosystem for Everyone"
+      key="og:title"
+    />
+
+    <meta
+      property="og:description"
+      content="Explore THE BRIJ, a global arts and culture ecosystem advancing creative leadership through education, research, innovation, incubation, and transformative experiences."
+      key="og:description"
+    />
+
+    <meta
+      name="twitter:title"
+      content="THE BRIJ | A Creative Ecosystem for Everyone"
+      key="twitter:title"
+    />
+
+    <meta
+      name="twitter:description"
+      content="Explore THE BRIJ, a global arts and culture ecosystem advancing creative leadership through education, research, innovation, incubation, and transformative experiences."
+      key="twitter:description"
+    />
+  </Helmet>
+
+ 
+
     <div className="min-h-screen bg-background">
       <BrijNav />
 
@@ -520,6 +559,7 @@ const Brij = () => {
         copyright="THE BRIJ"
       />
     </div>
+    </>
   );
 };
 

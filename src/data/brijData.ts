@@ -12,6 +12,7 @@ import brijElement1 from "@/assets/brij-element-1.jpg";
 import brijElement2 from "@/assets/brij-element-2.jpg";
 import brijElement3 from "@/assets/brij-element-3-innovation.jpg";
 import sunil from "@/assets/images/sunil-kant.png"
+import shefaliMunjal from "@/assets/images/shefali-munjal.jpg"
 import sefali from "@/assets/images/sefali.png"
 import saroj from "@/assets/images/saroj.png"
 import akshay from "@/assets/images/akshay.png"
@@ -70,14 +71,36 @@ export const elements = [
   },
 ];
 
-export const founderData = {
-  name: "Sunil Kant Munjal",
-  image: sunil,
-  bio: [
-    "A patron of the arts and a philanthropist, Sunil Kant Munjal has supported healthcare, education, and the arts in India for over 30 years. One of the founder promoters of the Hero Group, the world's leading two-wheeler company, he is currently the Chairman of Hero Enterprise, where he actively oversees higher education, healthcare, and capacity building projects managed by various family trusts.",
-    "In addition, he runs diverse operating businesses, an active Investment Office, and sits on the boards of multiple global organisations.",
-  ],
-};
+// export const founderData = {
+//   name: "Sunil Kant Munjal",
+//   image: sunil,
+//   bio: [
+//     "A patron of the arts and a philanthropist, Sunil Kant Munjal has supported healthcare, education, and the arts in India for over 30 years. One of the founder promoters of the Hero Group, the world's leading two-wheeler company, he is currently the Chairman of Hero Enterprise, where he actively oversees higher education, healthcare, and capacity building projects managed by various family trusts.",
+//     "In addition, he runs diverse operating businesses, an active Investment Office, and sits on the boards of multiple global organisations.",
+//   ],
+// };
+
+
+export const foundersData = [
+  {
+    name: "Sunil Kant Munjal",
+    image: sunil,
+    bio: [
+      "A patron of the arts and a philanthropist, Sunil Kant Munjal has supported healthcare, education, and the arts in India for over 30 years. One of the founder promoters of the Hero Group, the world's leading two-wheeler company, he is currently the Chairman of Hero Enterprise, where he actively oversees higher education, healthcare, and capacity building projects managed by various family trusts.",
+      "In addition, he runs diverse operating businesses, an active Investment Office, and sits on the boards of multiple global organisations.",
+    ],
+  },
+  {
+    name: "Shefali Munjal",
+    image: shefaliMunjal,
+    bio: [
+      "Shefali Munjal is a dynamic young business leader, social entrepreneur and philanthropist who featured in Businessworld's 2018 list of Achievers Under 40.",
+      "In 2005, Shefali pioneered the Hero Group's foray into insurance distribution; she has since transformed a modestly sized division that sold 5000 policies a month into a high-growth enterprise that consistently sells around 10 million policies a year—one of the highest in India's insurance industry.",
+      "Besides sustaining the growth of Hero Enterprise firms in the areas of insurance, steel, real estate and corporate training, Shefali is involved in developing futuristic and sustainable businesses that are profitable and socially meaningful and in also nurturing entrepreneurs with innovative business models and technologies that can become global in scale.",
+    ],
+  },
+];
+
 
 export const boardMembers = [
   {
