@@ -27,7 +27,10 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="flex items-center justify-between px-5 md:px-12 lg:px-24 py-3 md:py-4">
-        <Link to="/academy/fellowship" className="flex items-center gap-3 md:gap-4">
+        <Link
+          to="/academy/fellowship"
+          className="flex items-center gap-3 md:gap-4"
+        >
           <img src={brijLogo} alt="THE BRIJ" className="h-5 md:h-7" />
           <span className="text-brij-gray text-lg font-light select-none">
             |
@@ -41,6 +44,12 @@ const Navbar = () => {
 
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-8">
+          <a
+            href="https://thebrij.world/"
+            className="text-sm font-heading font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
+          >
+            Home
+          </a>
           <Link
             to="/academy/fellowship/about"
             className="text-sm font-heading font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
@@ -168,11 +177,19 @@ const Navbar = () => {
           >
             <div className="px-5 py-6 flex flex-col gap-5">
               {[
+                {
+                  href: "https://thebrij.world/",
+                  label: "Home",
+                  external: true,
+                },
                 { to: "/academy/fellowship/about", label: "About" },
                 { to: "/academy/fellowship/structure", label: "Structure" },
                 { to: "/academy/fellowship/bursary", label: "Bursary" },
                 { to: "/academy/fellowship/cohort/2026-2027", label: "Cohort" },
-                { to: "/academy/fellowship/publications", label: "Publications" },
+                {
+                  to: "/academy/fellowship/publications",
+                  label: "Publications",
+                },
                 { to: "/academy/fellowship/faq", label: "FAQ" },
               ].map((item, i) => (
                 <motion.div
@@ -181,13 +198,23 @@ const Navbar = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05, duration: 0.25 }}
                 >
-                  <Link
-                    to={item.to}
-                    onClick={() => setMenuOpen(false)}
-                    className="text-sm font-heading font-bold uppercase tracking-[0.15em] text-foreground hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all active:bg-gradient-to-r active:from-brij-red active:via-brij-orange active:to-brij-pink active:bg-clip-text active:text-transparent"
-                  >
-                    {item.label}
-                  </Link>
+                  {item.external ? (
+                    <a
+                      href={item.href}
+                      onClick={() => setMenuOpen(false)}
+                      className="text-sm font-heading font-bold uppercase tracking-[0.15em] text-foreground hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link
+                      to={item.to}
+                      onClick={() => setMenuOpen(false)}
+                      className="text-sm font-heading font-bold uppercase tracking-[0.15em] text-foreground hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
+                    >
+                      {item.label}
+                    </Link>
+                  )}
                 </motion.div>
               ))}
               <motion.div
