@@ -11,7 +11,7 @@ type NavLink = {
 };
 
 const links: NavLink[] = [
-  { label: "Home", to: "/brij" },
+  { label: "Home", to: "/" },
   { label: "About Us", to: "/about" },
   {
     label: "Innovation & Incubation",
