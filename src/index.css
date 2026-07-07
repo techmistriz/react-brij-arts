@@ -8,30 +8,12 @@
   font-display: swap;
 }
 
-/* @font-face {
+@font-face {
   font-family: 'Neue Haas Grotesk';
   src: url('@/assets/fonts/NeueHaasDisplayMedium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
-} */
-
-@font-face {
-  font-family: "Neue Haas Grotesk";
-  src: url("@/assets/fonts/NeueHaasDisplayRegular.ttf") format("truetype");
-  font-weight: 400;
-}
-
-@font-face {
-  font-family: "Neue Haas Grotesk";
-  src: url("@/assets/fonts/NeueHaasDisplayMedium.ttf") format("truetype");
-  font-weight: 500;
-}
-
-@font-face {
-  font-family: "Neue Haas Grotesk";
-  src: url("@/assets/fonts/NeueHaasDisplayBold.ttf") format("truetype");
-  font-weight: 700;
 }
 
 @tailwind base;
@@ -254,3 +236,19 @@
       contextual;
   }
 }
+
+/* @layer utilities {
+  .font-nav {
+    font-family: "Neue Haas Grotesk", Barlow, sans-serif;
+  }
+}
+
+@layer utilities {
+  .nav-font {
+    font-family: "Neue Haas Grotesk", Barlow, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 19.5px;
+    color: rgb(20, 20, 20);
+  }
+} */

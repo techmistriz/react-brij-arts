@@ -25,7 +25,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-xs border-b border-border">
       <div className="flex items-center justify-between px-5 md:px-12 lg:px-24 py-3 md:py-4">
         <Link
           to="/academy/fellowship"
@@ -46,30 +46,30 @@ const Navbar = () => {
         <div className="hidden md:flex items-center gap-8">
           <a
             href="https://thebrij.world/"
-            className="text-sm font-heading font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
+            className="text-xs font-body font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
           >
             Home
           </a>
           <Link
             to="/academy/fellowship/about"
-            className="text-sm font-heading font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
+            className="text-xs font-body font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
           >
             About
           </Link>
           <Link
             to="/academy/fellowship/structure"
-            className="text-sm font-heading font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
+            className="text-xs font-body font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
           >
             Structure
           </Link>
           <Link
             to="/academy/fellowship/bursary"
-            className="text-sm font-heading font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
+            className="text-xs font-body font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
           >
             Bursary
           </Link>
           <div className="relative group">
-            <button className="flex items-center gap-1 text-sm font-heading font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all">
+            <button className="flex items-center gap-1 text-xs font-body font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all">
               Cohort
               <ChevronDown className="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" />
             </button>
@@ -77,9 +77,9 @@ const Navbar = () => {
             <div className="absolute left-0 top-full mt-2 min-w-[180px] bg-white shadow-lg border border-gray-200 rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
               <Link
                 to="/academy/fellowship/cohort/2026-2027"
-                className="block px-4 py-3 text-sm font-bold    hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
+                className="block px-4 py-3 text-xs font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
                 style={{
-                  fontFamily: '"Akhand", "Barlow Condensed", sans-serif',
+                  fontFamily: '"Neue Haas Grotesk", Barlow,sans-serif',
                 }}
               >
                 2026-2027
@@ -88,13 +88,13 @@ const Navbar = () => {
           </div>
           <Link
             to="/academy/fellowship/publications"
-            className="text-sm font-heading font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
+            className="text-xs font-body font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
           >
             Publications
           </Link>
           <Link
             to="/academy/fellowship/faq"
-            className="text-sm font-heading font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
+            className="text-xs font-body font-bold uppercase tracking-[0.12em] hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
           >
             FAQ
           </Link>
@@ -102,7 +102,7 @@ const Navbar = () => {
             {!isLoggedIn && (
               <Link
                 to="/academy/fellowship/login"
-                className="relative overflow-hidden rounded-md px-6 py-2.5 text-sm font-heading font-bold tracking-wide bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
+                className="relative overflow-hidden rounded-md px-6 py-2.5 text-sm font-body font-bold tracking-wide bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
               >
                 <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
                 <span className="relative z-10">Login</span>
@@ -111,7 +111,7 @@ const Navbar = () => {
             {isLoggedIn ? (
               <button
                 onClick={handleLogout}
-                className="relative overflow-hidden rounded-md px-6 py-2.5 text-sm font-heading font-bold tracking-wide bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
+                className="relative overflow-hidden rounded-md px-6 py-2.5 text-sm font-body font-bold tracking-wide bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
               >
                 <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
                 <span className="relative z-10">Logout</span>
@@ -119,14 +119,14 @@ const Navbar = () => {
             ) : (
               <Link
                 to="/academy/fellowship/apply"
-                className="relative overflow-hidden rounded-md px-6 py-2.5 text-sm font-heading font-bold tracking-wide bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
+                className="relative overflow-hidden rounded-md px-6 py-2 text-sm font-body font-bold tracking-wide bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
               >
                 <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
                 <span className="relative z-10">Apply Now</span>
               </Link>
             )}
 
-            {/* <Link to="/apply" className="relative overflow-hidden rounded-md px-6 py-2.5 text-sm font-heading font-bold tracking-wide bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]">
+            {/* <Link to="/apply" className="relative overflow-hidden rounded-md px-6 py-2.5 text-xs font-body font-bold tracking-wide bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]">
 
             <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
             <span className="relative z-10">Apply Now</span>
@@ -202,7 +202,7 @@ const Navbar = () => {
                     <a
                       href={item.href}
                       onClick={() => setMenuOpen(false)}
-                      className="text-sm font-heading font-bold uppercase tracking-[0.15em] text-foreground hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
+                      className="text-xs font-body font-bold uppercase tracking-[0.15em] text-foreground hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
                     >
                       {item.label}
                     </a>
@@ -210,7 +210,7 @@ const Navbar = () => {
                     <Link
                       to={item.to}
                       onClick={() => setMenuOpen(false)}
-                      className="text-sm font-heading font-bold uppercase tracking-[0.15em] text-foreground hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
+                      className="text-xs font-body font-bold uppercase tracking-[0.15em] text-foreground hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
                     >
                       {item.label}
                     </Link>
@@ -227,7 +227,7 @@ const Navbar = () => {
                   <Link
                     to="/academy/fellowship/login"
                     onClick={() => setMenuOpen(false)}
-                    className="relative overflow-hidden block rounded-md px-6 py-3.5 text-sm font-heading font-bold tracking-wide text-center bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
+                    className="relative overflow-hidden block rounded-md px-6 py-3.5 text-xs font-body font-bold tracking-wide text-center bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
                   >
                     <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
                     <span className="relative z-10">Login</span>
@@ -239,7 +239,7 @@ const Navbar = () => {
                       handleLogout();
                       setMenuOpen(false);
                     }}
-                    className="relative overflow-hidden  block rounded-md px-6 py-3.5 text-sm font-heading font-bold tracking-wide text-center bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
+                    className="relative overflow-hidden  block rounded-md px-6 py-3.5 text-xs font-body font-bold tracking-wide text-center bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
                   >
                     <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
                     <span className="relative z-10">Logout</span>
@@ -248,7 +248,7 @@ const Navbar = () => {
                   <Link
                     to="/academy/fellowship/apply"
                     onClick={() => setMenuOpen(false)}
-                    className="relative overflow-hidden mt-4  block rounded-md px-6 py-3.5 text-sm font-heading font-bold tracking-wide text-center bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
+                    className="relative overflow-hidden mt-4  block rounded-md px-6 py-3.5 text-xs font-body font-bold tracking-wide text-center bg-foreground text-background hover:text-white transition-colors duration-300 group active:scale-[0.97]"
                   >
                     <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 brij-gradient-grain"></span>
                     <span className="relative z-10">Apply Now</span>
