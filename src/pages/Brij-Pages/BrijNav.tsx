@@ -62,8 +62,8 @@ const BrijNav = () => {
   const [mobileSubOpen, setMobileSubOpen] = useState<string | null>(null);
 
   // Use Neue Haas Grotesk (font-body) for nav buttons across all Brij pages.
-  const navFont = "font-body font-medium normal-case tracking-[0.02em]";
-  const navFontMobile = "font-body font-medium normal-case tracking-[0.02em]";
+  const navFont = "font-body font-medium normal-case ";
+  const navFontMobile = "font-body font-medium normal-case ";
 
   useEffect(() => {
     if (!hideUntilScroll) {
