@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Download } from "lucide-react";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
+import FellowshipModal from "@/components/FellowshipModal";
 const fileUrl = import.meta.env.VITE_FILE_PATH;
 const routes = [
   {
@@ -38,6 +39,8 @@ const Apply = () => {
   }, []);
 
   return (
+    <>
+       <FellowshipModal />
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-1 pt-24">
@@ -279,6 +282,7 @@ const Apply = () => {
       </main>
       <Footer />
     </div>
+    </>
   );
 };
 

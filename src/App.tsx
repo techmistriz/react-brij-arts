@@ -46,7 +46,7 @@ const App = () => (
         {/* <BrowserRouter> */}
         {/* <ScrollToHash /> */}
 
-        <FellowshipModal />
+        {/* <FellowshipModal /> */}
 
         <AnalyticsTracker />
 

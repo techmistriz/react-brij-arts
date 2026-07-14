@@ -25,6 +25,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useDropdowns } from "@/hooks/useDropdowns";
 import { submitApplication } from "@/lib/api/register";
 import { getDisciplines } from "@/lib/api/getDisciples";
+import FellowshipModal from "@/components/FellowshipModal";
 
 /* ─── Stage 1 schema ─── */
 const stage1Schema = z.object({
@@ -245,6 +246,8 @@ const ApplyIndividual = () => {
     ) : null;
 
   return (
+    <>
+       <FellowshipModal />
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-1 pt-24">
@@ -1117,6 +1120,7 @@ const ApplyIndividual = () => {
       </main>
       <Footer />
     </div>
+    </>
   );
 };
 

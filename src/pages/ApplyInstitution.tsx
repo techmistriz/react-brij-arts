@@ -22,6 +22,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { useDropdowns } from "@/hooks/useDropdowns";
 import { submitApplication } from "@/lib/api/register";
+import FellowshipModal from "@/components/FellowshipModal";
 
 const countWords = (text: string) =>
   text.trim().split(/\s+/).filter(Boolean).length;
@@ -198,6 +199,8 @@ const ApplyInstitution = () => {
   }, [setValue]);
 
   return (
+    <>
+       <FellowshipModal />
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-1 pt-24">
@@ -701,6 +704,7 @@ const ApplyInstitution = () => {
       </main>
       <Footer />
     </div>
+    </>
   );
 };
 
