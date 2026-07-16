@@ -1,12 +1,9 @@
 import { motion } from "framer-motion";
-import { FileText, ArrowUpRight } from "lucide-react";
-
-import reportBg1 from "../assets/compliance-img/grad-1.jpg";
-import reportBg2 from "../assets/compliance-img/grad-2.jpg";
-import reportBg3 from "../assets/compliance-img/grad-3.jpg";
-import reportBg4 from "../assets/compliance-img/grad-4.jpg";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
+import { useEffect, useState } from "react";
+import { ComplianceReport } from "@/types/compliance";
+import { getComplianceReports } from "@/lib/api/compliance";
 
 const fadeUp = {
     initial: { opacity: 0, y: 40 },
@@ -18,39 +15,38 @@ const fadeUp = {
     },
 };
 
-const reports = [
-    {
-        period: "JUNE 2026",
-        description:
-            "Half-yearly Environmental Clearance compliance submission covering water sourcing (Delhi Jal Board), STP operations, air, noise and construction-phase monitoring.",
-        pdf: "/academy/fellowship/compliance-reports",
-        bg: reportBg1,
-    },
-    {
-        period: "DECEMBER 2025",
-        description:
-            "Compliance status against Environmental Clearance conditions for the reporting period ending December 2025, including groundwater usage, sewage treatment with tertiary STP, rainwater harvesting and monitoring returns to the Regional Office, MoEF&CC.",
-        pdf: "/academy/fellowship/compliance-reports",
-        bg: reportBg2,
-    },
-    {
-        period: "DECEMBER 2024",
-        description:
-            "Signed half-yearly compliance report documenting adherence to specific and general conditions of the Environmental Clearance during the July–December 2024 window.",
-        pdf: "/academy/fellowship/compliance-reports",
-        bg: reportBg3,
-    },
-    {
-        period: "JUNE 2024",
-        description:
-            "Compliance report including ambient air quality (PM10, PM2.5, SO₂, NO₂, CO), noise monitoring in the designated silence zone and supporting annexures.",
-        pdf: "/academy/fellowship/compliance-reports",
-        bg: reportBg4,
-    },
-];
-
 
 const ComplianceReports = () => {
+
+    const [reports, setReports] = useState<ComplianceReport[]>([])
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchReports = async () => {
+            try {
+                const data = await getComplianceReports();
+                setReports(data);
+            } catch (error) {
+                console.error("Failed to fetch reports:", error);
+            } finally {
+                setLoading(false)
+            }
+        }
+        fetchReports()
+    }, [])
+
+    if (loading) {
+        return (
+            <>
+                <Navbar />
+                <div className="flex justify-center items-center h-screen">
+                    Loading...
+                </div>
+                <Footer />
+            </>
+        );
+    }
+
     return (
         <>
             <Navbar />
@@ -78,7 +74,7 @@ const ComplianceReports = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {reports.map((report, i) => (
                             <motion.div
-                                key={report.title}
+                                key={report.id}
                                 {...fadeUp}
                                 transition={{
                                     ...fadeUp.transition,
@@ -86,12 +82,12 @@ const ComplianceReports = () => {
                                 }}
                             >
                                 <a
-                                    href={report.pdf}
+                                    href={report.report_file}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="group relative flex flex-col justify-between min-h-[380px] overflow-hidden p-8"
                                     style={{
-                                        backgroundImage: `url(${report.bg})`,
+                                        backgroundImage: `url(${report.bg_image})`,
                                         backgroundSize: "cover",
                                         backgroundPosition: "center",
                                         backgroundRepeat: "no-repeat",
@@ -100,7 +96,7 @@ const ComplianceReports = () => {
                                     <div className="relative z-10">
                                         <div className="flex font-heading items-center gap-2 text-xl md:text-2xl md:font-bold font-semibold uppercase tracking-tighter  text-white">
 
-                                            {report.period}
+                                            {report.title}
                                         </div>
 
 
