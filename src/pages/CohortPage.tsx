@@ -174,7 +174,7 @@ const CohortPage = () => {
   };
 
   return (
-<div className="max-w-7xl mx-auto px-4 md:px-0 py-6 md:py-10">
+    <div className="max-w-7xl mx-auto px-4 md:px-0 py-6 md:py-10">
       <Navbar />
       {/* Header */}
       <div className="mt-16 md:mt-20">
@@ -233,9 +233,8 @@ const CohortPage = () => {
                 </h3>
 
                 <p
-                  className={`text-[#333] text-sm md:text-[14px] font-medium leading-6 transition-all duration-300 ${
-                    expandedCards.includes(index) ? "" : "line-clamp-5"
-                  }`}
+                  className={`text-[#333] text-sm md:text-[14px] font-medium leading-6 transition-all duration-300 ${expandedCards.includes(index) ? "" : "line-clamp-5"
+                    }`}
                 >
                   {person.description}
                 </p>
@@ -252,9 +251,8 @@ const CohortPage = () => {
 
                     <ChevronDown
                       size={16}
-                      className={`transition-transform duration-300 ${
-                        expandedCards.includes(index) ? "rotate-180" : ""
-                      }`}
+                      className={`transition-transform duration-300 ${expandedCards.includes(index) ? "rotate-180" : ""
+                        }`}
                     />
                   </button>
                   {person.linkedin && (
