@@ -56,24 +56,26 @@ const ComplianceReports = () => {
             <Navbar />
             <section className="bg-[#f7f7f7] pt-20 border-t border-neutral-300">
                 <div className="max-w-7xl mx-auto px-4 md:px-0 py-6 md:py-20">
-
-                    {/* Heading */}
-
-                    <motion.div {...fadeUp} className="">
+                    <motion.div {...fadeUp}>
                         <h2 className="font-heading font-bold uppercase text-[36px] md:text-[47px] leading-[37px] tracking-tighter">
                             Six-Monthly Compliance Reports
                         </h2>
 
                         <p className="mt-6 font-body text-[20px] leading-7 text-[#333] max-w-[42rem]">
-                            Half-yearly compliance submissions filed against the Environmental Clearance conditions — covering water sourcing through Delhi Jal Board, tertiary sewage treatment, rainwater harvesting, and ambient air and noise monitoring.
+                            Half-yearly compliance submissions filed against the Environmental Clearance
+                            conditions — covering water sourcing through Delhi Jal Board, tertiary sewage
+                            treatment, rainwater harvesting, and ambient air and noise monitoring.
                         </p>
                     </motion.div>
+                </div>
 
-                    <div className="border-t border-neutral-300 my-16"></div>
+                {/* Full-width divider */}
+                <div className="w-full border-t border-neutral-300"></div>
 
-                    {/* Cards */}
+                {/* Cards */}
 
-                    <div className="grid grid-cols-1 md:grid-cols-2  gap-6">
+                <div className="max-w-7xl mx-auto px-4 md:px-0 py-16">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {reports.map((report, i) => (
                             <motion.div
                                 key={report.title}
