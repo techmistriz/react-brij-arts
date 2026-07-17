@@ -34,6 +34,7 @@ import Brij from "./pages/Brij-Pages/Brij";
 import BrijAbout from "./pages/Brij-Pages/BrijAbout";
 import BrijCredits from "./pages/Brij-Pages/BrijCredits";
 import FellowshipModal from "./components/FellowshipModal";
+import ComplianceReports from "./pages/Brij-Pages/ComplianceReports";
 
 const queryClient = new QueryClient();
 
@@ -93,6 +94,8 @@ const App = () => (
           <Route path="/" element={<Brij />} />
           <Route path="/about" element={<BrijAbout />} />
           <Route path="/credits" element={<BrijCredits />} />
+
+            <Route path="/reports" element={<ComplianceReports />} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>
