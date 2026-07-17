@@ -69,12 +69,7 @@ const Navbar = () => {
           >
             Bursary
           </Link>
-          <Link
-            to="/academy/fellowship/compliance-reports"
-            className="text-[13px] font-body font-medium capitalize  hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all"
-          >
-            Compliance
-          </Link>
+
           <div className="relative group">
             <button className="flex items-center gap-1 text-[13px] font-body font-medium capitalize  hover:bg-gradient-to-r hover:from-brij-red hover:via-brij-orange hover:to-brij-pink hover:bg-clip-text hover:text-transparent transition-all">
               Cohort
@@ -239,18 +234,6 @@ const Navbar = () => {
                   Bursary
                 </Link>
               </motion.div>
-              <motion.div
-                initial={{ opacity: 0, x: -12 }}
-                animate={{ opacity: 1, x: 0 }}
-              >
-                <Link
-                  to="/academy/fellowship/Compliance-reports"
-                  onClick={() => setMenuOpen(false)}
-                  className="block text-[15px] font-body font-bold capitalize text-foreground"
-                >
-                  Compliance
-                </Link>
-              </motion.div>
 
               {/* Cohort Dropdown */}
               <motion.div
@@ -259,7 +242,7 @@ const Navbar = () => {
               >
                 <button
                   onClick={() => setCohortOpen(!cohortOpen)}
-className="flex items-center gap-0.5 text-[15px] font-body font-bold capitalize text-foreground"
+                  className="flex items-center gap-0.5 text-[15px] font-body font-bold capitalize text-foreground"
                 >
                   <span>Cohort</span>
 

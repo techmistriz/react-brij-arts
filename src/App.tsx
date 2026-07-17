@@ -34,7 +34,6 @@ import Brij from "./pages/Brij-Pages/Brij";
 import BrijAbout from "./pages/Brij-Pages/BrijAbout";
 import BrijCredits from "./pages/Brij-Pages/BrijCredits";
 import FellowshipModal from "./components/FellowshipModal";
-import ComplianceReports from "./pages/ComplianceReports";
 
 const queryClient = new QueryClient();
 
@@ -84,7 +83,6 @@ const App = () => (
           />
           <Route path="/academy/fellowship/faq" element={<Faq />} />
           <Route path="/academy/fellowship/bursary" element={<Bursary />} />
-          <Route path="/academy/fellowship/compliance-reports" element={<ComplianceReports />} />
           <Route path="/academy/fellowship/structure" element={<Structure />} />
           <Route
             path="/academy/fellowship/cohort/2026-2027"
