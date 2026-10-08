@@ -35,6 +35,7 @@ import BrijAbout from "./pages/Brij-Pages/BrijAbout";
 import BrijCredits from "./pages/Brij-Pages/BrijCredits";
 import FellowshipModal from "./components/FellowshipModal";
 import ComplianceReports from "./pages/Brij-Pages/ComplianceReports";
+import GlobalPopup from "./pages/GlobalPopup";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,7 @@ const App = () => (
         {/* <ScrollToHash /> */}
 
         {/* <FellowshipModal /> */}
+        <GlobalPopup />
 
         <AnalyticsTracker />
 
@@ -95,7 +97,7 @@ const App = () => (
           <Route path="/about" element={<BrijAbout />} />
           <Route path="/credits" element={<BrijCredits />} />
 
-            <Route path="/reports" element={<ComplianceReports />} />
+          <Route path="/reports" element={<ComplianceReports />} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>
